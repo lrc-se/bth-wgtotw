@@ -7,7 +7,7 @@
 $config = [
     'driver_options' => [\PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'],
     'fetch_mode' => \PDO::FETCH_OBJ,
-    'table_prefix' => 'wgtotw_',
+    'table_prefix' => '',
     'session_key' => 'kabc16-wgtotw-db',
 
     // True to be very verbose during development

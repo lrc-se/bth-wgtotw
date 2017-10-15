@@ -8,22 +8,22 @@ return [
     'repositories' => [
         'users' => [
             'type' => 'db-soft',
-            'table' => 'user',
+            'table' => 'wgtotw_user',
             'model' => \WGTOTW\Models\User::class
         ],
         'posts' => [
             'type' => 'db-soft',
-            'table' => 'post',
+            'table' => 'wgtotw_post',
             'model' => \WGTOTW\Models\Post::class
         ],
         'tags' => [
             'type' => 'db',
-            'table' => 'tag',
+            'table' => 'wgtotw_tag',
             'model' => \WGTOTW\Models\Tag::class
         ],
         'votes' => [
             'type' => 'db',
-            'table' => 'vote',
+            'table' => 'wgtotw_vote',
             'model' => \WGTOTW\Models\Vote::class
         ]
     ]
