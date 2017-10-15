@@ -1,0 +1,25 @@
+{
+    "name" : "WGTOTW",
+    "description": "We're Gonna Take Over The World",
+    "license": "MIT",
+    "require": {
+        "anax/request": "^1.0",
+        "anax/router": "^1.0",
+        "anax/response": "^1.0",
+        "anax/view": "^1.0",
+        "anax/url": "^1.0",
+        "anax/session": "^1.0",
+        "anax/textfilter": "^1.0",
+        "anax/configure": "^1.0",
+        "symfony/yaml": "^3.3",
+        "anax/di": "^1.0",
+        "anax/database": "^1.1",
+        "lrc-se/anax-repository": "^1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "LRC\\": "src/",
+            "WGTOTW\\": "src/"
+        }
+    }
+}
