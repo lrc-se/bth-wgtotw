@@ -12,13 +12,16 @@ class User extends BaseModel
     public $password;
     public $email;
     public $website;
-    public $showEmail;
+    public $hideEmail;
     public $isAdmin;
+    public $created;
+    public $updated;
+    public $deleted;
     
     
     public function __construct()
     {
-        $this->setNullables(['website', 'isAdmin']);
+        $this->setNullables(['website', 'hideEmail', 'isAdmin', 'created', 'updated', 'deleted']);
         $this->setValidation([
             'username' => [
                 [
