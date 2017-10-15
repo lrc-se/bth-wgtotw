@@ -38,6 +38,7 @@ class QuestionController extends BaseController
         $answers = $this->di->post->getAnswers($question);
         
         return $this->di->common->renderMain('question/view', [
+            'user' => $this->di->user->getCurrent(),
             'question' => $question,
             'tags' => $tags,
             'comments' => $comments,

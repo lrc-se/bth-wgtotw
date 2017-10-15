@@ -2,8 +2,10 @@
 <?= $form->form($this->currentUrl(), 'post', ['class' => 'form']) ?>
 <?php if ($update) : ?>
     <?= $form->input('id', 'hidden') ?>
-<?php endif; ?>
+    <?= $form->input('parentId', 'hidden') ?>
+<?php else : ?>
     <input type="hidden" name="parentId" value="">
+<?php endif; ?>
     <div class="form-control">
         <div class="form-label"><?= $form->label('title', 'Rubrik:') ?></label></div>
         <div class="form-input">
