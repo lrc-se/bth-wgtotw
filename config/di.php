@@ -139,7 +139,8 @@ $config = [
 // register controllers
 $controllers = [
     'content' => 'Content',
-    'error' => 'Error'
+    'error' => 'Error',
+    'user' => 'User'
 ];
 
 foreach ($controllers as $key => $controller) {

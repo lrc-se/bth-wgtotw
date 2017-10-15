@@ -25,11 +25,13 @@ $navbar = [
         ],
         'users' => [
             'title' => 'Användare',
-            'route' => 'user'
-        ],
-        'account' => [
-            'title' => 'Konto',
-            'route' => null
+            'route' => null,
+            'items' => [
+                [
+                    'title' => 'Visa alla',
+                    'route' => 'user/all'
+                ]
+            ]
         ]
     ]
 ];
@@ -41,33 +43,29 @@ try {
     $user = null;
 }
 if ($user) {
-    $navbar['items']['account']['title'] = '<span class="navbar-user">' . htmlspecialchars($user->username) . '</span>';
-    $navbar['items']['account']['items'] = [
-        [
-            'title' => 'Profil',
-            'route' => 'user/' . $user->id
-        ]
+    //$navbar['items']['users']['title'] = '<span class="navbar-user">' . htmlspecialchars($user->username) . '</span>';
+    $navbar['items']['users']['items'][] = [
+        'title' => 'Profil',
+        'route' => 'user/' . $user->id
     ];
     if ($user->isAdmin) {
-        $navbar['items']['account']['items'][] = [
+        $navbar['items']['users']['items'][] = [
             'title' => 'Administration',
             'route' => 'admin'
         ];
     }
-    $navbar['items']['account']['items'][] = [
+    $navbar['items']['users']['items'][] = [
         'title' => 'Logga ut',
-        'route' => 'account/logout'
+        'route' => 'user/logout'
     ];
 } else {
-    $navbar['items']['account']['items'] = [
-        [
-            'title' => 'Registrera',
-            'route' => 'account/create'
-        ],
-        [
-            'title' => 'Logga in',
-            'route' => 'account/login'
-        ]
+    $navbar['items']['users']['items'][] = [
+        'title' => 'Skapa konto',
+        'route' => 'user/create'
+    ];
+    $navbar['items']['users']['items'][] = [
+        'title' => 'Logga in',
+        'route' => 'user/login'
     ];
 }
 

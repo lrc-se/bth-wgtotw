@@ -21,50 +21,50 @@ class User extends BaseModel
     
     public function __construct()
     {
-        $this->setNullables(['website', 'hideEmail', 'isAdmin', 'created', 'updated', 'deleted']);
+        $this->setNullables(['website', 'created', 'updated', 'deleted']);
         $this->setValidation([
             'username' => [
                 [
                     'rule' => 'required',
-                    'message' => 'Användarnamn måste anges.'
+                    'message' => 'AnvÃ¤ndarnamn mÃ¥ste anges.'
                 ],
                 [
                     'rule' => 'maxlength',
                     'value' => 25,
-                    'message' => 'Användarnamnet får vara maximalt 25 tecken långt.'
+                    'message' => 'AnvÃ¤ndarnamnet fÃ¥r vara maximalt 25 tecken lÃ¥ngt.'
                 ]
             ],
             'password' => [
                 [
                     'rule' => 'required',
-                    'message' => 'Lösenord måste anges.'
+                    'message' => 'LÃ¶senord mÃ¥ste anges.'
                 ],
                 [
                     'rule' => 'minlength',
                     'value' => 8,
-                    'message' => 'Lösenordet måste vara minst 8 tecken långt.'
+                    'message' => 'LÃ¶senordet mÃ¥ste vara minst 8 tecken lÃ¥ngt.'
                 ]
             ],
             'email' => [
                 [
                     'rule' => 'required',
-                    'message' => 'E-postadress måste anges.'
+                    'message' => 'E-postadress mÃ¥ste anges.'
                 ],
                 [
                     'rule' => 'email',
-                    'message' => 'E-postadressen är ogiltig.'
+                    'message' => 'E-postadressen Ã¤r ogiltig.'
                 ],
                 [
                     'rule' => 'maxlength',
                     'value' => 200,
-                    'message' => 'E-postadressen får vara maximalt 200 tecken lång.'
+                    'message' => 'E-postadressen fÃ¥r vara maximalt 200 tecken lÃ¥ng.'
                 ]
             ],
             'website' => [
                 [
                     'rule' => 'maxlength',
                     'value' => 500,
-                    'message' => 'Webbadressen får vara maximalt 500 tecken lång.'
+                    'message' => 'Webbadressen fÃ¥r vara maximalt 500 tecken lÃ¥ng.'
                 ]
             ]
         ]);

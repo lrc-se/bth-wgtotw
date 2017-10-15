@@ -15,6 +15,10 @@ return [
             'file' => __DIR__ . '/route/flat-file-content.php'
         ],
         [
+            'mount' => 'user',
+            'file' => __DIR__ . '/route/user.php'
+        ],
+        [
             'mount' => null,
             'file' => __DIR__ . '/route/404.php',
             'sort' => 1000
