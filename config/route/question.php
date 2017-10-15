@@ -41,6 +41,31 @@ return [
             'requestMethod' => 'post',
             'path' => 'edit/{id:digit}',
             'callable' => ['questionController', 'handleUpdate']
+        ],
+        
+        [
+            'info' => 'Write answer page.',
+            'requestMethod' => 'get',
+            'path' => '{questionId:digit}/answer',
+            'callable' => ['answerController', 'create']
+        ],
+        [
+            'info' => 'Write answer handler.',
+            'requestMethod' => 'post',
+            'path' => '{questionId:digit}/answer',
+            'callable' => ['answerController', 'handleCreate']
+        ],
+        [
+            'info' => 'Edit answer page.',
+            'requestMethod' => 'get',
+            'path' => '{questionId:digit}/answer/{answerId:digit}',
+            'callable' => ['answerController', 'update']
+        ],
+        [
+            'info' => 'Edit answer handler.',
+            'requestMethod' => 'post',
+            'path' => '{questionId:digit}/answer/{answerId:digit}',
+            'callable' => ['answerController', 'handleUpdate']
         ]
     ]
 ];
