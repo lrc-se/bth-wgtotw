@@ -140,7 +140,8 @@ $config = [
 $controllers = [
     'content' => 'Content',
     'error' => 'Error',
-    'user' => 'User'
+    'user' => 'User',
+    'question' => 'Question'
 ];
 
 foreach ($controllers as $key => $controller) {

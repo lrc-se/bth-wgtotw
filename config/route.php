@@ -19,6 +19,10 @@ return [
             'file' => __DIR__ . '/route/user.php'
         ],
         [
+            'mount' => 'question',
+            'file' => __DIR__ . '/route/question.php'
+        ],
+        [
             'mount' => null,
             'file' => __DIR__ . '/route/404.php',
             'sort' => 1000
