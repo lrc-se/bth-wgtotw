@@ -27,7 +27,9 @@
 <?php $this->renderView('comment/comments', ['comments' => $comments]); ?>
 </div>
 <h2>Svar</h2>
+<?php if ($user) : ?>
 <p><a class="btn" href="<?= $this->url('question/' . $question->id . '/answer') ?>">Skriv ett svar</a></p>
+<?php endif; ?>
 <?php if (!empty($answers)) : ?>
 <div class="answers">
     <ul>
@@ -46,7 +48,7 @@
                 <div class="answer-updated">Uppdaterat <?= $answer->updated ?></div>
 <?php       endif; ?>
             </div>
-<?php       if ($answer->userId == $user->id) : ?>
+<?php       if ($user && $answer->userId == $user->id) : ?>
             <div class="answer-edit"><a href="<?= $this->url('question/' . $question->id . '/answer/' . $answer->id) ?>">Redigera</a></div>
 <?php       endif; ?>
 <?php $this->renderView('comment/comments', ['comments' => $di->post->getComments($answer)]); ?>
