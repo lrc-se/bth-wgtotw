@@ -19,8 +19,7 @@ class UserController extends BaseController
     {
         $user = $this->di->user->getById($id);
         if (!$user) {
-            $this->di->session->set('err', "Kunde inte hitta användaren med ID $id.");
-            $this->di->common->redirect('user/all');
+            $this->di->common->redirectError('user/all', "Kunde inte hitta användaren med ID $id.");
         }
         
         return $this->di->common->renderMain('user/profile', [
@@ -53,8 +52,7 @@ class UserController extends BaseController
         if ($this->di->user->createFromForm($form)) {
             $user = $form->getModel();
             $this->di->session->set('userId', $user->id);
-            $this->di->session->set('msg', 'Ditt användarkonto har skapats.');
-            $this->di->common->redirect('user/' . $user->id);
+            $this->di->common->redirectMessage('user/' . $user->id, 'Ditt användarkonto har skapats.');
         }
         
         return $this->di->common->renderMain('user/form', [
@@ -75,8 +73,7 @@ class UserController extends BaseController
     {
         $user = $this->di->common->verifyUser();
         if ($user->id != $id) {
-            $this->di->session->set('err', 'Du har inte behörighet att redigera den begärda profilen.');
-            $this->di->common->redirect('user/' . $user->id);
+            $this->di->common->redirectError('user/' . $user->id, 'Du har inte behörighet att redigera den begärda profilen.');
         }
         
         return $this->di->common->renderMain('user/form', [
@@ -97,13 +94,12 @@ class UserController extends BaseController
     {
         $oldUser = $this->di->common->verifyUser();
         if ($oldUser->id != $id) {
-            $this->di->session->set('Du har inte behörighet att redigera den begärda profilen.');
-            $this->di->common->redirect('user/' . $oldUser->id);
+            $this->di->common->redirectError('user/' . $oldUser->id, 'Du har inte behörighet att redigera den begärda profilen.');
         }
         
         $form = new Form('user-form', Models\User::class);
         if ($this->di->user->updateFromForm($form, $oldUser)) {
-            $this->di->session->set('msg', 'Din profil har uppdaterats.');
+            //$this->di->session->set('msg', 'Din profil har uppdaterats.');
             $this->di->common->redirect('user/' . $oldUser->id);
         }
         
@@ -139,9 +135,9 @@ class UserController extends BaseController
         $username = $this->di->request->getPost('username', '');
         $password = $this->di->request->getPost('password', '');
         if ($username === '' || $password === '' || !$this->di->user->login($username, $password)) {
-            $this->di->session->set('err', 'Felaktigt användarnamn eller lösenord.');
+            $this->di->common->redirectError('user/login', 'Felaktigt användarnamn eller lösenord.');
         }
-        $this->di->common->redirect($this->di->request->getPost('url', 'user/login'));
+        $this->di->common->redirect($this->di->request->getPost('url', 'user/' . $this->di->user->getCurrent()->id));
     }
     
     

@@ -28,6 +28,32 @@ class CommonService extends BaseService
     
     
     /**
+     * Redirect with flash message.
+     *
+     * @param string    $url    URL to redirect to.
+     * @prama string    $msg    Flash message.
+     * @param boolean   $error  Whether the message is an error.
+     */
+    public function redirectMessage($url, $msg, $error = false)
+    {
+        $this->di->session->set(($error ? 'err' : 'msg'), $msg);
+        $this->redirect($url);
+    }
+    
+    
+    /**
+     * Redirect with flash error message.
+     *
+     * @param string    $url    URL to redirect to.
+     * @prama string    $msg    Error message.
+     */
+    public function redirectError($url, $msg)
+    {
+        $this->redirectMessage($url, $msg, true);
+    }
+    
+    
+    /**
      * Retrieve flash messages from session.
      */
     public function retrieveMessages($labels = ['msg', 'err'])
@@ -59,7 +85,7 @@ class CommonService extends BaseService
      *
      * @return \WGTOTW\Models\User  Model instance of the logged-in user.
      */
-    public function verifyUser($url = 'account/login', $admin = false)
+    public function verifyUser($url = 'user/login', $admin = false)
     {
         $user = $this->di->user->getCurrent();
         if (!$user) {
@@ -84,7 +110,7 @@ class CommonService extends BaseService
      *
      * @return \LRC\User\User   Model instance of the logged-in user.
      */
-    public function verifyAdmin($url = 'account/login')
+    public function verifyAdmin($url = 'user/login')
     {
         return $this->verifyUser($url, true);
     }
