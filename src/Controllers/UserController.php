@@ -23,7 +23,7 @@ class UserController extends BaseController
             $this->di->common->redirect('user/all');
         }
         
-        return $this->renderPage('user/profile', [
+        return $this->di->common->renderMain('user/profile', [
             'user' => $user,
             'curUser' => $this->di->user->getCurrent()
         ], htmlspecialchars($user->username));
@@ -35,7 +35,7 @@ class UserController extends BaseController
      */
     public function create()
     {
-        return $this->renderPage('user/form', [
+        return $this->di->common->renderMain('user/form', [
             'user' => null,
             'admin' => null,
             'update' => false,
@@ -57,7 +57,7 @@ class UserController extends BaseController
             $this->di->common->redirect('user/' . $user->id);
         }
         
-        return $this->renderPage('user/form', [
+        return $this->di->common->renderMain('user/form', [
             'user' => $form->getModel(),
             'admin' => null,
             'update' => false,
@@ -79,7 +79,7 @@ class UserController extends BaseController
             $this->di->common->redirect('user/' . $user->id);
         }
         
-        return $this->renderPage('user/form', [
+        return $this->di->common->renderMain('user/form', [
             'user' => $user,
             'admin' => null,
             'update' => true,
@@ -107,7 +107,7 @@ class UserController extends BaseController
             $this->di->common->redirect('user/' . $oldUser->id);
         }
         
-        return $this->renderPage('user/form', [
+        return $this->di->common->renderMain('user/form', [
             'user' => $form->getModel(),
             'admin' => null,
             'update' => true,
@@ -127,7 +127,7 @@ class UserController extends BaseController
             $this->di->common->redirect('user/' . $user->id);
         }
         
-        return $this->renderPage('user/login', ['returnUrl' => $returnUrl], 'Logga in');
+        return $this->di->common->renderMain('user/login', ['returnUrl' => $returnUrl], 'Logga in');
     }
     
     
@@ -155,21 +155,5 @@ class UserController extends BaseController
             $this->di->session->set('msg', 'Du har loggats ut.');
         }
         $this->di->common->redirect('user/login');
-    }
-    
-    
-    /**
-     * Convenience method to render page.
-     *
-     * @param string    $view   View template.
-     * @param array     $data   View data.
-     * @param string    $title  View title.
-     *
-     * @return true
-     */
-    protected function renderPage($view, $data, $title)
-    {
-        $this->di->view->add($view, $data, 'main');
-        return $this->di->common->renderPage($title);
     }
 }

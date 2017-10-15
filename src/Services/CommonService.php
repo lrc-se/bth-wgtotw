@@ -128,4 +128,20 @@ class CommonService extends BaseService
         
         return true;
     }
+
+
+    /**
+     * Convenience method to render main region in standard page.
+     *
+     * @param string    $view   View template.
+     * @param array     $data   View data.
+     * @param string    $title  View title.
+     *
+     * @return true
+     */
+    public function renderMain($view, $data, $title)
+    {
+        $this->di->view->add($view, $data, 'main');
+        return $this->renderPage($title);
+    }
 }
