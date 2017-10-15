@@ -62,7 +62,9 @@ class RepositoryService extends BaseService implements ConfigureInterface
      */
     public function add($name, $config)
     {
-        $this->repositories[$name] = $this->manager->createRepository($name, $config);
+        $model = $config['model'];
+        unset($config['model']);
+        $this->repositories[$name] = $this->manager->createRepository($model, $config);
     }
     
     
