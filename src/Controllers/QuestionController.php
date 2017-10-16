@@ -40,6 +40,7 @@ class QuestionController extends BaseController
         return $this->di->common->renderMain('question/view', [
             'user' => $this->di->user->getCurrent(),
             'question' => $question,
+            'canComment' => true,
             'tags' => $tags,
             'comments' => $comments,
             'answers' => $answers

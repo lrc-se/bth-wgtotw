@@ -63,10 +63,10 @@ class AnswerController extends BaseController
         $answer = $this->di->post->useSoft()->getById($answerId, 'answer');
         if (!$answer) {
             $this->di->common->redirectError("question/$questionId", "Kunde inte hitta svaret med ID $answerId.");
-        } elseif ($user->id != $answer->userId) {
-            $this->di->common->redirectError("question/$questionId", 'Du har inte behörighet att redigera det begärda svaret.');
         } elseif ($answer->parentId != $question->id) {
             $this->di->common->redirectError("question/$questionId", 'Felaktig kombination av fråge- och svars-ID:n.');
+        } elseif ($user->id != $answer->userId) {
+            $this->di->common->redirectError("question/$questionId", 'Du har inte behörighet att redigera det begärda svaret.');
         }
         
         if ($this->di->request->getMethod() == 'POST') {

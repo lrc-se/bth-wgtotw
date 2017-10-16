@@ -44,6 +44,34 @@ return [
             'requestMethod' => 'get|post',
             'path' => '{questionId:digit}/answer/{answerId:digit}',
             'callable' => ['answerController', 'update']
+        ],
+        
+        // comments
+        [
+            'info' => 'Write question comment page/handler.',
+            'requestMethod' => 'get|post',
+            'path' => '{questionId:digit}/comment',
+            'callable' => ['commentController', 'create']
+        ],
+        [
+            'info' => 'Write answer comment page/handler.',
+            'requestMethod' => 'get|post',
+            'path' => '{questionId:digit}/answer/{answerId:digit}/comment',
+            'callable' => ['commentController', 'create']
+        ],
+        [
+            'info' => 'Edit comment page/handler.',
+            'requestMethod' => 'get|post',
+            'path' => '{questionId:digit}/comment/{commentId:digit}',
+            'callable' => ['commentController', 'update']
+        ],
+        [
+            'info' => 'Edit answer comment page/handler.',
+            'requestMethod' => 'get|post',
+            'path' => '{questionId:digit}/answer/{answerId:digit}/comment/{commentId:digit}',
+            'callable' => function ($questionId, $answerId, $commentId) {
+                $this->di->commentController->update($questionId, $commentId, $answerId);
+            }
         ]
     ]
 ];

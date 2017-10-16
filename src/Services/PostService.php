@@ -25,10 +25,15 @@ class PostService extends BaseService
      */
     public function getById($id, $type = null)
     {
-        $method = ($this->softQuery ? 'getFirstSoft' : 'getFirst');
-        $post = ($this->di->posts->$method('id = ?' . (!is_null($type) ? ' AND type = ?' : ''), [$id, $type]) ?: null);
+        if (is_null($type)) {
+            $method = ($this->softQuery ? 'findSoft' : 'find');
+            $post = $this->di->posts->$method(null, $id);
+        } else {
+            $method = ($this->softQuery ? 'getFirstSoft' : 'getFirst');
+            $post = $this->di->posts->$method('id = ? AND type = ?', [$id, $type]);
+        }
         $this->useSoft(false);
-        return $post;
+        return ($post ?: null);
     }
     
     

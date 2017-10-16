@@ -142,7 +142,8 @@ $controllers = [
     'error' => 'Error',
     'user' => 'User',
     'question' => 'Question',
-    'answer' => 'Answer'
+    'answer' => 'Answer',
+    'comment' => 'Comment'
 ];
 
 foreach ($controllers as $key => $controller) {

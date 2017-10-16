@@ -16,7 +16,12 @@ $author = $answer->user;
     <div class="answer-updated">Uppdaterat <?= $answer->updated ?></div>
 <?php endif; ?>
 </div>
+<div class="answer-actions">
 <?php if (empty($admin) && !empty($user) && $answer->userId == $user->id) : ?>
-<div class="answer-edit"><a href="<?= $this->url('question/' . $answer->parentId . '/answer/' . $answer->id) ?>">Redigera</a></div>
+    <a href="<?= $this->url('question/' . $answer->parentId . '/answer/' . $answer->id) ?>">Redigera</a>
 <?php endif; ?>
-<?php $this->renderView('comment/comments', ['comments' => $di->post->getComments($answer)]); ?>
+<?php if (!empty($canComment)) : ?>
+    <a href="<?= $this->url('question/' . $answer->parentId . '/answer/' . $answer->id . '/comment') ?>">Kommentera</a>
+<?php endif; ?>
+</div>
+<?php $this->renderView('comment/comments', ['post' => $answer, 'user' => (isset($user) ? $user : null)]); ?>

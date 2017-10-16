@@ -10,7 +10,7 @@
     <ul>
 <?php   foreach ($answers as $answer) : ?>
         <li id="answer-<?= $answer->id ?>">
-<?php $this->renderView('answer/answer', ['answer' => $answer, 'user' => $user]); ?>
+<?php $this->renderView('answer/answer', ['answer' => $answer, 'user' => $user, 'canComment' => true]); ?>
         </li>
 <?php   endforeach; ?>
     </ul>

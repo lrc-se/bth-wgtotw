@@ -27,8 +27,13 @@ $author = $question->user;
         </ul>
     </div>
 <?php endif; ?>
+    <div class="question-actions">
 <?php if (empty($admin) && !empty($user) && $question->userId == $user->id) : ?>
-<div class="question-edit"><a href="<?= $this->url('question/edit/' . $question->id) ?>">Redigera</a></div>
+        <a href="<?= $this->url('question/edit/' . $question->id) ?>">Redigera</a>
 <?php endif; ?>
-<?php $this->renderView('comment/comments', ['comments' => $di->post->getComments($question)]); ?>
+<?php if (!empty($canComment)) : ?>
+        <a href="<?= $this->url('question/' . $question->id . '/comment') ?>">Kommentera</a>
+<?php endif; ?>
+    </div>
+<?php $this->renderView('comment/comments', ['post' => $question, 'user' => (isset($user) ? $user : null)]); ?>
 </div>
