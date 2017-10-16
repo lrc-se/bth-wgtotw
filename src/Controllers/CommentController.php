@@ -19,9 +19,21 @@ class CommentController extends BaseController
     public function create($questionId, $answerId = null)
     {
         $user = $this->di->common->verifyUser();
-        $post = $this->di->post->useSoft()->getById(($answerId ?: $questionId));
-        if (!$post || $post->type == 'comment') {
-            $this->di->common->redirectError('question', 'Kunde inte hitta ' . (is_null($answerId) ? "frågan med ID $questionId." : "svaret med ID $answerId."));
+        
+        if (!is_null($answerId)) {
+            $id = $answerId;
+            $type = 'answer';
+            $findError = "frågan med ID $questionId";
+            $title = 'Kommentera svar';
+        } else {
+            $id = $questionId;
+            $type = 'question';
+            $findError = "svaret med ID $answerId";
+            $title = 'Kommentera fråga';
+        }
+        $post = $this->di->post->useSoft()->getById($id, $type);
+        if (!$post) {
+            $this->di->common->redirectError('question', "Kunde inte hitta $findError.");
         }
         
         $form = new Form('comment-form', Models\Comment::class);
@@ -36,11 +48,11 @@ class CommentController extends BaseController
                 'question' => $post,
                 'tags' => []
             ];
-        } elseif ($post->type == 'answer') {
+        } else {
             $postData = ['answer' => $post];
         }
         return $this->di->common->renderMain('comment/edit', [
-            'title' => 'Kommentera ' . (is_null($answerId) ? 'fråga' : 'svar'),
+            'title' => $title,
             'formData' => [
                 'admin' => null,
                 'update' => false,
@@ -49,7 +61,7 @@ class CommentController extends BaseController
                 'answerId' => $answerId
             ],
             'postData' => $postData
-        ], 'Kommentera ' . (is_null($answerId) ? 'fråga' : 'svar'));
+        ], $title);
     }
     
     
@@ -63,16 +75,28 @@ class CommentController extends BaseController
     public function update($questionId, $commentId, $answerId = null)
     {
         $user = $this->di->common->verifyUser();
-        $post = $this->di->post->useSoft()->getById(($answerId ?: $questionId));
-        if (!$post || $post->type == 'comment') {
-            $this->di->common->redirectError('question', 'Kunde inte hitta ' . (is_null($answerId) ? "frågan med ID $questionId." : "svaret med ID $answerId."));
+        
+        if (!is_null($answerId)) {
+            $id = $answerId;
+            $type = 'answer';
+            $findError = "frågan med ID $questionId";
+            $comboError = 'svars';
+        } else {
+            $id = $questionId;
+            $type = 'question';
+            $findError = "svaret med ID $answerId";
+            $comboError = 'fråge';
+        }
+        $post = $this->di->post->useSoft()->getById($id, $type);
+        if (!$post) {
+            $this->di->common->redirectError('question', "Kunde inte hitta $findError.");
         }
         
         $comment = $this->di->post->useSoft()->getById($commentId, 'comment');
         if (!$comment) {
             $this->di->common->redirectError("question/$questionId", "Kunde inte hitta kommentaren med ID $commentId.");
         } elseif ($post->id != $comment->parentId) {
-            $this->di->common->redirectError("question/$questionId", 'Felaktig kombination av kommentars- och ' . (is_null($answerId) ? 'fråge-' : 'svars-') . 'ID:n.');
+            $this->di->common->redirectError("question/$questionId", "Felaktig kombination av kommentars- och $comboError-ID:n.");
         } elseif ($user->id != $comment->userId) {
             $this->di->common->redirectError("question/$questionId", 'Du har inte behörighet att redigera den begärda kommentaren.');
         }
@@ -91,7 +115,7 @@ class CommentController extends BaseController
                 'question' => $post,
                 'tags' => []
             ];
-        } elseif ($post->type == 'answer') {
+        } else {
             $postData = ['answer' => $post];
         }
         return $this->di->common->renderMain('comment/edit', [
@@ -101,7 +125,7 @@ class CommentController extends BaseController
                 'update' => true,
                 'form' => $form,
                 'questionId' => $questionId,
-                'answerId' => ($post->type == 'answer' ? $post->id : null)
+                'answerId' => $answerId
             ],
             'postData' => $postData
         ], 'Redigera kommentar');
