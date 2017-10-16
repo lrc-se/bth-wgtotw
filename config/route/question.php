@@ -20,39 +20,27 @@ return [
             'callable' => ['questionController', 'view']
         ],
         [
-            'info' => 'Write question page.',
-            'requestMethod' => 'get',
+            'info' => 'Write question page/handler.',
+            'requestMethod' => 'get|post',
             'path' => 'create',
             'callable' => ['questionController', 'create']
         ],
         [
-            'info' => 'Write question handler.',
-            'requestMethod' => 'post',
-            'path' => 'create',
-            'callable' => ['questionController', 'handleCreate']
-        ],
-        [
-            'info' => 'Edit question page.',
-            'requestMethod' => 'get',
+            'info' => 'Edit question page/handler.',
+            'requestMethod' => 'get|post',
             'path' => 'edit/{id:digit}',
             'callable' => ['questionController', 'update']
-        ],
-        [
-            'info' => 'Edit question handler.',
-            'requestMethod' => 'post',
-            'path' => 'edit/{id:digit}',
-            'callable' => ['questionController', 'handleUpdate']
         ],
         
         // answers
         [
-            'info' => 'Write answer page.',
+            'info' => 'Write answer page/handler.',
             'requestMethod' => 'get|post',
             'path' => '{questionId:digit}/answer',
             'callable' => ['answerController', 'create']
         ],
         [
-            'info' => 'Edit answer page.',
+            'info' => 'Edit answer page/handler.',
             'requestMethod' => 'get|post',
             'path' => '{questionId:digit}/answer/{answerId:digit}',
             'callable' => ['answerController', 'update']

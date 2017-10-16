@@ -48,28 +48,16 @@ class QuestionController extends BaseController
     
     
     /**
-     * Write question page.
+     * Write question.
      */
     public function create()
     {
-        $this->di->common->verifyUser();
-        return $this->di->common->renderMain('question/form', [
-            'admin' => null,
-            'update' => false,
-            'form' => new Form('question-form', Models\Question::class)
-        ], 'Skriv ny fråga');
-    }
-    
-    
-    /**
-     * Write question handler.
-     */
-    public function handleCreate()
-    {
         $user = $this->di->common->verifyUser();
         $form = new Form('question-form', Models\Question::class);
-        if ($this->di->post->createFromForm('question', $form, $user)) {
-            $this->di->common->redirect('question/' . $form->getModel()->id);
+        if ($this->di->request->getMethod() == 'POST') {
+            if ($this->di->post->createFromForm('question', $form, $user)) {
+                $this->di->common->redirect('question/' . $form->getModel()->id);
+            }
         }
         
         return $this->di->common->renderMain('question/form', [
@@ -81,7 +69,7 @@ class QuestionController extends BaseController
     
     
     /**
-     * Edit question page.
+     * Edit question.
      *
      * @param int $id   Question ID.
      */
@@ -95,32 +83,13 @@ class QuestionController extends BaseController
             $this->di->common->redirectError('question', 'Du har inte behörighet att redigera den begärda frågan.');
         }
         
-        return $this->di->common->renderMain('question/form', [
-            'admin' => null,
-            'update' => true,
-            'form' => new Form('question-form', $question)
-        ], 'Redigera fråga');
-    }
-    
-    
-    /**
-     * Edit question handler.
-     *
-     * @param int $id   Question ID.
-     */
-    public function handleUpdate($id)
-    {
-        $user = $this->di->common->verifyUser();
-        $oldQuestion = $this->di->post->useSoft()->getById($id, 'question');
-        if (!$oldQuestion) {
-            $this->di->common->redirectError('question', "Kunde inte hitta frågan med ID $id.");
-        } elseif ($user->id != $oldQuestion->userId) {
-            $this->di->common->redirectError('question', 'Du har inte behörighet att redigera den begärda frågan.');
-        }
-        
-        $form = new Form('question-form', Models\Question::class);
-        if ($this->di->post->updateFromForm($form, $oldQuestion, $user)) {
-            $this->di->common->redirect('question/' . $oldQuestion->id);
+        if ($this->di->request->getMethod() == 'POST') {
+            $form = new Form('question-form', Models\Question::class);
+            if ($this->di->post->updateFromForm($form, $question, $user)) {
+                $this->di->common->redirect('question/' . $question->id);
+            }
+        } else {
+            $form = new Form('question-form', $question);
         }
         
         return $this->di->common->renderMain('question/form', [
