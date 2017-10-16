@@ -1,3 +1,8 @@
+<?php
+
+$author = $question->user;
+
+?>
 <div class="question">
     <div class="question-text"><?= $this->di->textfilter->markdown(esc($question->text)) ?></div>
     <div class="question-author">
@@ -21,6 +26,9 @@
 <?php   endforeach; ?>
         </ul>
     </div>
+<?php endif; ?>
+<?php if (empty($admin) && !empty($user) && $question->userId == $user->id) : ?>
+<div class="question-edit"><a href="<?= $this->url('question/edit/' . $question->id) ?>">Redigera</a></div>
 <?php endif; ?>
 <?php $this->renderView('comment/comments', ['comments' => $di->post->getComments($question)]); ?>
 </div>

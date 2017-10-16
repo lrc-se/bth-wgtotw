@@ -18,9 +18,7 @@
         <div class="form-label"></div>
         <div class="form-input">
             <input type="submit" value="<?= ($update ? 'Uppdatera' : 'Skicka') ?>">
-<?php if ($update || $admin) : ?>
             <a class="btn btn-2" href="<?= $this->url(($admin ? 'admin/post' : 'question/' . $questionId)) ?>">Avbryt</a> 
-<?php endif; ?>
         </div>
     </div>
 </form>

@@ -60,7 +60,7 @@ class QuestionController extends BaseController
             }
         }
         
-        return $this->di->common->renderMain('question/form', [
+        return $this->di->common->renderMain('question/edit', [
             'admin' => null,
             'update' => false,
             'form' => $form
@@ -92,7 +92,7 @@ class QuestionController extends BaseController
             $form = new Form('question-form', $question);
         }
         
-        return $this->di->common->renderMain('question/form', [
+        return $this->di->common->renderMain('question/edit', [
             'admin' => null,
             'update' => true,
             'form' => $form

@@ -1,3 +1,8 @@
+<?php
+
+$author = $answer->user;
+
+?>
 <div class="answer-text"><?= markdown($answer->text) ?></div>
 <div class="answer-author">
     <a href="<?= $this->url('user/' . $author->id) ?>">

@@ -1,4 +1,3 @@
-<?php $this->renderView('default/msgs'); ?>
 <?= $form->form($this->currentUrl(), 'post', ['class' => 'form']) ?>
 <?php if ($update) : ?>
     <?= $form->input('id', 'hidden') ?>
@@ -28,9 +27,7 @@
         <div class="form-label"></div>
         <div class="form-input">
             <input type="submit" value="<?= ($update ? 'Uppdatera' : 'Skicka') ?>">
-<?php if ($update || $admin) : ?>
-            <a class="btn btn-2" href="<?= $this->url(($admin ? 'admin/post' : 'question')) ?>">Avbryt</a> 
-<?php endif; ?>
+            <a class="btn btn-2" href="<?= $this->url(($admin ? 'admin/post' : ($update ? 'question/' . $form->getModel()->id : 'question'))) ?>">Avbryt</a> 
         </div>
     </div>
 </form>

@@ -1,5 +1,6 @@
 <h1>Frågor</h1>
 <?php $this->renderView('default/msgs'); ?>
+<p><a class="btn" href="<?= $this->url('question/create') ?>">Skriv fråga</a></p>
 <?php if (!empty($questions)) : ?>
 <div class="questions">
     <ul>

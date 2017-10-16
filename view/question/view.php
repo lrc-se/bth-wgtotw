@@ -1,6 +1,6 @@
 <h1><?= esc($question->title) ?></h1>
 <?php $this->renderView('default/msgs'); ?>
-<?php $this->renderView('question/question', ['question' => $question, 'tags' => $tags, 'author' => $question->user]); ?>
+<?php $this->renderView('question/question', $data); ?>
 <h2>Svar</h2>
 <?php if ($user) : ?>
 <p><a class="btn" href="<?= $this->url('question/' . $question->id . '/answer') ?>">Skriv ett svar</a></p>
@@ -10,7 +10,7 @@
     <ul>
 <?php   foreach ($answers as $answer) : ?>
         <li id="answer-<?= $answer->id ?>">
-<?php $this->renderView('answer/answer', ['answer' => $answer, 'author' => $answer->user, 'user' => $user]); ?>
+<?php $this->renderView('answer/answer', ['answer' => $answer, 'user' => $user]); ?>
         </li>
 <?php   endforeach; ?>
     </ul>
