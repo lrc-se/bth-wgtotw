@@ -6,6 +6,7 @@
 
 return [
     'routes' => [
+        // questions
         [
             'info' => 'Question index page.',
             'requestMethod' => 'get',
@@ -43,29 +44,18 @@ return [
             'callable' => ['questionController', 'handleUpdate']
         ],
         
+        // answers
         [
             'info' => 'Write answer page.',
-            'requestMethod' => 'get',
+            'requestMethod' => 'get|post',
             'path' => '{questionId:digit}/answer',
             'callable' => ['answerController', 'create']
         ],
         [
-            'info' => 'Write answer handler.',
-            'requestMethod' => 'post',
-            'path' => '{questionId:digit}/answer',
-            'callable' => ['answerController', 'handleCreate']
-        ],
-        [
             'info' => 'Edit answer page.',
-            'requestMethod' => 'get',
+            'requestMethod' => 'get|post',
             'path' => '{questionId:digit}/answer/{answerId:digit}',
             'callable' => ['answerController', 'update']
-        ],
-        [
-            'info' => 'Edit answer handler.',
-            'requestMethod' => 'post',
-            'path' => '{questionId:digit}/answer/{answerId:digit}',
-            'callable' => ['answerController', 'handleUpdate']
         ]
     ]
 ];

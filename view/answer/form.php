@@ -1,10 +1,9 @@
-<?php $this->renderView('default/msgs'); ?>
 <?= $form->form($this->currentUrl(), 'post', ['class' => 'form']) ?>
 <?php if ($update) : ?>
     <?= $form->input('id', 'hidden') ?>
     <?= $form->input('parentId', 'hidden') ?>
 <?php else : ?>
-    <input type="hidden" name="parentId" value="<?= $question->id ?>">
+    <input type="hidden" name="parentId" value="<?= $questionId ?>">
 <?php endif; ?>
     <div class="form-control">
         <div class="form-label"><?= $form->label('text', 'Text:') ?></div>
@@ -20,15 +19,8 @@
         <div class="form-input">
             <input type="submit" value="<?= ($update ? 'Uppdatera' : 'Skicka') ?>">
 <?php if ($update || $admin) : ?>
-            <a class="btn btn-2" href="<?= $this->url(($admin ? 'admin/post' : 'question/' . $question->id)) ?>">Avbryt</a> 
+            <a class="btn btn-2" href="<?= $this->url(($admin ? 'admin/post' : 'question/' . $questionId)) ?>">Avbryt</a> 
 <?php endif; ?>
         </div>
     </div>
 </form>
-<?php if (!$admin) : ?>
-<h2>Fråga</h2>
-<div class="question">
-    <div class="question-text"><?= $this->di->textfilter->markdown(esc($question->text)) ?></div>
-    <div class="question-author"><a href="<?= $this->url('user/' . $question->user->id) ?>"><?= esc($question->user->username) ?></a></div>
-</div>
-<?php endif; ?>
