@@ -1,6 +1,8 @@
+<?php if (empty($profileView)) : ?>
 <h1>Frågor</h1>
 <?php $this->renderView('default/msgs'); ?>
 <p><a class="btn" href="<?= $this->url('question/create') ?>">Skriv fråga</a></p>
+<?php endif; ?>
 <?php if (!empty($questions)) : ?>
 <div class="questions">
     <ul>
@@ -12,7 +14,9 @@
             <span class="unanswered">?</span>
 <?php       endif; ?>
             <a href="<?= $this->url('question/' . $question->id) ?>"><?= esc($question->title) ?></a>
+<?php       if (empty($profileView)) : ?>
             <a href="<?= $this->url('user/' . $question->user->id) ?>"><?= esc($question->user->username) ?></a>
+<?php       endif; ?>
         </li>
 <?php   endforeach; ?>
     </ul>
