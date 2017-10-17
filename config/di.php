@@ -121,18 +121,16 @@ $config = [
                     ]);
             }
         ],
-        /*'comments' => [
+        'tag' => [
             'shared' => true,
             'callback' => function () {
-                return (new \LRC\Comment\CommentService())
-                    ->configure('comment.php')
+                return (new \WGTOTW\Services\TagService())
                     ->inject([
-                        'session' => $this->session,
-                        'view' => $this->view,
-                        'comments' => $this->repository->comments
+                        'db' => $this->db,
+                        'tags' => $this->repository->tags
                     ]);
             }
-        ]*/
+        ]
     ]
 ];
 
