@@ -34,6 +34,17 @@ class Post extends BaseModel
     
     
     /**
+     * Return whether the post is an answered question.
+     *
+     * @return boolean  True if the post is an answered question, false otherwise.
+     */
+    public function isAnswered()
+    {
+        return ($this->type == 'question' && $this->status == Question::ANSWERED);
+    }
+    
+    
+    /**
      * Return whether the post is an accepted answer.
      *
      * @return boolean  True if the post is an accepted answer, false otherwise.

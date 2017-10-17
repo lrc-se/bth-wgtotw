@@ -6,7 +6,7 @@
     <ul>
 <?php   foreach ($questions as $question) : ?>
         <li>
-<?php       if ($question->status == \WGTOTW\Models\Question::ANSWERED) : ?>
+<?php       if ($question->isAnswered()) : ?>
             <span class="answered">!</span>
 <?php       else : ?>
             <span class="unanswered">?</span>
