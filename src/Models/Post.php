@@ -31,4 +31,15 @@ class Post extends BaseModel
             ]
         ]);
     }
+    
+    
+    /**
+     * Return whether the post is an accepted answer.
+     *
+     * @return boolean  True if the post is an accepted answer, false otherwise.
+     */
+    public function isAccepted()
+    {
+        return ($this->type == 'answer' && $this->status == Answer::ACCEPTED);
+    }
 }

@@ -17,6 +17,20 @@ $vote = (!empty($user) ? $di->post->getVote($answer, $user) : null);
 <?php   endif; ?>
     </div>
 <?php endif; ?>
+    <div class="answer-accept">
+<?php if (!empty($user) && $question->userId == $user->id) : ?>
+<?php   if ($answer->isAccepted()) : ?>
+        <span class="answer-accepted">*</span>
+        <a href="<?= $this->url('question/' . $answer->parentId . '/answer/' . $answer->id . '/unaccept') ?>?return=answer-<?= $answer->id ?>">Ångra</a>
+<?php   else: ?>
+        <a href="<?= $this->url('question/' . $answer->parentId . '/answer/' . $answer->id . '/accept') ?>?return=answer-<?= $answer->id ?>" title="Acceptera detta svar">*</a>
+<?php   endif; ?>
+<?php else : ?>
+<?php   if ($answer->isAccepted()) : ?>
+        <span class="answer-accepted">*</span>
+<?php   endif; ?>
+<?php endif; ?>
+    </div>
 </div>
 <div class="answer-text"><?= markdown($answer->text) ?></div>
 <div class="answer-author">

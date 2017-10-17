@@ -92,4 +92,61 @@ class AnswerController extends BaseController
             ]
         ], 'Redigera svar');
     }
+    
+    
+    /**
+     * Accept answer.
+     *
+     * @param int   $questionId     Question ID.
+     * @param int   $answerId       Answer ID.
+     */
+    public function accept($questionId, $answerId)
+    {
+        $this->changeAcceptedStatus($questionId, $answerId, true);
+    }
+    
+    
+    /**
+     * Unaccept answer.
+     *
+     * @param int   $questionId     Question ID.
+     * @param int   $answerId       Answer ID.
+     */
+    public function unaccept($questionId, $answerId)
+    {
+        $this->changeAcceptedStatus($questionId, $answerId, false);
+    }
+    
+    
+    /**
+     * Change accepted status for answer.
+     *
+     * @param int   $questionId     Question ID.
+     * @param int   $answerId       Answer ID.
+     * @param int   $status         Accepted status.
+     */
+    private function changeAcceptedStatus($questionId, $answerId, $status)
+    {
+        $user = $this->di->common->verifyUser();
+        $answer = $this->di->post->useSoft()->getById($answerId, 'answer');
+        if (!$answer) {
+            $this->di->common->redirectError("question/$questionId", "Kunde inte hitta svaret med ID $answerId.");
+        }
+        
+        $question = $this->di->post->useSoft()->getById($questionId, 'question');
+        if (!$question) {
+            $this->di->common->redirectError('question', "Kunde inte hitta frågan med ID $questionId.");
+        } elseif ($answer->parentId != $question->id) {
+            $this->di->common->redirectError("question/$questionId", 'Felaktig kombination av fråge- och svars-ID:n.');
+        } elseif ($question->userId != $user->id) {
+            $this->di->common->redirectError("question/$questionId", 'Du har inte behörighet att acceptera svar för denna fråga.');
+        }
+        
+        if ($status) {
+            $this->di->post->acceptAnswer($question, $answer);
+        } else {
+            $this->di->post->unacceptAnswer($question, $answer);
+        }
+        $this->di->common->redirect("question/$questionId#answer-" . $answer->id);
+    }
 }

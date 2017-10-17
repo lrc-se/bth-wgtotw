@@ -158,6 +158,49 @@ class PostService extends BaseService
     
     
     /**
+     * Set the accepted answer to a question.
+     *
+     * @param Models\Question   $question   Question model instance.
+     * @param Models\Answer     $answer     Answer model instance.
+     */
+    public function acceptAnswer($question, $answer)
+    {
+        // demote old accepted answer, if any
+        $oldAnswer = $this->di->posts->getFirst("type = 'answer' AND parentId = ? AND status = '" . Models\Answer::ACCEPTED . "'", [$answer->parentId]);
+        if ($oldAnswer) {
+            $oldAnswer->status = null;
+            $this->di->posts->save($oldAnswer);
+        }
+        
+        // promote new accepted answer
+        $answer->status = Models\Answer::ACCEPTED;
+        $this->di->posts->save($answer);
+        
+        // mark corresponding question as answered
+        $question->status = Models\Question::ANSWERED;
+        $this->di->posts->save($question);
+    }
+    
+    
+    /**
+     * Remove accepted status from an answer.
+     *
+     * @param Models\Question   $question   Question model instance.
+     * @param Models\Answer     $answer     Answer model instance.
+     */
+    public function unacceptAnswer($question, $answer)
+    {
+        // demote old accepted answer
+        $answer->status = null;
+        $this->di->posts->save($answer);
+        
+        // mark corresponding question as unanswered
+        $question->status = null;
+        $this->di->posts->save($question);
+    }
+    
+    
+    /**
      * Create post from model-bound form.
      *
      * @param string                    $type   Post type.

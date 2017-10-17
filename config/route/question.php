@@ -45,6 +45,18 @@ return [
             'path' => '{questionId:digit}/answer/{answerId:digit}',
             'callable' => ['answerController', 'update']
         ],
+        [
+            'info' => 'Accept answer.',
+            'requestMethod' => 'get',
+            'path' => '{questionId:digit}/answer/{answerId:digit}/accept',
+            'callable' => ['answerController', 'accept']
+        ],
+        [
+            'info' => 'Unaccept answer.',
+            'requestMethod' => 'get',
+            'path' => '{questionId:digit}/answer/{answerId:digit}/unaccept',
+            'callable' => ['answerController', 'unaccept']
+        ],
         
         // comments
         [

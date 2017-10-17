@@ -9,8 +9,8 @@
 <div class="answers">
     <ul>
 <?php   foreach ($answers as $answer) : ?>
-        <li id="answer-<?= $answer->id ?>">
-<?php $this->renderView('answer/answer', ['answer' => $answer, 'user' => $user, 'canComment' => true]); ?>
+        <li id="answer-<?= $answer->id ?>"<?= ($answer->isAccepted() ? ' class="accepted"' : '') ?>>
+<?php $this->renderView('answer/answer', ['answer' => $answer, 'question' => $question, 'user' => $user, 'canComment' => true]); ?>
         </li>
 <?php   endforeach; ?>
     </ul>
