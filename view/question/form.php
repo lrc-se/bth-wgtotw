@@ -24,6 +24,15 @@
         </div>
     </div>
     <div class="form-control">
+        <div class="form-label"><label>Taggar:</label></div>
+        <div class="form-input">
+<?php foreach ($tags as $n => $tag) : ?>
+            <input id="tag-<?= $n ?>" type="checkbox" name="tagIds[]" value="<?= $tag->id ?>"<?= (in_array($tag->id, $tagIds) ? ' checked' : '') ?>>
+            <label for="tag-<?= $n ?>"><?= esc($tag->name) ?></label>
+<?php endforeach; ?>
+        </div>
+    </div>
+    <div class="form-control">
         <div class="form-label"></div>
         <div class="form-input">
             <input type="submit" value="<?= ($update ? 'Uppdatera' : 'Skicka') ?>">

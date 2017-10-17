@@ -64,7 +64,9 @@ class QuestionController extends BaseController
         return $this->di->common->renderMain('question/edit', [
             'admin' => null,
             'update' => false,
-            'form' => $form
+            'form' => $form,
+            'tags' => $this->di->tag->getAll(),
+            'tagIds' => []
         ], 'Skriv ny fråga');
     }
     
@@ -96,7 +98,9 @@ class QuestionController extends BaseController
         return $this->di->common->renderMain('question/edit', [
             'admin' => null,
             'update' => true,
-            'form' => $form
+            'form' => $form,
+            'tags' => $this->di->tag->getAll(),
+            'tagIds' => $this->di->tag->getIdsByPost($question)
         ], 'Redigera fråga');
     }
 }

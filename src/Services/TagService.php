@@ -38,9 +38,9 @@ class TagService extends BaseService
     /**
      * Get tags for a specific post.
      *
-     * @param Models\Post   $post   Post model instance.
+     * @param Models\Post   $post       Post model instance.
      *
-     * @return array                Array of tag model instances.
+     * @return array                    Array of tag model instances.
      */
     public function getByPost($post)
     {
@@ -51,6 +51,40 @@ class TagService extends BaseService
             ->where('pt.postId = ?')
             ->execute([$post->id])
             ->fetchAllClass(Models\Tag::class);
+    }
+    
+    
+    /**
+     * Get tags IDs for a specific post.
+     *
+     * @param Models\Post   $post       Post model instance.
+     *
+     * @return array                    Array of tag IDs.
+     */
+    public function getIdsByPost($post)
+    {
+        $objs = $this->di->db->connect()
+            ->select('tagId')
+            ->from('wgtotw_post_tag')
+            ->where('postId = ?')
+            ->execute([$post->id])
+            ->fetchAll();
+        $ids = [];
+        foreach ($objs as $obj) {
+            $ids[] = $obj->tagId;
+        }
+        return $ids;
+    }
+    
+    
+    /**
+     * Get all tags.
+     *
+     * @return array    Array of tag model instances.
+     */
+    public function getAll()
+    {
+        return $this->di->tags->getAll();
     }
     
     
