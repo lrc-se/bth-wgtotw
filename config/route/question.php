@@ -70,7 +70,7 @@ return [
             'requestMethod' => 'get|post',
             'path' => '{questionId:digit}/answer/{answerId:digit}/comment/{commentId:digit}',
             'callable' => function ($questionId, $answerId, $commentId) {
-                $this->di->commentController->update($questionId, $commentId, $answerId);
+                return $this->di->commentController->update($questionId, $commentId, $answerId);
             }
         ],
         
