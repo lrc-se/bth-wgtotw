@@ -11,6 +11,17 @@ use \WGTOTW\Models as Models;
 class UserController extends BaseController
 {
     /**
+     * User index.
+     */
+    public function index()
+    {
+        return $this->di->common->renderMain('user/index', [
+            'users' => $this->di->repository->users->getAll()
+        ], 'Användare');
+    }
+    
+    
+    /**
      * Profile page.
      *
      * @param int   $id     User ID.

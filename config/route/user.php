@@ -7,6 +7,12 @@
 return [
     'routes' => [
         [
+            'info' => 'User index.',
+            'requestMethod' => 'get',
+            'path' => 'all',
+            'callable' => ['userController', 'index']
+        ],
+        [
             'info' => 'Profile page.',
             'requestMethod' => 'get',
             'path' => '{id:digit}',
