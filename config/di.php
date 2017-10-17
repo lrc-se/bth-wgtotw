@@ -104,7 +104,7 @@ $config = [
                         'session' => $this->session,
                         'db' => $this->db,
                         'users' => $this->repository->users,
-                        'posts' => $this->repository->posts
+                        'post' => $this->post
                     ]);
             }
         ],

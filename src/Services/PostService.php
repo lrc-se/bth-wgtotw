@@ -51,7 +51,7 @@ class PostService extends BaseService
         if (!is_null($type)) {
             $posts = $this->di->posts->$method('userId = ? AND type = ?', [$user->id, $type]);
         } else {
-            $posts = $this->di->posts->$method('userId = ?', $user->id);
+            $posts = $this->di->posts->$method('userId = ?', [$user->id]);
         }
         $this->useSoft(false);
         return $posts;

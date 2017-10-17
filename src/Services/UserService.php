@@ -67,6 +67,41 @@ class UserService extends BaseService
     
     
     /**
+     * Get user reputation.
+     *
+     * @param Models\User   $user   User model instance.
+     *
+     * @return int                  User reputation level.
+     */
+    public function getReputation($user)
+    {
+        $rep = 0;
+        $posts = $this->di->post->useSoft()->getByAuthor($user);
+        foreach ($posts as $post) {
+            if ($post->rank < 0) {
+                $factor = $post->rank - 1;
+            } elseif ($post->rank > 0) {
+                $factor = $post->rank + 1;
+            } else {
+                $factor = 1;
+            }
+            switch ($post->type) {
+                case 'question':
+                    $rep += 2 * $factor;
+                    break;
+                case 'answer':
+                    $rep += ($post->isAccepted() ? 5 : 3) * $factor;
+                    break;
+                case 'comment':
+                    $rep += $factor;
+                    break;
+            }
+        }
+        return $rep;
+    }
+    
+    
+    /**
      * Create user from model-bound form.
      *
      * @param \LRC\Form\ModelForm   $form       Model-bound form.
