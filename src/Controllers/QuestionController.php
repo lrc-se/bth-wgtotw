@@ -33,7 +33,7 @@ class QuestionController extends BaseController
             $this->di->common->redirectError('question', "Kunde inte hitta frågan med ID $id.");
         }
         
-        $tags = []; //$this->di->tag->getByPost($question);
+        $tags = $this->di->tag->getByPost($question);
         $comments = $this->di->post->getComments($question);
         $answers = $this->di->post->getAnswers($question);
         

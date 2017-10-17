@@ -39,7 +39,7 @@ class AnswerController extends BaseController
             ],
             'questionData' => [
                 'question' => $question,
-                'tags' => [],
+                'tags' => $this->di->tag->getByPost($question),
                 'author' => $question->user
             ]
         ], 'Besvara fråga');
@@ -87,7 +87,7 @@ class AnswerController extends BaseController
             ],
             'questionData' => [
                 'question' => $question,
-                'tags' => [],
+                'tags' => $this->di->tag->getByPost($question),
                 'author' => $question->user
             ]
         ], 'Redigera svar');

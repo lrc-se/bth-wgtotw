@@ -46,7 +46,7 @@ class CommentController extends BaseController
         if ($post->type == 'question') {
             $postData = [
                 'question' => $post,
-                'tags' => []
+                'tags' => $this->di->tag->getByPost($post)
             ];
         } else {
             $postData = ['answer' => $post];
@@ -113,7 +113,7 @@ class CommentController extends BaseController
         if ($post->type == 'question') {
             $postData = [
                 'question' => $post,
-                'tags' => []
+                'tags' => $this->di->tag->getByPost($post)
             ];
         } else {
             $postData = ['answer' => $post];
