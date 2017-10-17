@@ -6,7 +6,7 @@ $vote = (!empty($user) ? $di->post->getVote($answer, $user) : null);
 ?>
 <div class="answer-header">
     <div class="rank"><?= $answer->rank ?></div>
-<?php if (!empty($user)) : ?>
+<?php if (!empty($user) && $answer->userId != $user->id) : ?>
     <div class="vote">
 <?php   if (!$vote) : ?>
         <a href="<?= $this->url('question/' . $answer->parentId . '/vote/' . $answer->id . '/down') ?>?return=answer-<?= $answer->id ?>">–</a>

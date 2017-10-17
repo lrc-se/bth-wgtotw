@@ -25,7 +25,7 @@ $vote = (!empty($user) ? $di->post->getVote($comment, $user) : null);
     </div>
     <div class="comment-footer">
         <div class="rank"><?= $comment->rank ?></div>
-<?php if (!empty($user)) : ?>
+<?php if (!empty($user) && $comment->userId != $user->id) : ?>
         <div class="vote">
 <?php   if (!$vote) : ?>
             <a href="<?= $this->url("question/$questionId/vote/" . $comment->id . '/down') ?>?return=comment-<?= $comment->id ?>">–</a>

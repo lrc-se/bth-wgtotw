@@ -60,6 +60,9 @@ class VoteController extends BaseController
         if (!$post) {
             $this->di->common->redirectError("question/$questionId", "Kunde inte hitta inlägget med ID $postId.");
         }
+        if ($post->userId == $user->id) {
+            $this->di->common->redirectError("question/$questionId", 'Du kan inte rösta på ditt eget inlägg.');
+        }
         
         if ($this->di->post->registerVote($post, $user, $value)) {
             $anchor = urlencode($this->di->request->getGet('return'));
