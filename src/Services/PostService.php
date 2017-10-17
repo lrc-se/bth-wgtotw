@@ -107,6 +107,57 @@ class PostService extends BaseService
     
     
     /**
+     * Get user's vote for post.
+     *
+     * @param Models\Post   $post   Post model instance.
+     * @param Models\User   $user   User model instance.
+     * @param Models\Vote|null      Vote model instance, or null if no vote found.
+     */
+    public function getVote($post, $user)
+    {
+        return $this->di->votes->getFirst('postId = ? AND userId = ?', [$post->id, $user->id]);
+    }
+    
+    
+    /**
+     * Register a vote on a post.
+     *
+     * @param Models\Post   $post   Post model instance.
+     * @param Models\User   $user   User model instance.
+     * @param int           $value  Vote value (positive = up, negative = down, 0 = cancel vote).
+     *
+     * @param boolean               True if the vote was cast/cancelled, false if the user has already cast a vote for the post.
+     */
+    public function registerVote($post, $user, $value)
+    {
+        $oldVote = $this->getVote($post, $user);
+        if ($oldVote && $value === 0) {
+            // cancel old vote
+            $this->di->votes->delete($oldVote);
+            $post->rank -= $oldVote->value;
+            $this->di->posts->save($post);
+            return true;
+        } elseif (!$oldVote && $value !== 0) {
+            // cast new vote or amend previous vote
+            if ($oldVote) {
+                $vote = $oldVote;
+            } else {
+                $vote = new Models\Vote();
+                $vote->postId = $post->id;
+                $vote->userId = $user->id;
+            }
+            
+            $vote->value = $value;
+            $this->di->votes->save($vote);
+            $post->rank += $value;
+            $this->di->posts->save($post);
+            return true;
+        }
+        return false;
+    }
+    
+    
+    /**
      * Create post from model-bound form.
      *
      * @param string                    $type   Post type.

@@ -116,7 +116,8 @@ $config = [
                         'db' => $this->db,
                         'users' => $this->repository->users,
                         'posts' => $this->repository->posts,
-                        'tags' => $this->repository->tags
+                        'tags' => $this->repository->tags,
+                        'votes' => $this->repository->votes
                     ]);
             }
         ],
@@ -143,7 +144,8 @@ $controllers = [
     'user' => 'User',
     'question' => 'Question',
     'answer' => 'Answer',
-    'comment' => 'Comment'
+    'comment' => 'Comment',
+    'vote' => 'Vote'
 ];
 
 foreach ($controllers as $key => $controller) {

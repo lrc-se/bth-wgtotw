@@ -1,8 +1,23 @@
 <?php
 
 $author = $answer->user;
+$vote = (!empty($user) ? $di->post->getVote($answer, $user) : null);
 
 ?>
+<div class="answer-header">
+    <div class="rank"><?= $answer->rank ?></div>
+<?php if (!empty($user)) : ?>
+    <div class="vote">
+<?php   if (!$vote) : ?>
+        <a href="<?= $this->url('question/' . $answer->parentId . '/vote/' . $answer->id . '/down') ?>?return=answer-<?= $answer->id ?>">–</a>
+        <a href="<?= $this->url('question/' . $answer->parentId . '/vote/' . $answer->id . '/up') ?>?return=answer-<?= $answer->id ?>">+</a>
+<?php   else : ?>
+        <span class="vote-active"><?= ($vote->value < 0 ? '–' : '+') ?></span>
+        <a href="<?= $this->url('question/' . $answer->parentId . '/vote/' . $answer->id . '/cancel') ?>?return=answer-<?= $answer->id ?>">Ångra</a>
+<?php   endif; ?>
+    </div>
+<?php endif; ?>
+</div>
 <div class="answer-text"><?= markdown($answer->text) ?></div>
 <div class="answer-author">
     <a href="<?= $this->url('user/' . $author->id) ?>">

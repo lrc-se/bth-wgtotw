@@ -72,6 +72,26 @@ return [
             'callable' => function ($questionId, $answerId, $commentId) {
                 $this->di->commentController->update($questionId, $commentId, $answerId);
             }
+        ],
+        
+        // votes
+        [
+            'info' => 'Register down vote.',
+            'requestMethod' => 'get',
+            'path' => '{questionId:digit}/vote/{$postId}/down',
+            'callable' => ['voteController', 'voteDown']
+        ],
+        [
+            'info' => 'Register up vote.',
+            'requestMethod' => 'get',
+            'path' => '{questionId:digit}/vote/{$postId}/up',
+            'callable' => ['voteController', 'voteUp']
+        ],
+        [
+            'info' => 'Cancel vote.',
+            'requestMethod' => 'get',
+            'path' => '{questionId:digit}/vote/{$postId}/cancel',
+            'callable' => ['voteController', 'cancelVote']
         ]
     ]
 ];

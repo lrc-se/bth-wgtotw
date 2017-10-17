@@ -1,9 +1,24 @@
 <?php
 
 $author = $question->user;
+$vote = (!empty($user) ? $di->post->getVote($question, $user) : null);
 
 ?>
 <div class="question">
+    <div class="question-header">
+        <div class="rank"><?= $question->rank ?></div>
+<?php if (!empty($user)) : ?>
+        <div class="vote">
+<?php   if (!$vote) : ?>
+            <a href="<?= $this->url('question/' . $question->id . '/vote/' . $question->id . '/down') ?>">–</a>
+            <a href="<?= $this->url('question/' . $question->id . '/vote/' . $question->id . '/up') ?>">+</a>
+<?php   else : ?>
+            <span class="vote-active"><?= ($vote->value < 0 ? '–' : '+') ?></span>
+            <a href="<?= $this->url('question/' . $question->id . '/vote/' . $question->id . '/cancel') ?>">Ångra</a>
+<?php   endif; ?>
+        </div>
+<?php endif; ?>
+    </div>
     <div class="question-text"><?= $this->di->textfilter->markdown(esc($question->text)) ?></div>
     <div class="question-author">
         <a href="<?= $this->url('user/' . $author->id) ?>">
