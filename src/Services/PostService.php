@@ -75,6 +75,28 @@ class PostService extends BaseService
     
     
     /**
+     * Get posts by tag.
+     *
+     * @param Models\Tag    $tag    Tag model instance.
+     *
+     * @return array                Array of post model instances.
+     */
+    public function getByTag($tag)
+    {
+        $posts = $this->di->db->connect()
+            ->select('p.*, u.username, u.email')
+            ->from($this->di->posts->getCollectionName() . ' AS p')
+            ->join('wgtotw_post_tag AS pt', 'p.id = pt.postId')
+            ->leftJoin($this->di->users->getCollectionName() . ' AS u', 'p.userId = u.id')
+            ->where('pt.tagId = ?' . ($this->softQuery ? ' AND p.deleted IS NULL AND u.deleted IS NULL' : ''))
+            ->execute([$tag->id])
+            ->fetchAllClass(Models\PostVM::class);
+        $this->useSoft(false);
+        return $posts;
+    }
+    
+    
+    /**
      * Get answers for question.
      *
      * @param Models\Question   $question   Question model instance.

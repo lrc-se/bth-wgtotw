@@ -143,7 +143,8 @@ $controllers = [
     'question' => 'Question',
     'answer' => 'Answer',
     'comment' => 'Comment',
-    'vote' => 'Vote'
+    'vote' => 'Vote',
+    'tag' => 'Tag'
 ];
 
 foreach ($controllers as $key => $controller) {
