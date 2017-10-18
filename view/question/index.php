@@ -13,6 +13,7 @@
 <?php       else : ?>
             <span class="unanswered">? <?= $di->post->useSoft()->getAnswerCount($question) ?></span>
 <?php       endif; ?>
+            <span class="question-rank"><?= $question->rank ?></span>
             <a href="<?= $this->url('question/' . $question->id) ?>"><?= esc($question->title) ?></a>
 <?php       if (empty($hideUser)) : ?>
             <a href="<?= $this->url('user/' . $question->user->id) ?>"><?= esc($question->user->username) ?></a>
