@@ -14,6 +14,7 @@
 <?php       endif; ?>
             <a href="<?= $this->url('question/' . $question->id) ?>"><?= esc($question->title) ?></a>
             <a href="<?= $this->url('user/' . $question->userId) ?>"><?= esc($question->username) ?></a>
+            <span class="question-time"><?= $question->published ?></span>
         </li>
 <?php   endforeach; ?>
     </ul>

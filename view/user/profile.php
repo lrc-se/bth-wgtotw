@@ -9,4 +9,4 @@
 </p>
 <?php endif; ?>
 <h2>Frågor</h2>
-<?php $this->renderView('question/index', ['questions' => $questions, 'profileView' => true]); ?>
+<?php $this->renderView('question/index', ['questions' => $questions, 'hideTitle' => true, 'hideUser' => true]); ?>
