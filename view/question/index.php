@@ -16,7 +16,7 @@
             <span class="question-rank"><?= $question->rank ?></span>
             <a href="<?= $this->url('question/' . $question->id) ?>"><?= esc($question->title) ?></a>
 <?php       if (empty($hideUser)) : ?>
-            <a href="<?= $this->url('user/' . $question->user->id) ?>"><?= esc($question->user->username) ?></a>
+            <a href="<?= $this->url('user/' . $question->userId) ?>"><?= esc(($question instanceof \WGTOTW\Models\PostVM ? $question->username : $question->user->username)) ?></a>
 <?php       endif; ?>
             <span class="question-time"><?= $question->published ?></span>
         </li>
