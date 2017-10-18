@@ -97,6 +97,27 @@ class PostService extends BaseService
     
     
     /**
+     * Get all posts.
+     *
+     * @param   string  $type   Post type.
+     * @param   string  $order  Order by clause.
+     *
+     * @return array            Array of post model instances.
+     */
+    public function getAll($type = null, $order = null)
+    {
+        $method = ($this->softQuery ? 'getAllSoft' : 'getAll');
+        if (!is_null($type)) {
+            $posts = $this->di->posts->$method('type = ?', [$type], $order);
+        } else {
+            $posts = $this->di->posts->$method(null, [], $order);
+        }
+        $this->useSoft(false);
+        return $posts;
+    }
+    
+    
+    /**
      * Get answers for question.
      *
      * @param Models\Question   $question   Question model instance.

@@ -137,6 +137,7 @@ $config = [
 
 // register controllers
 $controllers = [
+    'default' => 'Default',
     'content' => 'Content',
     'error' => 'Error',
     'user' => 'User',

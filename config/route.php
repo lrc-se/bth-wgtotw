@@ -12,6 +12,10 @@ return [
         ],
         [
             'mount' => null,
+            'file' => __DIR__ . '/route/default.php'
+        ],
+        [
+            'mount' => null,
             'file' => __DIR__ . '/route/flat-file-content.php'
         ],
         [
