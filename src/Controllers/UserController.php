@@ -36,6 +36,7 @@ class UserController extends BaseController
         return $this->di->common->renderMain('user/profile', [
             'user' => $user,
             'reputation' => $this->di->user->getReputation($user),
+            'numVotes' => $this->di->repository->votes->count('userId = ?', [$user->id]),
             'questions' => $this->di->post->getByAuthor($user, 'question'),
             'curUser' => $this->di->user->getCurrent()
         ], htmlspecialchars($user->username));
