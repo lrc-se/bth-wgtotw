@@ -121,13 +121,14 @@ class PostService extends BaseService
      * Get answers for question.
      *
      * @param Models\Question   $question   Question model instance.
+     * @param string            $order      Order by clause.
      *
      * @return array                        Array of answer model instances.
      */
-    public function getAnswers($question)
+    public function getAnswers($question, $order = null)
     {
         $method = ($this->softQuery ? 'getAllSoft' : 'getAll');
-        $questions = $this->di->posts->$method("type = 'answer' AND parentId = ?", [$question->id]);
+        $questions = $this->di->posts->$method("type = 'answer' AND parentId = ?", [$question->id], $order);
         $this->useSoft(false);
         return $questions;
     }

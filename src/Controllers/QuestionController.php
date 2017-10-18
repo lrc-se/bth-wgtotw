@@ -35,7 +35,16 @@ class QuestionController extends BaseController
         
         $tags = $this->di->tag->getByPost($question);
         $comments = $this->di->post->getComments($question);
-        $answers = $this->di->post->getAnswers($question);
+        
+        $orderBy = [
+            'date-asc' => 'published',
+            'date-desc' => 'published DESC',
+            'rank-asc' => 'rank',
+            'rank-desc' => 'rank DESC'
+        ];
+        $sort = $this->di->request->getGet('sort', 'date-asc');
+        $order = $orderBy[(isset($orderBy[$sort]) ? $sort : 'date-asc')];
+        $answers = $this->di->post->getAnswers($question, $order);
         
         return $this->di->common->renderMain('question/view', [
             'user' => $this->di->user->getCurrent(),
@@ -43,7 +52,14 @@ class QuestionController extends BaseController
             'canComment' => true,
             'tags' => $tags,
             'comments' => $comments,
-            'answers' => $answers
+            'answers' => $answers,
+            'sort' => $sort,
+            'sortOptions' => [
+                'Kronologisk' => 'date-asc',
+                'Nyast först' => 'date-desc',
+                'Lägst poäng' => 'rank-asc',
+                'Högst poäng' => 'rank-desc'
+            ]
         ], htmlspecialchars($question->title));
     }
     
