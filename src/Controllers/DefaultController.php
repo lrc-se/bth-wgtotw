@@ -26,10 +26,20 @@ class DefaultController extends BaseController
             ->limit(5)
             ->execute()
             ->fetchAll();
-        
+        $activeTags = $this->di->db->connect()
+            ->select('t.*, COUNT(tagId) AS numPosts')
+            ->from('wgtotw_post_tag AS pt')
+            ->join($this->di->repository->tags->getCollectionName() . ' AS t', 'pt.tagId = t.id')
+            ->groupBy('pt.tagId')
+            ->orderBy('numPosts DESC, t.id')
+            ->limit(5)
+            ->execute()
+            ->fetchAll();
+       
         return $this->di->common->renderMain('start', [
             'questions' => $questions,
-            'activeUsers' => $activeUsers
+            'activeUsers' => $activeUsers,
+            'activeTags' => $activeTags
         ], 'Start');
     }
 }
