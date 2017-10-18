@@ -135,6 +135,22 @@ class PostService extends BaseService
     
     
     /**
+     * Get answer count for question.
+     *
+     * @param Models\Question   $question   Question model instance.
+     *
+     * @return int                          Number of answers.
+     */
+    public function getAnswerCount($question)
+    {
+        $method = ($this->softQuery ? 'countSoft' : 'count');
+        $num = $this->di->posts->$method("type = 'answer' AND parentId = ?", [$question->id]);
+        $this->useSoft(false);
+        return $num;
+    }
+    
+    
+    /**
      * Get comments for post.
      *
      * @param Models\Post   $post   Post model instance.

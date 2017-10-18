@@ -9,9 +9,9 @@
 <?php   foreach ($questions as $question) : ?>
         <li>
 <?php       if ($question->isAnswered()) : ?>
-            <span class="answered">!</span>
+            <span class="answered">! <?= $di->post->useSoft()->getAnswerCount($question) ?></span>
 <?php       else : ?>
-            <span class="unanswered">?</span>
+            <span class="unanswered">? <?= $di->post->useSoft()->getAnswerCount($question) ?></span>
 <?php       endif; ?>
             <a href="<?= $this->url('question/' . $question->id) ?>"><?= esc($question->title) ?></a>
 <?php       if (empty($hideUser)) : ?>
