@@ -89,13 +89,6 @@ $config = [
                 return new \WGTOTW\Services\CommonService($this);
             }
         ],
-        'content' => [
-            'shared' => true,
-            'callback' => function () {
-                return (new \WGTOTW\Services\ContentService())
-                    ->inject(['textfilter' => $this->textfilter]);
-            }
-        ],
         'user' => [
             'shared' => true,
             'callback' => function () {
@@ -138,7 +131,6 @@ $config = [
 // register controllers
 $controllers = [
     'default' => 'Default',
-    'content' => 'Content',
     'error' => 'Error',
     'user' => 'User',
     'question' => 'Question',

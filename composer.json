@@ -11,7 +11,6 @@
         "anax/session": "^1.0",
         "anax/textfilter": "^1.0",
         "anax/configure": "^1.0",
-        "symfony/yaml": "^3.3",
         "anax/di": "^1.0",
         "anax/database": "^1.1",
         "lrc-se/anax-repository": "^1.0"

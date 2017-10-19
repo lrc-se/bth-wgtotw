@@ -42,4 +42,14 @@ class DefaultController extends BaseController
             'activeTags' => $activeTags
         ], 'Start');
     }
+
+
+
+    /**
+     * About page.
+     */
+    public function about()
+    {
+        return $this->di->common->renderMain('about', [], 'Om webbplatsen');
+    }
 }
