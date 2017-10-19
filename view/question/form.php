@@ -36,7 +36,7 @@
         <div class="form-label"></div>
         <div class="form-input">
             <input type="submit" value="<?= ($update ? 'Uppdatera' : 'Skicka') ?>">
-            <a class="btn btn-2" href="<?= $this->url(($admin ? 'admin/post' : ($update ? 'question/' . $form->getModel()->id : 'question'))) ?>">Avbryt</a> 
+            <a class="btn btn-2" href="<?= $this->url(($update ? 'question/' . $form->getModel()->id : 'question')) ?>">Avbryt</a> 
         </div>
     </div>
 </form>

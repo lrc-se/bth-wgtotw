@@ -18,7 +18,7 @@
         <div class="form-label"></div>
         <div class="form-input">
             <input type="submit" value="<?= ($update ? 'Uppdatera' : 'Skicka') ?>">
-            <a class="btn btn-2" href="<?= $this->url(($admin ? 'admin/post' : 'question/' . $questionId)) ?>">Avbryt</a> 
+            <a class="btn btn-2" href="<?= $this->url($return) ?>">Avbryt</a> 
         </div>
     </div>
 </form>

@@ -291,15 +291,14 @@ class PostService extends BaseService
      *
      * @param \WGTOTW\Form\ModelForm    $form       Model-bound form.
      * @param Models\Post               $oldPost    Model instance of existing post.
-     * @param Models\User               $user       Post editor.
      *
      * @return bool                                 True if the update was performed, false if validation failed.
      */
-    public function updateFromForm($form, $oldPost, $user)
+    public function updateFromForm($form, $oldPost)
     {
         $post = $form->populateModel();
         $post->id = $oldPost->id;
-        $post->userId = $user->id;
+        $post->userId = $oldPost->userId;
         $post->parentId = $oldPost->parentId;
         $post->type = $oldPost->type;
         $post->rank = $oldPost->rank;

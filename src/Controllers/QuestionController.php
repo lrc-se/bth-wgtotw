@@ -98,13 +98,13 @@ class QuestionController extends BaseController
         $question = $this->di->post->useSoft()->getById($id, 'question');
         if (!$question) {
             $this->di->common->redirectError('question', "Kunde inte hitta frågan med ID $id.");
-        } elseif ($user->id != $question->userId) {
+        } elseif (!$user->isAdmin && $user->id != $question->userId) {
             $this->di->common->redirectError('question', 'Du har inte behörighet att redigera den begärda frågan.');
         }
         
         if ($this->di->request->getMethod() == 'POST') {
             $form = new Form('question-form', Models\Question::class);
-            if ($this->di->post->updateFromForm($form, $question, $user)) {
+            if ($this->di->post->updateFromForm($form, $question)) {
                 $this->di->common->redirect('question/' . $question->id);
             }
         } else {

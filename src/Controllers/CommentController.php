@@ -58,7 +58,8 @@ class CommentController extends BaseController
                 'update' => false,
                 'form' => $form,
                 'questionId' => $questionId,
-                'answerId' => $answerId
+                'answerId' => $answerId,
+                'return' => 'question/' . $questionId . (!is_null($answerId) ? "#answer-$answerId" : '')
             ],
             'postData' => $postData
         ], $title);
@@ -97,7 +98,7 @@ class CommentController extends BaseController
             $this->di->common->redirectError("question/$questionId", "Kunde inte hitta kommentaren med ID $commentId.");
         } elseif ($post->id != $comment->parentId) {
             $this->di->common->redirectError("question/$questionId", "Felaktig kombination av kommentars- och $comboError-ID:n.");
-        } elseif ($user->id != $comment->userId) {
+        } elseif (!$user->isAdmin && $user->id != $comment->userId) {
             $this->di->common->redirectError("question/$questionId", 'Du har inte behörighet att redigera den begärda kommentaren.');
         }
         
@@ -125,7 +126,8 @@ class CommentController extends BaseController
                 'update' => true,
                 'form' => $form,
                 'questionId' => $questionId,
-                'answerId' => $answerId
+                'answerId' => $answerId,
+                'return' => 'question/' . $questionId . '#comment-' . $comment->id
             ],
             'postData' => $postData
         ], 'Redigera kommentar');

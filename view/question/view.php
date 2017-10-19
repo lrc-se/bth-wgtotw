@@ -2,9 +2,7 @@
 <?php $this->renderView('default/msgs'); ?>
 <?php $this->renderView('question/question', $data); ?>
 <h2 id="answers">Svar</h2>
-<?php if ($user) : ?>
 <p><a class="btn" href="<?= $this->url('question/' . $question->id . '/answer') ?>">Skriv ett svar</a></p>
-<?php endif; ?>
 <?php if (!empty($answers)) : ?>
 <div class="answers">
     <form action="<?= $di->request->getCurrentUrl() ?>#answers">

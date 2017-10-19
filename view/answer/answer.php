@@ -51,7 +51,7 @@ $vote = (!empty($user) ? $di->post->getVote($answer, $user) : null);
 <?php endif; ?>
 </div>
 <div class="answer-actions">
-<?php if (empty($admin) && !empty($user) && $answer->userId == $user->id) : ?>
+<?php if (!empty($user) && ($user->isAdmin || $answer->userId == $user->id)) : ?>
     <a href="<?= $this->url('question/' . $answer->parentId . '/answer/' . $answer->id) ?>">Redigera</a>
 <?php endif; ?>
 <?php if (!empty($canComment)) : ?>

@@ -35,7 +35,8 @@ class AnswerController extends BaseController
                 'admin' => null,
                 'update' => false,
                 'form' => $form,
-                'questionId' => $question->id
+                'questionId' => $question->id,
+                'return' => 'question/' . $question->id
             ],
             'questionData' => [
                 'question' => $question,
@@ -65,7 +66,7 @@ class AnswerController extends BaseController
             $this->di->common->redirectError("question/$questionId", "Kunde inte hitta svaret med ID $answerId.");
         } elseif ($answer->parentId != $question->id) {
             $this->di->common->redirectError("question/$questionId", 'Felaktig kombination av fråge- och svars-ID:n.');
-        } elseif ($user->id != $answer->userId) {
+        } elseif (!$user->isAdmin && $user->id != $answer->userId) {
             $this->di->common->redirectError("question/$questionId", 'Du har inte behörighet att redigera det begärda svaret.');
         }
         
@@ -83,7 +84,8 @@ class AnswerController extends BaseController
                 'admin' => null,
                 'update' => true,
                 'form' => $form,
-                'questionId' => $question->id
+                'questionId' => $question->id,
+                'return' => 'question/' . $question->id . '#answer-' . $answer->id
             ],
             'questionData' => [
                 'question' => $question,
