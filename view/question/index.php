@@ -7,6 +7,7 @@
 <div class="questions">
     <ul>
 <?php   foreach ($questions as $question) : ?>
+<?php       $author = ($question instanceof \WGTOTW\Models\PostVM ? $question->username : ($question->user ? $question->user->username : null)); ?>
         <li>
 <?php       if ($question->isAnswered()) : ?>
             <span class="answered">! <?= $di->post->useSoft()->getAnswerCount($question) ?></span>
@@ -16,7 +17,11 @@
             <span class="question-rank"><?= $question->rank ?></span>
             <a href="<?= $this->url('question/' . $question->id) ?>"><?= esc($question->title) ?></a>
 <?php       if (empty($hideUser)) : ?>
-            <a href="<?= $this->url('user/' . $question->userId) ?>"><?= esc(($question instanceof \WGTOTW\Models\PostVM ? $question->username : $question->user->username)) ?></a>
+<?php           if ($author) : ?>
+            <a href="<?= $this->url('user/' . $question->userId) ?>"><?= esc($author) ?></a>
+<?php           else : ?>
+            <em>(Borttagen användare)</em>
+<?php           endif; ?>
 <?php       endif; ?>
             <span class="question-time"><?= $question->published ?></span>
         </li>

@@ -22,7 +22,7 @@ $vote = (!empty($user) ? $di->post->getVote($answer, $user) : null);
 <?php   if ($answer->isAccepted()) : ?>
         <span class="answer-accepted">*</span>
         <a href="<?= $this->url('question/' . $answer->parentId . '/answer/' . $answer->id . '/unaccept') ?>?return=answer-<?= $answer->id ?>">Ångra</a>
-<?php   else: ?>
+<?php   else : ?>
         <a href="<?= $this->url('question/' . $answer->parentId . '/answer/' . $answer->id . '/accept') ?>?return=answer-<?= $answer->id ?>" title="Acceptera detta svar">*</a>
 <?php   endif; ?>
 <?php else : ?>
@@ -34,10 +34,15 @@ $vote = (!empty($user) ? $di->post->getVote($answer, $user) : null);
 </div>
 <div class="answer-text"><?= markdown($answer->text) ?></div>
 <div class="answer-author">
-    <a href="<?= $this->url('user/' . $author->id) ?>">
-        <img src="<?= $author->getGravatar() ?>" alt="">
-        <?= esc($author->username) ?>
-    </a>
+<?php if ($author) : ?>
+        <a href="<?= $this->url('user/' . $author->id) ?>">
+            <img src="<?= $author->getGravatar() ?>" alt="">
+            <?= esc($author->username) ?>
+        </a>
+<?php else : ?>
+        <img src="<?= (new \WGTOTW\Models\User())->getGravatar() ?>" alt="">
+        <em>(Borttagen användare)</em>
+<?php endif; ?>
 </div>
 <div class="answer-time">
     <div class="answer-published">Skrivet <?= $answer->published ?></div>

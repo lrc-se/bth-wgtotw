@@ -21,10 +21,15 @@ $vote = (!empty($user) ? $di->post->getVote($question, $user) : null);
     </div>
     <div class="question-text"><?= $this->di->textfilter->markdown(esc($question->text)) ?></div>
     <div class="question-author">
+<?php if ($author) : ?>
         <a href="<?= $this->url('user/' . $author->id) ?>">
             <img src="<?= $author->getGravatar() ?>" alt="">
             <?= esc($author->username) ?>
         </a>
+<?php else : ?>
+        <img src="<?= (new \WGTOTW\Models\User())->getGravatar() ?>" alt="">
+        <em>(Borttagen användare)</em>
+<?php endif; ?>
     </div>
     <div class="question-time">
         <div class="question-published">Skriven <?= $question->published ?></div>

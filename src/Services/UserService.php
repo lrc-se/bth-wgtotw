@@ -60,7 +60,7 @@ class UserService extends BaseService
     public function getCurrent()
     {
         if (!$this->curUser && $this->di->session->has('userId')) {
-            $this->curUser = $this->getById($this->di->session->get('userId'));
+            $this->curUser = $this->useSoft()->getById($this->di->session->get('userId'));
         }
         return $this->curUser;
     }

@@ -7,7 +7,17 @@ $vote = (!empty($user) ? $di->post->getVote($comment, $user) : null);
 ?>
 <li id="comment-<?= $comment->id ?>">
     <div class="comment-text"><?= markdown($comment->text) ?></div>
-    <div class="comment-author"><a href="<?= $this->url('user/' . $author->id) ?>"><?= esc($author->username) ?></a></div>
+    <div class="comment-author">
+<?php if ($author) : ?>
+        <a href="<?= $this->url('user/' . $author->id) ?>">
+            <img src="<?= $author->getGravatar() ?>" alt="">
+            <?= esc($author->username) ?>
+        </a>
+<?php else : ?>
+        <img src="<?= (new \WGTOTW\Models\User())->getGravatar() ?>" alt="">
+        <em>(Borttagen användare)</em>
+<?php endif; ?>
+    </div>
     <div class="comment-time">
         <div class="comment-published">Skriven <?= $comment->published ?></div>
 <?php if ($comment->updated) : ?>

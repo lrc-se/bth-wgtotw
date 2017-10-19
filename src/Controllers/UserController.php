@@ -16,7 +16,7 @@ class UserController extends BaseController
     public function index()
     {
         return $this->di->common->renderMain('user/index', [
-            'users' => $this->di->repository->users->getAll()
+            'users' => $this->di->repository->users->getAllSoft()
         ], 'Användare');
     }
     
@@ -28,7 +28,7 @@ class UserController extends BaseController
      */
     public function profile($id)
     {
-        $user = $this->di->user->getById($id);
+        $user = $this->di->user->useSoft()->getById($id);
         if (!$user) {
             $this->di->common->redirectError('user/all', "Kunde inte hitta användaren med ID $id.");
         }

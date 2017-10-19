@@ -27,10 +27,10 @@ class PostService extends BaseService
     {
         if (is_null($type)) {
             $method = ($this->softQuery ? 'findSoft' : 'find');
-            $post = $this->di->posts->$method(null, $id);
+            $post = $this->di->posts->fetchReferences(true, true)->$method(null, $id);
         } else {
             $method = ($this->softQuery ? 'getFirstSoft' : 'getFirst');
-            $post = $this->di->posts->$method('id = ? AND type = ?', [$id, $type]);
+            $post = $this->di->posts->fetchReferences(true, true)->$method('id = ? AND type = ?', [$id, $type]);
         }
         $this->useSoft(false);
         return ($post ?: null);
@@ -49,9 +49,9 @@ class PostService extends BaseService
     {
         $method = ($this->softQuery ? 'getAllSoft' : 'getAll');
         if (!is_null($type)) {
-            $posts = $this->di->posts->$method('userId = ? AND type = ?', [$user->id, $type]);
+            $posts = $this->di->posts->fetchReferences(true, true)->$method('userId = ? AND type = ?', [$user->id, $type]);
         } else {
-            $posts = $this->di->posts->$method('userId = ?', [$user->id]);
+            $posts = $this->di->posts->fetchReferences(true, true)->$method('userId = ?', [$user->id]);
         }
         $this->useSoft(false);
         return $posts;
@@ -68,7 +68,7 @@ class PostService extends BaseService
     public function getByType($type)
     {
         $method = ($this->softQuery ? 'getAllSoft' : 'getAll');
-        $posts = $this->di->posts->$method('type = ?', [$type]);
+        $posts = $this->di->posts->fetchReferences(true, true)->$method('type = ?', [$type]);
         $this->useSoft(false);
         return $posts;
     }
@@ -87,8 +87,8 @@ class PostService extends BaseService
             ->select('p.*, u.username, u.email')
             ->from($this->di->posts->getCollectionName() . ' AS p')
             ->join('wgtotw_post_tag AS pt', 'p.id = pt.postId')
-            ->leftJoin($this->di->users->getCollectionName() . ' AS u', 'p.userId = u.id')
-            ->where('pt.tagId = ?' . ($this->softQuery ? ' AND p.deleted IS NULL AND u.deleted IS NULL' : ''))
+            ->leftJoin($this->di->users->getCollectionName() . ' AS u', 'p.userId = u.id AND u.deleted IS NULL')
+            ->where('pt.tagId = ?' . ($this->softQuery ? ' AND p.deleted IS NULL' : ''))
             ->execute([$tag->id])
             ->fetchAllClass(Models\PostVM::class);
         $this->useSoft(false);
@@ -108,9 +108,9 @@ class PostService extends BaseService
     {
         $method = ($this->softQuery ? 'getAllSoft' : 'getAll');
         if (!is_null($type)) {
-            $posts = $this->di->posts->$method('type = ?', [$type], $order);
+            $posts = $this->di->posts->fetchReferences(true, true)->$method('type = ?', [$type], $order);
         } else {
-            $posts = $this->di->posts->$method(null, [], $order);
+            $posts = $this->di->posts->fetchReferences(true, true)->$method(null, [], $order);
         }
         $this->useSoft(false);
         return $posts;
@@ -128,7 +128,7 @@ class PostService extends BaseService
     public function getAnswers($question, $order = null)
     {
         $method = ($this->softQuery ? 'getAllSoft' : 'getAll');
-        $questions = $this->di->posts->$method("type = 'answer' AND parentId = ?", [$question->id], $order);
+        $questions = $this->di->posts->fetchReferences(true, true)->$method("type = 'answer' AND parentId = ?", [$question->id], $order);
         $this->useSoft(false);
         return $questions;
     }
@@ -160,7 +160,7 @@ class PostService extends BaseService
     public function getComments($post)
     {
         $method = ($this->softQuery ? 'getAllSoft' : 'getAll');
-        $posts = $this->di->posts->$method("type = 'comment' AND parentId = ?", [$post->id]);
+        $posts = $this->di->posts->fetchReferences(true, true)->$method("type = 'comment' AND parentId = ?", [$post->id]);
         $this->useSoft(false);
         return $posts;
     }
