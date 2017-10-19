@@ -91,18 +91,18 @@ class TagService extends BaseService
     /**
      * Create tag from model-bound form.
      *
-     * @param \LRC\Form\ModelForm   $form       Model-bound form.
+     * @param \WGTOTW\Form\ModelForm    $form   Model-bound form.
      *
      * @return bool                             True if the insert was performed, false if validation failed.
      */
     public function createFromForm($form)
     {
         $tag = $form->populateModel();
+        $form->validate();
         if ($this->getByName($tag->name)) {
             $form->addError('name', 'Namnet är upptaget.');
         }
         
-        $form->validate();
         if ($form->isValid()) {
             $tag->created = date('Y-m-d H:i:s');
             $this->di->tags->save($tag);
@@ -115,8 +115,8 @@ class TagService extends BaseService
     /**
      * Update tag from model-bound form.
      *
-     * @param \LRC\Form\ModelForm   $form       Model-bound form.
-     * @param Models\Tag            $oldTag     Model instance of existing tag.
+     * @param \WGTOTW\Form\ModelForm    $form   Model-bound form.
+     * @param Models\Tag                $oldTag Model instance of existing tag.
      *
      * @return bool                             True if the update was performed, false if validation failed.
      */
@@ -125,11 +125,11 @@ class TagService extends BaseService
         $tag = $form->populateModel();
         $tag->id = $oldTag->id;
         $tag->created = $oldTag->created;
+        $form->validate();
         if ($tag->name != $oldTag->name && $this->getByName($tag->name)) {
             $form->addError('name', 'Namnet är upptaget.');
         }
         
-        $form->validate();
         if ($form->isValid()) {
             $tag->updated = date('Y-m-d H:i:s');
             $this->di->tags->save($tag);

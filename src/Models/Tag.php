@@ -8,7 +8,6 @@ namespace WGTOTW\Models;
 class Tag extends BaseModel
 {
     public $id;
-    public $postId;
     public $name;
     public $description;
     public $created;
@@ -18,13 +17,6 @@ class Tag extends BaseModel
     public function __construct()
     {
         $this->setNullables(['updated']);
-        $this->setReferences([
-            'post' => [
-                'attribute' => 'postId',
-                'model' => Post::class,
-                'magic' => true
-            ]
-        ]);
         $this->setValidation([
             'name' => [
                 [

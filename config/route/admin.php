@@ -44,6 +44,32 @@ return [
             'requestMethod' => 'post',
             'path' => 'user/restore/{id:digit}',
             'callable' => ['adminController', 'restoreUser']
+        ],
+        
+        // tags
+        [
+            'info' => 'Admin tag list.',
+            'requestMethod' => 'get',
+            'path' => 'tag',
+            'callable' => ['adminController', 'tags']
+        ],
+        [
+            'info' => 'Admin tag create page/handler.',
+            'requestMethod' => 'get|post',
+            'path' => 'tag/create',
+            'callable' => ['adminController', 'createTag']
+        ],
+        [
+            'info' => 'Admin tag edit page/handler.',
+            'requestMethod' => 'get|post',
+            'path' => 'tag/edit/{id:digit}',
+            'callable' => ['adminController', 'updateTag']
+        ],
+        [
+            'info' => 'Admin tag delete page/handler.',
+            'requestMethod' => 'get|post',
+            'path' => 'tag/delete/{id:digit}',
+            'callable' => ['adminController', 'deleteTag']
         ]
     ]
 ];
