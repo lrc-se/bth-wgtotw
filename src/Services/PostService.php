@@ -84,7 +84,7 @@ class PostService extends BaseService
     public function getByTag($tag)
     {
         $posts = $this->di->db->connect()
-            ->select('p.*, u.username, u.email')
+            ->select('p.*, u.username')
             ->from($this->di->posts->getCollectionName() . ' AS p')
             ->join('wgtotw_post_tag AS pt', 'p.id = pt.postId')
             ->leftJoin($this->di->users->getCollectionName() . ' AS u', 'p.userId = u.id AND u.deleted IS NULL')

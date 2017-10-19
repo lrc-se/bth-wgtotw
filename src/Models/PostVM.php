@@ -3,12 +3,11 @@
 namespace WGTOTW\Models;
 
 /**
- * Post view model including user data.
+ * Post view model including username.
  */
 class PostVM extends Post
 {
     public $username;
-    public $email;
     
     
     public function __construct()

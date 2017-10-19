@@ -171,7 +171,7 @@ class AdminController extends BaseController
      */
     public function createTag()
     {
-        $admin = $this->di->common->verifyAdmin();
+        $this->di->common->verifyAdmin();
         $form = new Form('tag-form', Models\Tag::class);
         if ($this->di->request->getMethod() == 'POST') {
             if ($this->di->tag->createFromForm($form)) {
@@ -194,7 +194,7 @@ class AdminController extends BaseController
      */
     public function updateTag($id)
     {
-        $admin = $this->di->common->verifyAdmin();
+        $this->di->common->verifyAdmin();
         $tag = $this->di->tag->getById($id);
         if (!$tag) {
             $this->di->common->redirectError('admin/tag', "Kunde inte hitta taggen med ID $id.");
@@ -224,7 +224,7 @@ class AdminController extends BaseController
      */
     public function deleteTag($id)
     {
-        $admin = $this->di->common->verifyAdmin();
+        $this->di->common->verifyAdmin();
         $tag = $this->di->tag->getById($id);
         if (!$tag) {
             $this->di->common->redirectError('admin/tag', "Kunde inte hitta taggen med ID $id.");
