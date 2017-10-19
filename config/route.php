@@ -31,6 +31,10 @@ return [
             'file' => __DIR__ . '/route/tag.php'
         ],
         [
+            'mount' => 'admin',
+            'file' => __DIR__ . '/route/admin.php'
+        ],
+        [
             'mount' => null,
             'file' => __DIR__ . '/route/404.php',
             'sort' => 1000
