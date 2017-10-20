@@ -34,7 +34,7 @@ class QuestionController extends BaseController
         }
         
         $tags = $this->di->tag->getByPost($question);
-        $comments = $this->di->post->getComments($question);
+        $comments = $this->di->post->useSoft()->getComments($question);
         
         $orderBy = [
             'date-asc' => 'published',
@@ -44,7 +44,7 @@ class QuestionController extends BaseController
         ];
         $sort = $this->di->request->getGet('sort', 'date-asc');
         $order = $orderBy[(isset($orderBy[$sort]) ? $sort : 'date-asc')];
-        $answers = $this->di->post->getAnswers($question, $order);
+        $answers = $this->di->post->useSoft()->getAnswers($question, $order);
         
         return $this->di->common->renderMain('question/view', [
             'user' => $this->di->user->getCurrent(),

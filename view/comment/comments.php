@@ -1,6 +1,6 @@
 <?php
 
-$comments = $di->post->getComments($post);
+$comments = $di->post->useSoft()->getComments($post);
 
 ?>
 <?php if (!empty($comments)) : ?>

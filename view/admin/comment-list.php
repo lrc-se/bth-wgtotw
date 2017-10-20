@@ -15,7 +15,7 @@ if ($parent->type == 'answer') {
 <?php if ($parent->type == 'question') : ?>
 <p><strong>Fråga:</strong> <a href="<?= $this->url('question/' . $parent->id) ?>"><?= esc($parent->title) ?></a></p>
 <?php else : ?>
-<p><strong>Svar till fråga:</strong> <a href="<?= $this->url('question/' . $question->id) ?>"><?= esc($question->title) ?></a></p>
+<p><strong>Svar till fråga:</strong> <a href="<?= $this->url('question/' . $question->id . '#answer-' . $parent->id) ?>"><?= esc($question->title) ?></a></p>
 <?php endif; ?>
 <p>
 <?php if ($parent->type == 'answer') : ?>
