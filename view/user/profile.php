@@ -8,6 +8,12 @@ $numComments = count($comments);
 <h1><?= esc($user->username) ?></h1>
 <?php $this->renderView('default/msgs'); ?>
 <p><img src="<?= $user->getGravatar(100) ?>" alt="Gravatar"></p>
+<?php if (!$user->hideEmail) : ?>
+<div>E-post: <a href="mailto:<?= esc($user->email) ?>"><?= $user->email ?></a></div>
+<?php endif; ?>
+<?php if ($user->website) : ?>
+<div>Webbplats: <a href="<?= esc($user->website) ?>"><?= $user->website ?></a></div>
+<?php endif; ?>
 <div class="user-reputation">Rykte: <?= $reputation ?></div>
 <div class="user-posts">
     Frågor: <?= $numQuestions ?><br>
