@@ -102,6 +102,38 @@ return [
             'callable' => function ($id) {
                 return $this->di->adminController->restorePost('question', $id);
             }
+        ],
+        
+        // answers
+        [
+            'info' => 'Admin answer list.',
+            'requestMethod' => 'get',
+            'path' => 'question/{questionId:digit}/answer',
+            'callable' => ['adminController', 'answers']
+        ],
+        [
+            'info' => 'Admin answer edit page/handler.',
+            'requestMethod' => 'get|post',
+            'path' => 'answer/edit/{id:digit}',
+            'callable' => function ($id) {
+                return $this->di->adminController->updatePost('answer', $id);
+            }
+        ],
+        [
+            'info' => 'Admin answer delete page/handler.',
+            'requestMethod' => 'get|post',
+            'path' => 'answer/delete/{id:digit}',
+            'callable' => function ($id) {
+                return $this->di->adminController->deletePost('answer', $id);
+            }
+        ],
+        [
+            'info' => 'Admin answer restore handler.',
+            'requestMethod' => 'post',
+            'path' => 'answer/restore/{id:digit}',
+            'callable' => function ($id) {
+                return $this->di->adminController->restorePost('answer', $id);
+            }
         ]
     ]
 ];

@@ -250,22 +250,39 @@ class AdminController extends BaseController
         $this->di->common->verifyAdmin();
         
         $status = $this->di->request->getGet('status');
-        if ($status == 'active') {
-            $questions = $this->di->post->useSoft()->getByType('question');
-            $total = $this->di->repository->posts->count("type = 'question'");
-        } elseif ($status == 'inactive') {
-            $questions = $this->di->repository->posts->getAll("type = 'question' AND deleted IS NOT NULL");
-            $total = $this->di->repository->posts->count("type = 'question'");
-        } else {
-            $questions = $this->di->post->getByType('question');
-            $total = count($questions);
-        }
+        list($questions, $total) = $this->filterPosts($status, 'question');
         
         return $this->di->common->renderMain('admin/question-list', [
             'questions' => $questions,
             'total' => $total,
             'status' => $status
         ], 'Administrera frågor');
+    }
+    
+    
+    /**
+     * Admin answer list.
+     *
+     * @param int   $questionId     Question ID.
+     */
+    public function answers($questionId)
+    {
+        $this->di->common->verifyAdmin();
+        
+        $question = $this->di->post->getById($questionId);
+        if (!$question) {
+            $this->di->common->redirectError('admin/question', "Kunde inte hitta frågan med ID $questionId.");
+        }
+        
+        $status = $this->di->request->getGet('status');
+        list($answers, $total) = $this->filterPosts($status, 'answer', $questionId);
+        
+        return $this->di->common->renderMain('admin/answer-list', [
+            'question' => $question,
+            'answers' => $answers,
+            'total' => $total,
+            'status' => $status
+        ], 'Administrera svar');
     }
     
     
@@ -278,16 +295,29 @@ class AdminController extends BaseController
     public function updatePost($type, $id)
     {
         $this->di->common->verifyAdmin();
-        list($words, $model) = $this->getPostMeta($type);
         $post = $this->di->post->getById($id, $type);
         if (!$post) {
-            $this->di->common->redirectError("admin/$type", 'Kunde inte hitta ' . $words[1] . " med ID $id.");
+            $this->di->common->redirectError('admin/question', "Kunde inte hitta inlägget med ID $id.");
         }
         
         if ($this->di->request->getMethod() == 'POST') {
+            switch ($type) {
+                case 'question':
+                    $model = Models\Question::class;
+                    $msg = 'Frågan har uppdaterats.';
+                    break;
+                case 'answer':
+                    $model = Models\Answer::class;
+                    $msg = 'Svaret har uppdaterats.';
+                    break;
+                case 'comment':
+                    $model = Models\Comment::class;
+                    $msg = 'Kommentaren har uppdaterats.';
+                    break;
+            }
             $form = new Form("$type-form", $model);
             if ($this->di->post->updateFromForm($form, $post)) {
-                $this->di->common->redirectMessage("admin/$type", ucfirst($words[1]) . ' har uppdaterats.');
+                $this->di->common->redirectMessage($this->getReturnUrl($post), $msg);
             }
         } else {
             $form = new Form("$type-form", $post);
@@ -304,7 +334,13 @@ class AdminController extends BaseController
                     'tagIds' => $this->di->tag->getIdsByPost($post)
                 ], 'Redigera fråga');
             case 'answer':
-                break;
+                return $this->di->common->renderMain('answer/form', [
+                    'answer' => $form->getModel(),
+                    'admin' => true,
+                    'update' => true,
+                    'form' => $form,
+                    'return' => $this->getReturnUrl($post)
+                ], 'Redigera svar');
             case 'comment':
                 break;
         }
@@ -320,20 +356,37 @@ class AdminController extends BaseController
     public function deletePost($type, $id)
     {
         $this->di->common->verifyAdmin();
-        list($words, $model) = $this->getPostMeta($type);
         $post = $this->di->post->getById($id, $type);
         if (!$post) {
-            $this->di->common->redirectError("admin/$type", 'Kunde inte hitta ' . $words[1] . " med ID $id.");
+            $this->di->common->redirectError('admin/question', "Kunde inte hitta inlägget med ID $id.");
         }
         
+        switch ($type) {
+            case 'question':
+                $msg = 'Frågan har tagits bort.';
+                $title = 'Ta bort fråga';
+                break;
+            case 'answer':
+                $msg = 'Svaret har tagits bort.';
+                $title = 'Ta bort svar';
+                break;
+            case 'comment':
+                $msg = 'Kommentaren har tagits bort.';
+                $title = 'Ta bort kommentar';
+                break;
+        }
         if ($this->di->request->getMethod() == 'POST') {
             if ($this->di->request->getPost('action') == 'delete') {
                 $this->di->post->delete($post);
-                $this->di->common->redirectMessage("admin/$type", ucfirst($words[1]) . ' har tagits bort.');
+                $this->di->common->redirectMessage($this->getReturnUrl($post), $msg);
             }
         }
         
-        return $this->di->common->renderMain('admin/post-delete', ['post' => $post, 'type' => $type], 'Ta bort ' . $words[0]);
+        return $this->di->common->renderMain('admin/post-delete', [
+            'post' => $post,
+            'type' => $type,
+            'return' => $this->getReturnUrl($post)
+        ], $title);
     }
     
     
@@ -346,47 +399,90 @@ class AdminController extends BaseController
     public function restorePost($type, $id)
     {
         $this->di->common->verifyAdmin();
-        list($words, $model) = $this->getPostMeta($type);
         $post = $this->di->post->getById($id, $type);
         if (!$post) {
-            $this->di->common->redirectError("admin/$type", 'Kunde inte hitta ' . $words[1] . " med ID $id.");
+            $this->di->common->redirectError('admin/question', "Kunde inte hitta inlägget med ID $id.");
         }
         
+        switch ($type) {
+            case 'question':
+                $msg = 'Frågan har tagits återställts.';
+                break;
+            case 'answer':
+                $msg = 'Svaret har återställts.';
+                break;
+            case 'comment':
+                $msg = 'Kommentaren har återställts.';
+                break;
+        }        
         if ($this->di->request->getPost('action') == 'restore') {
             $this->di->post->restore($post);
-            $this->di->common->redirectMessage("admin/$type", ucfirst($words[1]) . ' har återställts.');
+            $this->di->common->redirectMessage($this->getReturnUrl($post), $msg);
         }
         
-        $this->di->common->redirect("admin/$type");
+        $this->di->common->redirect($this->getReturnUrl($post));
     }
     
     
     /**
-     * Get post metadata by type.
+     * Get return URL for post.
      *
-     * @param string $type  Post type.
+     * @param Models\Post   $post   Post model instance.
      *
-     * @return array        Array of natural-language designations and model class for the post type.
+     * @return string               Return URL.
      */
-    private function getPostMeta($type)
+    private function getReturnUrl($post)
     {
-        switch ($type) {
+        switch ($post->type) {
             case 'question':
-                $words = ['fråga', 'frågan'];
-                $model = Models\Question::class;
+                $return = 'admin/question';
                 break;
             case 'answer':
-                $words = ['svar', 'svaret'];
-                $model = Models\Answer::class;
+                $return = 'admin/question/' . $post->parentId . '/answer';
                 break;
             case 'comment':
-                $words = ['kommentar', 'kommentaren'];
-                $model = Models\Comment::class;
-                break;
+                $parent = $this->di->post->getById($post->parentId);
+                if ($parent->type == 'question') {
+                    $return = 'admin/question/' . $parent->id . '/comment';
+                } else {
+                    $return = 'admin/question/' . $parent->parentId . '/answer/' . $parent->id . '/comment';
+                }
             default:
-                $words = null;
-                $model = null;
+                $return = null;
         }
-        return [$words, $model];
+        return $return;
+    }
+    
+    
+    /**
+     * Filter posts.
+     *
+     * @param string    $status     Post status.
+     * @param string    $type       Post type.
+     * @param int       $parentId   Parent post ID.
+     *
+     * @return array                Array of filtered posts and their total count.
+     */
+    private function filterPosts($status, $type, $parentId = null)
+    {
+        $status = $this->di->request->getGet('status');
+        $where = ['type = ?'];
+        $values = [$type];
+        if (!is_null($parentId)) {
+            $where[] = 'parentId = ?';
+            $values[] = $parentId;
+        }
+        if ($status == 'active') {
+            $posts = $this->di->repository->posts->getAllSoft(implode(' AND ', $where), $values);
+            $total = $this->di->repository->posts->count(implode(' AND ', $where), $values);
+        } elseif ($status == 'inactive') {
+            $where[] = 'deleted IS NOT NULL';
+            $posts = $this->di->repository->posts->getAll(implode(' AND ', $where), $values);
+            $total = $this->di->repository->posts->count(implode(' AND ', $where), $values);
+        } else {
+            $posts = $this->di->repository->posts->getAll(implode(' AND ', $where), $values);
+            $total = count($posts);
+        }
+        return [$posts, $total];
     }
 }

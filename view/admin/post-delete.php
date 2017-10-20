@@ -18,5 +18,5 @@ switch ($type) {
 <form action="<?= $this->currentUrl() ?>" method="post">
     <input type="hidden" name="action" value="delete">
     <input type="submit" value="Ta bort">
-    <a class="btn btn-2" href="<?= $this->url("admin/$type") ?>">Avbryt</a>
+    <a class="btn btn-2" href="<?= $this->url($return) ?>">Avbryt</a>
 </form>

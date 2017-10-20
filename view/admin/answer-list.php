@@ -1,15 +1,17 @@
 <?php
 
-$num = count($questions);
+$num = count($answers);
 
 ?>
 <?php $this->renderView('default/msgs'); ?>
 <?php if ($num) : ?>
-<h3>Visar <?= $num ?> av <?= ($total == 1 ? '1 fråga' : "$total frågor") ?></h3>
+<h3>Visar <?= $num ?> av <?= $total ?> svar</h3>
 <?php else : ?>
-<h3>Inga frågor att visa</h3>
+<h3>Inga svar att visa</h3>
 <?php endif; ?>
+<p><strong>Fråga:</strong> <a href="<?= $this->url('question/' . $question->id) ?>"><?= esc($question->title) ?></a></p>
 <p>
+    <a class="btn btn-2" href="<?= $this->url('admin/question') ?>">Tillbaka till frågor</a>
     <a class="btn btn-2" href="<?= $this->url('admin') ?>">Tillbaka till administration</a>
 </p>
 <form action="<?= $this->currentUrl() ?>">
@@ -28,7 +30,6 @@ $num = count($questions);
         <thead>
             <tr>
                 <th>ID</th>
-                <th>Rubrik</th>
                 <th>Författare</th>
                 <th>Publicerad</th>
                 <th>Uppdaterad</th>
@@ -37,27 +38,26 @@ $num = count($questions);
             </tr>
         </thead>
         <tbody>
-<?php   foreach ($questions as $question) : ?>
-            <tr<?= ($question->deleted ? ' class="deleted"' : '') ?>>
-                <td><?= $question->id ?></td>
-                <td><a href="<?= $this->url('question/' . $question->id) ?>"><?= esc($question->title) ?></a></td>
+<?php   foreach ($answers as $answer) : ?>
+            <tr<?= ($answer->deleted ? ' class="deleted"' : '') ?>>
+                <td><?= $answer->id ?></td>
                 <td>
-<?php       if ($question->user) : ?>
-                    <a href="<?= $this->url('user/' . $question->userId) ?>"><?= esc($question->user->username) ?></a>
+<?php       if ($answer->user) : ?>
+                    <a href="<?= $this->url('user/' . $answer->userId) ?>"><?= esc($answer->user->username) ?></a>
 <?php       else : ?>
                     <em>(Borttagen användare)</em>
 <?php       endif; ?>
                 </td>
-                <td><?= $question->published ?></td>
-                <td><?= $question->updated ?></td>
-                <td><?= $question->deleted ?></td>
+                <td><?= $answer->published ?></td>
+                <td><?= $answer->updated ?></td>
+                <td><?= $answer->deleted ?></td>
                 <td>
-                    <a href="<?= $this->url('admin/question/' . $question->id . '/answer') ?>">Visa svar</a><br>
-<?php       if ($question->deleted) : ?>
-                    <a class="restore-link" href="#!" data-id="<?= $question->id ?>">Återställ</a>
+                    <a href="<?= $this->url('admin/answer/' . $answer->id . '/comment') ?>">Visa kommentarer</a><br>
+<?php       if ($answer->deleted) : ?>
+                    <a class="restore-link" href="#!" data-id="<?= $answer->id ?>">Återställ</a>
 <?php       else : ?>
-                    <a href="<?= $this->url('admin/question/edit/' . $question->id) ?>">Redigera</a><br>
-                    <a href="<?= $this->url('admin/question/delete/' . $question->id) ?>">Ta bort</a>
+                    <a href="<?= $this->url('admin/answer/edit/' . $answer->id) ?>">Redigera</a><br>
+                    <a href="<?= $this->url('admin/answer/delete/' . $answer->id) ?>">Ta bort</a>
 <?php       endif; ?>
                 </td>
             </tr>
@@ -65,5 +65,5 @@ $num = count($questions);
         </tbody>
     </table>
 </div>
-<?php $this->renderView('admin/restore', ['entity' => 'question']); ?>
+<?php $this->renderView('admin/restore', ['entity' => 'answer']); ?>
 <?php endif; ?>
