@@ -97,7 +97,7 @@ class AdminController extends BaseController
             'user' => $form->getModel(),
             'admin' => $admin,
             'update' => true,
-            'form' => new Form('user-form', $user)
+            'form' => $form
         ], 'Redigera användare');
     }
     
@@ -238,5 +238,155 @@ class AdminController extends BaseController
         }
         
         return $this->di->common->renderMain('admin/tag-delete', ['tag' => $tag], 'Ta bort tagg');
+    }
+    
+    
+    
+    /**
+     * Admin question list.
+     */
+    public function questions()
+    {
+        $this->di->common->verifyAdmin();
+        
+        $status = $this->di->request->getGet('status');
+        if ($status == 'active') {
+            $questions = $this->di->post->useSoft()->getByType('question');
+            $total = $this->di->repository->posts->count("type = 'question'");
+        } elseif ($status == 'inactive') {
+            $questions = $this->di->repository->posts->getAll("type = 'question' AND deleted IS NOT NULL");
+            $total = $this->di->repository->posts->count("type = 'question'");
+        } else {
+            $questions = $this->di->post->getByType('question');
+            $total = count($questions);
+        }
+        
+        return $this->di->common->renderMain('admin/question-list', [
+            'questions' => $questions,
+            'total' => $total,
+            'status' => $status
+        ], 'Administrera frågor');
+    }
+    
+    
+    /**
+     * Admin edit post page/handler.
+     *
+     * @param string    $type   Post type.
+     * @param int       $id     Post ID.
+     */
+    public function updatePost($type, $id)
+    {
+        $this->di->common->verifyAdmin();
+        list($words, $model) = $this->getPostMeta($type);
+        $post = $this->di->post->getById($id, $type);
+        if (!$post) {
+            $this->di->common->redirectError("admin/$type", 'Kunde inte hitta ' . $words[1] . " med ID $id.");
+        }
+        
+        if ($this->di->request->getMethod() == 'POST') {
+            $form = new Form("$type-form", $model);
+            if ($this->di->post->updateFromForm($form, $post)) {
+                $this->di->common->redirectMessage("admin/$type", ucfirst($words[1]) . ' har uppdaterats.');
+            }
+        } else {
+            $form = new Form("$type-form", $post);
+        }
+        
+        switch ($type) {
+            case 'question':
+                return $this->di->common->renderMain('question/form', [
+                    'question' => $form->getModel(),
+                    'admin' => true,
+                    'update' => true,
+                    'form' => $form,
+                    'tags' => $this->di->tag->getAll(),
+                    'tagIds' => $this->di->tag->getIdsByPost($post)
+                ], 'Redigera fråga');
+            case 'answer':
+                break;
+            case 'comment':
+                break;
+        }
+    }
+    
+    
+    /**
+     * Admin delete post page/handler.
+     *
+     * @param string    $type   Post type.
+     * @param int       $id     Post ID.
+     */
+    public function deletePost($type, $id)
+    {
+        $this->di->common->verifyAdmin();
+        list($words, $model) = $this->getPostMeta($type);
+        $post = $this->di->post->getById($id, $type);
+        if (!$post) {
+            $this->di->common->redirectError("admin/$type", 'Kunde inte hitta ' . $words[1] . " med ID $id.");
+        }
+        
+        if ($this->di->request->getMethod() == 'POST') {
+            if ($this->di->request->getPost('action') == 'delete') {
+                $this->di->post->delete($post);
+                $this->di->common->redirectMessage("admin/$type", ucfirst($words[1]) . ' har tagits bort.');
+            }
+        }
+        
+        return $this->di->common->renderMain('admin/post-delete', ['post' => $post, 'type' => $type], 'Ta bort ' . $words[0]);
+    }
+    
+    
+    /**
+     * Admin restore post handler.
+     *
+     * @param string    $type   Post type.
+     * @param int       $id     Post ID.
+     */
+    public function restorePost($type, $id)
+    {
+        $this->di->common->verifyAdmin();
+        list($words, $model) = $this->getPostMeta($type);
+        $post = $this->di->post->getById($id, $type);
+        if (!$post) {
+            $this->di->common->redirectError("admin/$type", 'Kunde inte hitta ' . $words[1] . " med ID $id.");
+        }
+        
+        if ($this->di->request->getPost('action') == 'restore') {
+            $this->di->post->restore($post);
+            $this->di->common->redirectMessage("admin/$type", ucfirst($words[1]) . ' har återställts.');
+        }
+        
+        $this->di->common->redirect("admin/$type");
+    }
+    
+    
+    /**
+     * Get post metadata by type.
+     *
+     * @param string $type  Post type.
+     *
+     * @return array        Array of natural-language designations and model class for the post type.
+     */
+    private function getPostMeta($type)
+    {
+        switch ($type) {
+            case 'question':
+                $words = ['fråga', 'frågan'];
+                $model = Models\Question::class;
+                break;
+            case 'answer':
+                $words = ['svar', 'svaret'];
+                $model = Models\Answer::class;
+                break;
+            case 'comment':
+                $words = ['kommentar', 'kommentaren'];
+                $model = Models\Comment::class;
+                break;
+            default:
+                $words = null;
+                $model = null;
+        }
+        return [$words, $model];
     }
 }

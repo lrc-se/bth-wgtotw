@@ -70,6 +70,38 @@ return [
             'requestMethod' => 'get|post',
             'path' => 'tag/delete/{id:digit}',
             'callable' => ['adminController', 'deleteTag']
+        ],
+        
+        // questions
+        [
+            'info' => 'Admin question list.',
+            'requestMethod' => 'get',
+            'path' => 'question',
+            'callable' => ['adminController', 'questions']
+        ],
+        [
+            'info' => 'Admin question edit page/handler.',
+            'requestMethod' => 'get|post',
+            'path' => 'question/edit/{id:digit}',
+            'callable' => function ($id) {
+                return $this->di->adminController->updatePost('question', $id);
+            }
+        ],
+        [
+            'info' => 'Admin question delete page/handler.',
+            'requestMethod' => 'get|post',
+            'path' => 'question/delete/{id:digit}',
+            'callable' => function ($id) {
+                return $this->di->adminController->deletePost('question', $id);
+            }
+        ],
+        [
+            'info' => 'Admin question restore handler.',
+            'requestMethod' => 'post',
+            'path' => 'question/restore/{id:digit}',
+            'callable' => function ($id) {
+                return $this->di->adminController->restorePost('question', $id);
+            }
         ]
     ]
 ];
