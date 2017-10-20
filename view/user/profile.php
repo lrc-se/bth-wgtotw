@@ -37,10 +37,13 @@ $numComments = count($comments);
 <?php if (!empty($answers)) : ?>
 <ul>
 <?php   foreach ($answers as $answer) : ?>
+<?php       $question = $di->post->useSoft()->getById($answer->parentId); ?>
+<?php       if ($question) : ?>
     <li>
-        <a href="<?= $this->url('question/' . $answer->parentId . '#answer-' . $answer->id) ?>"><?= esc($di->post->getById($answer->parentId)->title) ?></a>
+        <a href="<?= $this->url('question/' . $answer->parentId . '#answer-' . $answer->id) ?>"><?= esc($question->title) ?></a>
         <span class="answer-time"><?= $answer->published ?></span>
     </li>
+<?php       endif; ?>
 <?php   endforeach; ?>
 </ul>
 <?php else : ?>
@@ -50,13 +53,15 @@ $numComments = count($comments);
 <?php if (!empty($comments)) : ?>
 <ul>
 <?php   foreach ($comments as $comment) : ?>
-<?php       $parentPost = $di->post->getById($comment->parentId); ?>
+<?php       $parentPost = $di->post->useSoft()->getById($comment->parentId); ?>
+<?php       if ($parentPost) : ?>
     <li>
         <a href="<?= $this->url('question/' . ($parentPost->type == 'question' ? $comment->parentId : $parentPost->parentId) . '#comment-' . $comment->id) ?>">
             <?= esc(($parentPost->type == 'question' ? $parentPost->title : $di->post->getById($parentPost->parentId)->title)) ?>
         </a>
         <span class="comment-time"><?= $comment->published ?></span>
     </li>
+<?php       endif; ?>
 <?php   endforeach; ?>
 </ul>
 <?php else : ?>
