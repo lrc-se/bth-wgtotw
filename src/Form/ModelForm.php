@@ -16,7 +16,7 @@ class ModelForm
     public $id;
     
     /**
-     * @var \WGTOTW\Models\BaseModel    Model instance to bind to.
+     * @var \WGTOTW\Models\ValidationInterface  Model instance to bind to.
      */
     private $model;
     

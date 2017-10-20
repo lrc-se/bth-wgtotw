@@ -29,4 +29,14 @@ interface ValidationInterface
      * @return array    Array of validation errors (attribute => error).
      */
     public function getValidationErrors();
+    
+    
+    /**
+     * Return whether an attribute is nullable.
+     *
+     * @param string $attr  Attribute name.
+     *
+     * @return bool         True if the attribute is nullable, false otherwise.
+     */
+    public function isNullable($attr);
 }
