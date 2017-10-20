@@ -134,6 +134,44 @@ return [
             'callable' => function ($id) {
                 return $this->di->adminController->restorePost('answer', $id);
             }
+        ],
+        
+        // comments
+        [
+            'info' => 'Admin question comment list.',
+            'requestMethod' => 'get',
+            'path' => 'question/{parentId:digit}/comment',
+            'callable' => ['adminController', 'comments']
+        ],
+        [
+            'info' => 'Admin answer comment list.',
+            'requestMethod' => 'get',
+            'path' => 'answer/{parentId:digit}/comment',
+            'callable' => ['adminController', 'comments']
+        ],
+        [
+            'info' => 'Admin comment edit page/handler.',
+            'requestMethod' => 'get|post',
+            'path' => 'comment/edit/{id:digit}',
+            'callable' => function ($id) {
+                return $this->di->adminController->updatePost('comment', $id);
+            }
+        ],
+        [
+            'info' => 'Admin comment delete page/handler.',
+            'requestMethod' => 'get|post',
+            'path' => 'comment/delete/{id:digit}',
+            'callable' => function ($id) {
+                return $this->di->adminController->deletePost('comment', $id);
+            }
+        ],
+        [
+            'info' => 'Admin comment restore handler.',
+            'requestMethod' => 'post',
+            'path' => 'comment/restore/{id:digit}',
+            'callable' => function ($id) {
+                return $this->di->adminController->restorePost('comment', $id);
+            }
         ]
     ]
 ];

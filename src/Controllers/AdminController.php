@@ -287,6 +287,32 @@ class AdminController extends BaseController
     
     
     /**
+     * Admin comment list.
+     *
+     * @param int   $parentId   Parent post ID.
+     */
+    public function comments($parentId)
+    {
+        $this->di->common->verifyAdmin();
+        
+        $parent = $this->di->post->getById($parentId);
+        if (!$parent) {
+            $this->di->common->redirectError('admin/question', "Kunde inte hitta inlägget med ID $parentId.");
+        }
+        
+        $status = $this->di->request->getGet('status');
+        list($comments, $total) = $this->filterPosts($status, 'comment', $parentId);
+        
+        return $this->di->common->renderMain('admin/comment-list', [
+            'parent' => $parent,
+            'comments' => $comments,
+            'total' => $total,
+            'status' => $status
+        ], 'Administrera kommentarer');
+    }
+    
+    
+    /**
      * Admin edit post page/handler.
      *
      * @param string    $type   Post type.
@@ -342,6 +368,13 @@ class AdminController extends BaseController
                     'return' => $this->getReturnUrl($post)
                 ], 'Redigera svar');
             case 'comment':
+                return $this->di->common->renderMain('comment/form', [
+                    'comment' => $form->getModel(),
+                    'admin' => true,
+                    'update' => true,
+                    'form' => $form,
+                    'return' => $this->getReturnUrl($post)
+                ], 'Redigera kommentar');
                 break;
         }
     }
@@ -442,11 +475,8 @@ class AdminController extends BaseController
                 break;
             case 'comment':
                 $parent = $this->di->post->getById($post->parentId);
-                if ($parent->type == 'question') {
-                    $return = 'admin/question/' . $parent->id . '/comment';
-                } else {
-                    $return = 'admin/question/' . $parent->parentId . '/answer/' . $parent->id . '/comment';
-                }
+                $return = 'admin/' . $parent->type . '/' . $parent->id . '/comment';
+                break;
             default:
                 $return = null;
         }

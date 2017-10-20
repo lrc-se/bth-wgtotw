@@ -53,6 +53,7 @@ $num = count($questions);
                 <td><?= $question->deleted ?></td>
                 <td>
                     <a href="<?= $this->url('admin/question/' . $question->id . '/answer') ?>">Visa svar</a><br>
+                    <a href="<?= $this->url('admin/question/' . $question->id . '/comment') ?>">Visa kommentarer</a><br>
 <?php       if ($question->deleted) : ?>
                     <a class="restore-link" href="#!" data-id="<?= $question->id ?>">Återställ</a>
 <?php       else : ?>
