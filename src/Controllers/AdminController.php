@@ -7,6 +7,9 @@ use \WGTOTW\Form\ModelForm as Form;
 
 /**
  * Controller for admin.
+ *
+ * @SuppressWarnings(PHPMD.TooManyPublicMethods)
+ * @SuppressWarnings(PHPMD.ExcessiveClassComplexity)
  */
 class AdminController extends BaseController
 {
@@ -360,6 +363,8 @@ class AdminController extends BaseController
      *
      * @param string    $type   Post type.
      * @param int       $id     Post ID.
+     *
+     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      */
     public function updatePost($type, $id)
     {
@@ -418,7 +423,6 @@ class AdminController extends BaseController
                     'form' => $form,
                     'return' => $this->getReturnUrl($post)
                 ], 'Redigera kommentar');
-                break;
         }
     }
     

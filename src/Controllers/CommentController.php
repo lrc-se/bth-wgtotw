@@ -72,6 +72,8 @@ class CommentController extends BaseController
      * @param int   $questionId     Question ID.
      * @param int   $commentId      Comment ID.
      * @param int   $answerId       Answer ID.
+     *
+     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      */
     public function update($questionId, $commentId, $answerId = null)
     {
