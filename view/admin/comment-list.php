@@ -62,6 +62,7 @@ if ($parent->type == 'answer') {
                 <td><?= $comment->updated ?></td>
                 <td><?= $comment->deleted ?></td>
                 <td>
+                    <a href="<?= $this->url('admin/comment/' . $comment->id) ?>">Visa kommentar</a><br>
 <?php       if ($comment->deleted) : ?>
                     <a class="restore-link" href="#!" data-id="<?= $comment->id ?>">Återställ</a>
 <?php       else : ?>

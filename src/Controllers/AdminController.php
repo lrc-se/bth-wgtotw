@@ -313,6 +313,49 @@ class AdminController extends BaseController
     
     
     /**
+     * Admin view post page.
+     *
+     * @param string    $type   Post type.
+     * @param int       $id     Post ID.
+     */
+    public function viewPost($type, $id)
+    {
+        $this->di->common->verifyAdmin();
+        $post = $this->di->post->getById($id, $type);
+        if (!$post) {
+            $this->di->common->redirectError('admin/question', "Kunde inte hitta inlägget med ID $id.");
+        }
+        
+        switch ($type) {
+            case 'question':
+                return $this->di->common->renderMain('admin/post-view', [
+                    'deleted' => ($post->deleted ? 'Denna fråga är borttagen' : false),
+                    'view' => 'question/question',
+                    'question' => $post,
+                    'canComment' => false,
+                    'return' => $this->getReturnUrl($post)
+                ], 'Visa fråga');
+            case 'answer':
+                return $this->di->common->renderMain('admin/post-view', [
+                    'deleted' => ($post->deleted ? 'Detta svar är borttaget' : false),
+                    'view' => 'answer/answer',
+                    'answer' => $post,
+                    'canComment' => false,
+                    'return' => $this->getReturnUrl($post)
+                ], 'Visa svar');
+            case 'comment':
+                return $this->di->common->renderMain('admin/post-view', [
+                    'deleted' => ($post->deleted ? 'Denna kommentar är borttagen' : false),
+                    'view' => 'comment/comment',
+                    'comment' => $post,
+                    'post' => $this->di->post->getById($post->parentId),
+                    'return' => $this->getReturnUrl($post)
+                ], 'Visa kommentar');
+        }
+    }
+    
+    
+    /**
      * Admin edit post page/handler.
      *
      * @param string    $type   Post type.
@@ -447,7 +490,7 @@ class AdminController extends BaseController
             case 'comment':
                 $msg = 'Kommentaren har återställts.';
                 break;
-        }        
+        }
         if ($this->di->request->getPost('action') == 'restore') {
             $this->di->post->restore($post);
             $this->di->common->redirectMessage($this->getReturnUrl($post), $msg);

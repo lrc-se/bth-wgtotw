@@ -25,7 +25,7 @@ $vote = (!empty($user) ? $di->post->getVote($comment, $user) : null);
 <?php endif; ?>
     </div>
     <div class="comment-actions">
-<?php if ($user && ($user->isAdmin || $comment->userId == $user->id)) : ?>
+<?php if (!empty($user) && ($user->isAdmin || $comment->userId == $user->id)) : ?>
 <?php   if ($post->type == 'question') : ?>
         <a href="<?= $this->url("question/$questionId/comment/" . $comment->id) ?>">Redigera</a>
 <?php   elseif ($post->type == 'answer') : ?>

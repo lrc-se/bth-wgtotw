@@ -80,6 +80,14 @@ return [
             'callable' => ['adminController', 'questions']
         ],
         [
+            'info' => 'Admin question view.',
+            'requestMethod' => 'get',
+            'path' => 'question/{id:digit}',
+            'callable' => function ($id) {
+                return $this->di->adminController->viewPost('question', $id);
+            }
+        ],
+        [
             'info' => 'Admin question edit page/handler.',
             'requestMethod' => 'get|post',
             'path' => 'question/edit/{id:digit}',
@@ -110,6 +118,14 @@ return [
             'requestMethod' => 'get',
             'path' => 'question/{questionId:digit}/answer',
             'callable' => ['adminController', 'answers']
+        ],
+        [
+            'info' => 'Admin answer view.',
+            'requestMethod' => 'get',
+            'path' => 'answer/{id:digit}',
+            'callable' => function ($id) {
+                return $this->di->adminController->viewPost('answer', $id);
+            }
         ],
         [
             'info' => 'Admin answer edit page/handler.',
@@ -148,6 +164,14 @@ return [
             'requestMethod' => 'get',
             'path' => 'answer/{parentId:digit}/comment',
             'callable' => ['adminController', 'comments']
+        ],
+        [
+            'info' => 'Admin comment view.',
+            'requestMethod' => 'get',
+            'path' => 'comment/{id:digit}',
+            'callable' => function ($id) {
+                return $this->di->adminController->viewPost('comment', $id);
+            }
         ],
         [
             'info' => 'Admin comment edit page/handler.',

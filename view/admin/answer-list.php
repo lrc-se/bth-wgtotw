@@ -52,7 +52,8 @@ $num = count($answers);
                 <td><?= $answer->updated ?></td>
                 <td><?= $answer->deleted ?></td>
                 <td>
-                    <a href="<?= $this->url('admin/answer/' . $answer->id . '/comment') ?>">Visa kommentarer</a><br>
+                    <a href="<?= $this->url('admin/answer/' . $answer->id) ?>">Visa svar</a><br>
+                    <a href="<?= $this->url('admin/answer/' . $answer->id . '/comment') ?>">Kommentarer</a><br>
 <?php       if ($answer->deleted) : ?>
                     <a class="restore-link" href="#!" data-id="<?= $answer->id ?>">Återställ</a>
 <?php       else : ?>
