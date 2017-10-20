@@ -15,7 +15,7 @@ class DefaultController extends BaseController
      */
     public function index()
     {
-        $questions = $this->di->post->useSoft()->getAll('question', 'published DESC');
+        $questions = $this->di->post->useSoft()->getAll('question', ['order' => 'published DESC', 'limit' => 5]);
         $activeUsers = $this->di->db->connect()
             ->select('u.*, COUNT(p.id) AS numPosts')
             ->from($this->di->repository->posts->getCollectionName() . ' AS p')

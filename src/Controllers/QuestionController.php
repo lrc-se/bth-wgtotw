@@ -44,7 +44,7 @@ class QuestionController extends BaseController
         ];
         $sort = $this->di->request->getGet('sort', 'date-asc');
         $order = $orderBy[(isset($orderBy[$sort]) ? $sort : 'date-asc')];
-        $answers = $this->di->post->useSoft()->getAnswers($question, $order);
+        $answers = $this->di->post->useSoft()->getAnswers($question, ['order' => $order]);
         
         return $this->di->common->renderMain('question/view', [
             'user' => $this->di->user->getCurrent(),

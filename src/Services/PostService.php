@@ -99,18 +99,18 @@ class PostService extends BaseService
     /**
      * Get all posts.
      *
-     * @param   string  $type   Post type.
-     * @param   string  $order  Order by clause.
+     * @param   string  $type       Post type.
+     * @param   array   $options    Query options.
      *
-     * @return array            Array of post model instances.
+     * @return array                Array of post model instances.
      */
-    public function getAll($type = null, $order = null)
+    public function getAll($type = null, $options = [])
     {
         $method = ($this->softQuery ? 'getAllSoft' : 'getAll');
         if (!is_null($type)) {
-            $posts = $this->di->posts->fetchReferences(true, true)->$method('type = ?', [$type], $order);
+            $posts = $this->di->posts->fetchReferences(true, true)->$method('type = ?', [$type], $options);
         } else {
-            $posts = $this->di->posts->fetchReferences(true, true)->$method(null, [], $order);
+            $posts = $this->di->posts->fetchReferences(true, true)->$method(null, [], $options);
         }
         $this->useSoft(false);
         return $posts;
@@ -121,14 +121,14 @@ class PostService extends BaseService
      * Get answers for question.
      *
      * @param Models\Question   $question   Question model instance.
-     * @param string            $order      Order by clause.
+     * @param string            $options    Query options.
      *
      * @return array                        Array of answer model instances.
      */
-    public function getAnswers($question, $order = null)
+    public function getAnswers($question, $options = [])
     {
         $method = ($this->softQuery ? 'getAllSoft' : 'getAll');
-        $questions = $this->di->posts->fetchReferences(true, true)->$method("type = 'answer' AND parentId = ?", [$question->id], $order);
+        $questions = $this->di->posts->fetchReferences(true, true)->$method("type = 'answer' AND parentId = ?", [$question->id], $options);
         $this->useSoft(false);
         return $questions;
     }
