@@ -7,7 +7,13 @@
 <div class="questions">
     <ul>
 <?php   foreach ($questions as $question) : ?>
-<?php       $author = ($question instanceof \WGTOTW\Models\PostVM ? $question->username : ($question->user ? $question->user->username : null)); ?>
+<?php       if ($question instanceof \WGTOTW\Models\PostVM) : ?>
+<?php           $author = new \WGTOTW\Models\User(); ?>
+<?php           $author->username = $question->username; ?>
+<?php           $author->email = $question->email; ?>
+<?php       else : ?>
+<?php           $author = $question->user; ?>
+<?php       endif; ?>
         <li <?= ($question->isAnswered() ? ' class="answered"' : '') ?>>
 <?php       if ($question->isAnswered()) : ?>
             <span class="question-status">! <?= $di->post->useSoft()->getAnswerCount($question) ?></span>
@@ -20,9 +26,11 @@
             <span class="question-meta">
                 <span class="question-author">
 <?php           if ($author) : ?>
-                    <a href="<?= $this->url('user/' . $question->userId) ?>"><?= esc($author) ?></a>
+                    <a href="<?= $this->url('user/' . $question->userId) ?>"><?= esc($author->username) ?></a>
+                    <a href="<?= $this->url('user/' . $question->userId) ?>"><img src="<?= $author->getGravatar(25) ?>" alt=""></a>
 <?php           else : ?>
                     <em>(Borttagen användare)</em>
+                    <img src="<?= $author->getGravatar(25) ?>" alt="">
 <?php           endif; ?>
                 </span>
 <?php       endif; ?>

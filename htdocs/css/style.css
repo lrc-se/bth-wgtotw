@@ -643,9 +643,21 @@ article > .columns:last-child {
     flex: 0 1 auto;
 }
 
-.questions .question-status {
+.question-status {
     margin-right: .5em;
     white-space: nowrap;
+}
+
+.answered .question-status {
+    color: #34803f;
+}
+
+.question-author {
+    font-weight: 700;
+}
+
+.question-author img {
+    margin-left: .25em;
 }
 
 .answers > ul > li {
