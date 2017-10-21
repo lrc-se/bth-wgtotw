@@ -7,21 +7,23 @@ $numComments = count($comments);
 ?>
 <h1><?= esc($user->username) ?></h1>
 <?php $this->renderView('default/msgs'); ?>
-<p><img src="<?= $user->getGravatar(100) ?>" alt="Gravatar"></p>
+<p><img src="<?= $user->getGravatar(125) ?>" alt="Gravatar"></p>
 <?php if (!$user->hideEmail) : ?>
-<div>E-post: <a href="mailto:<?= esc($user->email) ?>"><?= $user->email ?></a></div>
+<div><span class="icon-mail" title="E-post"></span> <a href="mailto:<?= esc($user->email) ?>"><?= $user->email ?></a></div>
 <?php endif; ?>
 <?php if ($user->website) : ?>
-<div>Webbplats: <a href="<?= esc($user->website) ?>"><?= $user->website ?></a></div>
+<div><span class="icon-link" title="Webbplats"></span> <a href="<?= esc($user->website) ?>"><?= $user->website ?></a></div>
 <?php endif; ?>
-<div class="user-reputation">Rykte: <?= $reputation ?></div>
-<div class="user-posts">
-    Frågor: <?= $numQuestions ?><br>
-    Svar: <?= $numAnswers ?><br>
-    Kommentarer: <?= $numComments ?><br>
-    Totalt: <?= $numQuestions + $numAnswers + $numComments ?>
+<div>
+    <span><span class="icon-award" title="Rykte"></span> <?= $reputation ?></span>
+    <span><span class="icon-vote" title="Röster"></span> <?= $numVotes ?></span>
 </div>
-<div class="user-votes">Röster: <?= $numVotes ?></div>
+<div class="user-posts">
+    <span class="icon-message" title="Inlägg"></span> <?= $numQuestions + $numAnswers + $numComments ?>
+    <span class="icon-question" title="Frågor"></span> <?= $numQuestions ?>
+    <span class="icon-answer" title="Svar"></span> <?= $numAnswers ?>
+    <span class="icon-comment" title="Kommentarer"></span> <?= $numComments ?>
+</div>
 <?php if ($curUser && $user->id == $curUser->id) : ?>
 <p>
     <a class="btn" href="<?= $this->url('user/edit/' . $user->id) ?>">Redigera profil</a>

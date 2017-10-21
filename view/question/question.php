@@ -9,11 +9,17 @@ $user = (isset($user) ? $user : null);
 <?php if (!empty($user) && $question->userId != $user->id) : ?>
     <div class="post-vote">
 <?php   if (!$vote) : ?>
-        <a href="<?= $this->url('question/' . $question->id . '/vote/' . $question->id . '/down') ?>">–</a>
-        <a href="<?= $this->url('question/' . $question->id . '/vote/' . $question->id . '/up') ?>">+</a>
+        <a href="<?= $this->url('question/' . $question->id . '/vote/' . $question->id . '/up') ?>" title="Rösta upp"><span class="icon-thumbs-up"></span></a>
+        <a href="<?= $this->url('question/' . $question->id . '/vote/' . $question->id . '/down') ?>" title="Rösta ned"><span class="icon-thumbs-down"></span></a>
 <?php   else : ?>
-        <span class="post-vote-active"><?= ($vote->value < 0 ? '–' : '+') ?></span>
-        <a href="<?= $this->url('question/' . $question->id . '/vote/' . $question->id . '/cancel') ?>">Ångra</a>
+        <span class="post-vote-active">
+<?php       if ($vote->value < 0) : ?>
+            <span class="icon-thumbs-down" title="Du har röstat ned denna fråga"></span>
+<?php       else : ?>
+            <span class="icon-thumbs-up" title="Du har röstat upp denna fråga"></span>
+<?php       endif; ?>
+        </span>
+        <a href="<?= $this->url('question/' . $question->id . '/vote/' . $question->id . '/cancel') ?>" title="Ångra röst">Ångra</a>
 <?php   endif; ?>
     </div>
 <?php endif; ?>

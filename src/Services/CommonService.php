@@ -128,7 +128,7 @@ class CommonService extends BaseService
      */
     public function renderPage($title, $content = '', $data = [], $status = 200)
     {
-        $data['stylesheets'] = ['css/style.css'];
+        $data['stylesheets'] = ['css/fontello.css', 'css/style.css'];
         
         // retrieve flash messages, if any
         $this->retrieveMessages();

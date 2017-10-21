@@ -16,9 +16,9 @@
 <?php       endif; ?>
         <li <?= ($question->isAnswered() ? ' class="answered"' : '') ?>>
 <?php       if ($question->isAnswered()) : ?>
-            <span class="question-status">! <?= $di->post->useSoft()->getAnswerCount($question) ?></span>
+            <span class="question-status"><span class="icon-answer" title="Har ett accepterat svar"></span> <?= $di->post->useSoft()->getAnswerCount($question) ?></span>
 <?php       else : ?>
-            <span class="question-status">? <?= $di->post->useSoft()->getAnswerCount($question) ?></span>
+            <span class="question-status"><span class="icon-question" title="Saknar accepterat svar"></span> <?= $di->post->useSoft()->getAnswerCount($question) ?></span>
 <?php       endif; ?>
             <span class="post-rank"><?= $question->rank ?></span>
             <span class="question-title"><a href="<?= $this->url('question/' . $question->id) ?>"><?= esc($question->title) ?></a></span>

@@ -744,12 +744,13 @@ article > .columns:last-child {
 }
 
 .post-vote-active {
-    width: 1.5em;
     margin-right: .25em;
-    color: #ccc;
-    border: 1px solid;
-    border-color: #ccc;
-    border-color: rgba(255, 255, 255, .75);
+    padding: .05em;
+    color: #888;
+    color: rgba(0, 0, 0, .5);
+    border: 2px solid;
+    border-color: #888;
+    border-color: rgba(0, 0, 0, .5);
     border-radius: 50%;
     text-align: center;
     display: inline-block;
@@ -757,6 +758,7 @@ article > .columns:last-child {
 
 .post-vote-active + a {
     width: auto;
+    text-decoration: underline;
 }
 
 .post-text {
@@ -848,6 +850,14 @@ article > .columns:last-child {
     margin-bottom: 0;
 }
 
+.question-header .post-vote-active,
+.accepted .post-vote-active {
+    color: #ccc;
+    color: rgba(255, 255, 255, .75);
+    border-color: #ccc;
+    border-color: rgba(255, 255, 255, .75);
+}
+
 .answers > form {
     margin-bottom: 1em;
 }
@@ -863,12 +873,6 @@ article > .columns:last-child {
 .answer-header .post-rank {
     color: #333;
     background-color: #f8f8f8;
-}
-
-.answer-header .post-vote-active,
-.post-footer .post-vote-active {
-    color: inherit;
-    border-color: inherit;
 }
 
 .answer-header .post-vote > a,
