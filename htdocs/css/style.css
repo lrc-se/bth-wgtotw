@@ -639,16 +639,25 @@ article > .columns:last-child {
     flex: 0 1 auto;
 }
 
-.questions .post-list > li.answered {
-    border-color: #34803f;
-}
-
-.question-status {
+.post-list .post-type {
     margin-right: .5em;
     white-space: nowrap;
 }
 
-.answered .question-status {
+.questions .post-list .post-type {
+    margin-right: .75em;
+}
+
+.questions .post-list > li.answered {
+    border-color: #34803f;
+}
+
+.answered .post-type {
+    color: #34803f;
+}
+
+.answered .icon-accepted {
+    margin-left: .25em;
     color: #34803f;
 }
 
@@ -680,7 +689,7 @@ article > .columns:last-child {
 }
 
 .post-list .post-rank {
-    margin-right: 1em;
+    margin-left: .5em;
 }
 
 .post-list .post-title {

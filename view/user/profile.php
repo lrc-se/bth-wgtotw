@@ -42,8 +42,11 @@ $numComments = count($comments);
 <?php       $question = $di->post->useSoft()->getById($answer->parentId); ?>
 <?php       if ($question) : ?>
     <li>
-        <span class="post-rank"><?= $answer->rank ?></span>
-        <span class="post-title"><a href="<?= $this->url('question/' . $answer->parentId . '#answer-' . $answer->id) ?>"><?= esc($question->title) ?></a></span>
+        <span class="post-type"><span class="icon-answer"></span></span>
+        <span class="post-title">
+            <a href="<?= $this->url('question/' . $answer->parentId . '#answer-' . $answer->id) ?>"><?= esc($question->title) ?></a>
+            <span class="post-rank"><?= $answer->rank ?></span>
+        </span>
         <span class="post-time"><?= $answer->published ?></span>
     </li>
 <?php       endif; ?>
@@ -59,11 +62,11 @@ $numComments = count($comments);
 <?php       $parentPost = $di->post->useSoft()->getById($comment->parentId); ?>
 <?php       if ($parentPost) : ?>
     <li>
-        <span class="post-rank"><?= $comment->rank ?></span>
+        <span class="post-type"><span class="icon-comment"></span></span>
         <span class="post-title">
             <a href="<?= $this->url('question/' . ($parentPost->type == 'question' ? $comment->parentId : $parentPost->parentId) . '#comment-' . $comment->id) ?>">
-                <?= esc(($parentPost->type == 'question' ? $parentPost->title : $di->post->getById($parentPost->parentId)->title)) ?>
-            </a>
+                <?= esc(($parentPost->type == 'question' ? $parentPost->title : $di->post->getById($parentPost->parentId)->title)) ?></a>
+            <span class="post-rank"><?= $comment->rank ?></span>
         </span>
         <span class="post-time"><?= $comment->published ?></span>
     </li>

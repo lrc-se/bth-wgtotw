@@ -15,13 +15,14 @@
 <?php           $author = $question->user; ?>
 <?php       endif; ?>
         <li <?= ($question->isAnswered() ? ' class="answered"' : '') ?>>
+            <span class="post-type"><span class="icon-question"></span> <strong><?= $di->post->useSoft()->getAnswerCount($question) ?></strong></span>
+            <span class="post-title">
+                <a href="<?= $this->url('question/' . $question->id) ?>"><?= esc($question->title) ?></a>
+                <span class="post-rank"><?= $question->rank ?></span>
 <?php       if ($question->isAnswered()) : ?>
-            <span class="question-status"><span class="icon-answer" title="Har ett accepterat svar"></span> <?= $di->post->useSoft()->getAnswerCount($question) ?></span>
-<?php       else : ?>
-            <span class="question-status"><span class="icon-question" title="Saknar accepterat svar"></span> <?= $di->post->useSoft()->getAnswerCount($question) ?></span>
+                <span class="icon-accepted" title="Har ett accepterat svar"></span>
 <?php       endif; ?>
-            <span class="post-rank"><?= $question->rank ?></span>
-            <span class="post-title"><a href="<?= $this->url('question/' . $question->id) ?>"><?= esc($question->title) ?></a></span>
+            </span>
 <?php       if (empty($hideUser)) : ?>
             <span class="post-meta">
                 <span class="post-author">

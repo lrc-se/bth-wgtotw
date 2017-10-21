@@ -18,7 +18,7 @@
                     <a href="<?= $this->url('user/' . $user->id) ?>"><img src="<?= $user2->getGravatar(25) ?>" alt=""></a>
                     <strong><a href="<?= $this->url('user/' . $user->id) ?>"><?= esc($user->username) ?></a></strong>
                 </span>
-                <span><strong><?= $user->numPosts ?></strong> inlägg</span>
+                <span><span class="icon-message" title="Inlägg"></span> <?= $user->numPosts ?></span>
             </li>
 <?php endforeach; ?>
         </ul>
@@ -29,7 +29,7 @@
 <?php foreach ($activeTags as $tag) : ?>
             <li>
                 <span class="post-title"><a href="<?= $this->url('tag/' . urlencode($tag->name)) ?>"><?= esc($tag->name) ?></a></span>
-                <span><?= ($tag->numPosts == 1 ? '<strong>1</strong> fråga' : '<strong>' . $tag->numPosts . '</strong> frågor') ?></span>
+                <span><span class="icon-question" title="Frågor"></span> <?= $tag->numPosts ?></span>
             </li>
 <?php endforeach; ?>
         </ul>
