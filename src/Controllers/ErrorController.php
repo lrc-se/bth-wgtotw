@@ -41,7 +41,10 @@ class ErrorController extends BaseController
             $title = 'Okänt fel';
             $message = 'Ett okänt fel har inträffat.';
         }
-        $this->di->common->renderPage($title, $message, ['title' => $title], $code);
+        $this->di->common->renderMain('default/error', [
+            'title' => $title,
+            'message' => $message
+        ], $title, $code);
         return true;
     }
 }
