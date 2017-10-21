@@ -212,7 +212,7 @@ dl {
 
 dt {
     margin: 0;
-    font-weight: 700;
+    font-weight: 600;
     text-align: right;
     flex: 0 0 175px;
 }
@@ -288,19 +288,19 @@ h3 {
 h4 {
     margin: 1em 0;
     font-size: 1.375em;
-    font-weight: 700;
+    font-weight: 600;
 }
 
 h5 {
     margin: 1em 0 .5em;
     font-size: 1.25em;
-    font-weight: 700;
+    font-weight: 600;
 }
 
 h6 {
     margin: 1em 0 .5em;
     font-size: 1.125em;
-    font-weight: 700;
+    font-weight: 600;
 }
 
 h2:first-child,
@@ -423,7 +423,7 @@ textarea.input-small {
 }
 
 label {
-    font-weight: 700;
+    font-weight: 600;
 }
 
 .spacer {
@@ -506,7 +506,7 @@ article > .columns:last-child {
     background-color: rgba(52, 128, 63, .09);
     border: 2px solid #34803f;
     border-radius: 3px;
-    font-weight: 700;
+    font-weight: 600;
     display: inline-block;
 }
 
@@ -542,7 +542,7 @@ article > .columns:last-child {
 }
 
 .form-label {
-    font-weight: 700;
+    font-weight: 600;
     text-align: right;
     flex: 0 1 175px;
 }
@@ -653,7 +653,7 @@ article > .columns:last-child {
 }
 
 .question-author {
-    font-weight: 700;
+    font-weight: 600;
 }
 
 .question-author img {
@@ -782,7 +782,7 @@ article > .columns:last-child {
     border-bottom: 1px solid;
     border-bottom-color: #ccc;
     border-bottom-color: rgba(0, 0, 0, .15);
-    font-weight: 700;
+    font-weight: 600;
     overflow: hidden;
 }
 
@@ -801,7 +801,7 @@ article > .columns:last-child {
 }
 
 .post-published {
-    font-weight: 700;
+    font-weight: 600;
     opacity: .75;
 }
 

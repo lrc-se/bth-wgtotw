@@ -7,7 +7,7 @@
 <?php foreach ($stylesheets as $stylesheet) : ?>
     <link rel="stylesheet" href="<?= $this->asset($stylesheet) ?>">
 <?php endforeach; ?>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Iceland%7CSource+Sans+Pro:400,400i,700,700i">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Iceland%7CSource+Sans+Pro:400,400i,600,600i">
     <!--<link rel="shortcut icon" href="<?= $this->asset('favicon.ico') ?>">-->
     <script>
         var WGTOTW = {
