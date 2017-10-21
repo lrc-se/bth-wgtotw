@@ -1,6 +1,5 @@
 <?php
 
-$author = $question->user;
 $vote = (!empty($user) ? $di->post->getVote($question, $user) : null);
 
 ?>
@@ -20,26 +19,7 @@ $vote = (!empty($user) ? $di->post->getVote($question, $user) : null);
 </div>
 <div class="post-body question">
     <div class="post-text"><?= $this->di->textfilter->markdown(esc($question->text)) ?></div>
-    <div class="post-meta">
-        <div class="post-author">
-            <span>Skriven av</span>
-            <span>
-<?php if ($author) : ?>
-                <a href="<?= $this->url('user/' . $author->id) ?>"><img src="<?= $author->getGravatar(30) ?>" alt=""></a>
-                <a href="<?= $this->url('user/' . $author->id) ?>"><?= esc($author->username) ?></a>
-<?php else : ?>
-                <img src="<?= (new \WGTOTW\Models\User())->getGravatar(30) ?>" alt="">
-                <em>(Borttagen användare)</em>
-<?php endif; ?>
-            </span>
-        </div>
-        <div class="post-time">
-            <div class="post-published">Publicerad <span><?= $question->published ?></span></div>
-<?php if ($question->updated) : ?>
-            <div class="post-updated">Uppdaterad <span><?= $question->updated ?></span></div>
-<?php endif; ?>
-        </div>
-    </div>
+<?php $this->renderView('post/meta', ['post' => $question, 'author' => $question->user]); ?>
 <?php if (!empty($tags)) : ?>
     <div class="post-tags">
         <strong>Taggar:</strong>
