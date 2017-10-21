@@ -985,6 +985,26 @@ li:last-child .comment {
 }
 
 
+.user-summary {
+    max-width: 100%;
+    margin-bottom: 1em;
+    padding: 1em;
+    background-color: #fff;
+    border: 1px solid;
+    border-color: #ccc;
+    border-color: rgba(0, 0, 0, .15);
+    border-radius: 3px;
+    white-space: nowrap;
+    display: inline-block;
+    overflow: hidden;
+}
+
+.url {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
 @media only screen and (min-width: 768px) {
     
     .navbar > button {

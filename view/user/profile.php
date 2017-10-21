@@ -7,22 +7,27 @@ $numComments = count($comments);
 ?>
 <h1><?= esc($user->username) ?></h1>
 <?php $this->renderView('default/msgs'); ?>
-<p><img src="<?= $user->getGravatar(125) ?>" alt="Gravatar"></p>
+<div class="user-summary">
+    <p><img src="<?= $user->getGravatar(150) ?>" alt="Gravatar"></p>
 <?php if (!$user->hideEmail) : ?>
-<div><span class="icon-mail" title="E-post"></span> <a href="mailto:<?= esc($user->email) ?>"><?= $user->email ?></a></div>
+    <div><span class="icon-mail" title="E-post"></span> <a href="mailto:<?= esc($user->email) ?>"><?= $user->email ?></a></div>
 <?php endif; ?>
 <?php if ($user->website) : ?>
-<div><span class="icon-link" title="Webbplats"></span> <a href="<?= esc($user->website) ?>"><?= $user->website ?></a></div>
+    <div class="url"><span class="icon-link" title="Webbplats"></span> <a href="<?= esc($user->website) ?>"><?= $user->website ?></a></div>
 <?php endif; ?>
-<div>
-    <span><span class="icon-award" title="Rykte"></span> <?= $reputation ?></span>
-    <span><span class="icon-vote" title="Röster"></span> <?= $numVotes ?></span>
-</div>
-<div class="user-posts">
-    <span class="icon-message" title="Inlägg"></span> <?= $numQuestions + $numAnswers + $numComments ?>
-    <span class="icon-question" title="Frågor"></span> <?= $numQuestions ?>
-    <span class="icon-answer" title="Svar"></span> <?= $numAnswers ?>
-    <span class="icon-comment" title="Kommentarer"></span> <?= $numComments ?>
+    <div>
+        <span>* <?= substr($user->created, 0, 10) ?></span>
+    </div>
+    <div>
+        <span><span class="icon-award" title="Rykte"></span> <?= $reputation ?></span>
+        <span><span class="icon-vote" title="Röster"></span> <?= $numVotes ?></span>
+    </div>
+    <div>
+        <span class="icon-message" title="Inlägg"></span> <?= $numQuestions + $numAnswers + $numComments ?>
+        <span class="icon-question" title="Frågor"></span> <?= $numQuestions ?>
+        <span class="icon-answer" title="Svar"></span> <?= $numAnswers ?>
+        <span class="icon-comment" title="Kommentarer"></span> <?= $numComments ?>
+    </div>
 </div>
 <?php if ($curUser && $user->id == $curUser->id) : ?>
 <p>

@@ -54,8 +54,9 @@ class UserController extends BaseController
             'user' => null,
             'admin' => null,
             'update' => false,
-            'form' => new Form('user-form', Models\User::class)
-        ], 'Registrera konto');
+            'form' => new Form('user-form', Models\User::class),
+            'title' => 'Skapa konto'
+        ], 'Skapa konto');
     }
     
     
@@ -75,8 +76,9 @@ class UserController extends BaseController
             'user' => $form->getModel(),
             'admin' => null,
             'update' => false,
-            'form' => $form
-        ], 'Registrera konto');
+            'form' => $form,
+            'title' => 'Skapa konto'
+        ], 'Skapa konto');
     }
     
     
@@ -96,7 +98,8 @@ class UserController extends BaseController
             'user' => $user,
             'admin' => null,
             'update' => true,
-            'form' => new Form('user-form', $user)
+            'form' => new Form('user-form', $user),
+            'title' => 'Redigera profil'
         ], 'Redigera profil');
     }
     
@@ -123,7 +126,8 @@ class UserController extends BaseController
             'user' => $form->getModel(),
             'admin' => null,
             'update' => true,
-            'form' => $form
+            'form' => $form,
+            'title' => 'Redigera profil'
         ], 'Redigera profil');
     }
     

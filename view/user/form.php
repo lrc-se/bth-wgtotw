@@ -1,3 +1,6 @@
+<?php if (!empty($title)) : ?>
+<h1><?= $title ?></h1>
+<?php endif; ?>
 <?php $this->renderView('default/msgs'); ?>
 <?= $form->form($this->currentUrl(), 'post', ['class' => 'form']) ?>
 <?php if ($update) : ?>

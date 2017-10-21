@@ -1,3 +1,4 @@
+<h1>Logga in</h1>
 <?php $this->renderView('default/msgs'); ?>
 <form class="form" action="<?= $this->url('user/login') ?>" method="post">
 <?php if (!empty($returnUrl)) : ?>
