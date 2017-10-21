@@ -6,16 +6,14 @@
     <input type="hidden" name="parentId" value="<?= $questionId ?>">
 <?php endif; ?>
     <div class="form-control">
-        <div class="form-label"><?= $form->label('text', 'Text:') ?></div>
         <div class="form-input">
-            <?= $form->textarea('text', ['required' => true, 'rows' => 7]) ?>
+            <?= $form->textarea('text', ['required' => true, 'rows' => 7, 'autofocus' => true]) ?>
 <?php if ($form->hasError('text')) : ?>
             <div class="form-error"><?= $form->getError('text') ?></div>
 <?php endif; ?>
         </div>
     </div>
     <div class="form-control">
-        <div class="form-label"></div>
         <div class="form-input">
             <input type="submit" value="<?= ($update ? 'Uppdatera' : 'Skicka') ?>">
             <a class="btn btn-2" href="<?= $this->url($return) ?>">Avbryt</a> 
