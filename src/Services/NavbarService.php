@@ -84,7 +84,7 @@ class NavbarService extends BaseService implements ConfigureInterface
             $list .= '<li' . (count($classes) > 0 ? ' class="' . implode(' ', $classes) . '"' : '') . ' data-level="' . $level . '">';
             
             // render link, if any
-            $list .= '<a href="' . (!is_null($item['route']) ? $this->di->url->create($item['route']) : '#!') . '">' . $item['title']  . '</a>';
+            $list .= '<a href="' . (!isset($item['items']) ? $this->di->url->create($item['route']) : '#!') . '">' . $item['title']  . '</a>';
             
             // render subitems, if any
             if ($hasChildren) {

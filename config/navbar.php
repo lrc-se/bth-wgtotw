@@ -25,7 +25,7 @@ $navbar = [
         ],
         'users' => [
             'title' => 'Användare',
-            'route' => null,
+            'route' => 'user',
             'items' => [
                 [
                     'title' => 'Visa alla',
@@ -43,10 +43,10 @@ try {
     $user = null;
 }
 if ($user) {
-    //$navbar['items']['users']['title'] = '<span class="navbar-user">' . htmlspecialchars($user->username) . '</span>';
+    $navbar['items']['users']['title'] .= ' <span class="navbar-user">(<span>' . htmlspecialchars($user->username) . '</span>)</span>';
     $navbar['items']['users']['items'][] = [
         'title' => 'Profil',
-        'route' => 'user/' . $user->id
+        'route' => 'user/profile'
     ];
     if ($user->isAdmin) {
         $navbar['items']['users']['items'][] = [

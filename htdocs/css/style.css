@@ -406,7 +406,7 @@ header {
 }
 
 .navbar-user > span {
-    max-width: 100px;
+    max-width: 125px;
     white-space: nowrap;
     text-overflow: ellipsis;
     display: inline-block;
@@ -1107,8 +1107,7 @@ li:last-child .comment,
     .navbar > ul ul {
         position: absolute;
         list-style-type: none;
-        min-width: 175px;
-        max-width: 200px;
+        width: 300px;
         margin: 0;
         padding: 0;
         border-radius: 0 3px 3px 3px;
