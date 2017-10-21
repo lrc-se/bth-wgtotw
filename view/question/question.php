@@ -4,7 +4,7 @@ $author = $question->user;
 $vote = (!empty($user) ? $di->post->getVote($question, $user) : null);
 
 ?>
-<div class="question-header">
+<div class="post-header question-header">
     <div class="post-rank"><?= $question->rank ?></div>
 <?php if (!empty($user) && $question->userId != $user->id) : ?>
     <div class="post-vote">
@@ -18,10 +18,10 @@ $vote = (!empty($user) ? $di->post->getVote($question, $user) : null);
     </div>
 <?php endif; ?>
 </div>
-<div class="question">
-    <div class="question-text"><?= $this->di->textfilter->markdown(esc($question->text)) ?></div>
-    <div class="question-meta">
-        <div class="question-author">
+<div class="post-body question">
+    <div class="post-text"><?= $this->di->textfilter->markdown(esc($question->text)) ?></div>
+    <div class="post-meta">
+        <div class="post-author">
             <span>Skriven av</span>
             <span>
 <?php if ($author) : ?>
@@ -33,15 +33,15 @@ $vote = (!empty($user) ? $di->post->getVote($question, $user) : null);
 <?php endif; ?>
             </span>
         </div>
-        <div class="question-time">
-            <div class="question-published">Publicerad <span><?= $question->published ?></span></div>
+        <div class="post-time">
+            <div class="post-published">Publicerad <span><?= $question->published ?></span></div>
 <?php if ($question->updated) : ?>
-            <div class="question-updated">Uppdaterad <span><?= $question->updated ?></span></div>
+            <div class="post-updated">Uppdaterad <span><?= $question->updated ?></span></div>
 <?php endif; ?>
         </div>
     </div>
 <?php if (!empty($tags)) : ?>
-    <div class="question-tags">
+    <div class="post-tags">
         <strong>Taggar:</strong>
         <ul>
 <?php   foreach ($tags as $tag) : ?>
@@ -50,7 +50,7 @@ $vote = (!empty($user) ? $di->post->getVote($question, $user) : null);
         </ul>
     </div>
 <?php endif; ?>
-    <div class="question-actions">
+    <div class="post-actions">
 <?php if (!empty($canComment)) : ?>
         <a class="btn btn-small" href="<?= $this->url('question/' . $question->id . '/comment') ?>">Kommentera</a>
 <?php endif; ?>

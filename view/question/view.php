@@ -7,7 +7,7 @@
 <div class="answers">
     <form action="<?= $di->request->getCurrentUrl() ?>#answers">
         <label for="sort">Sortering:</label>
-        <select id="sort" name="sort" onchange="this.form.submit()">
+        <select id="sort" class="input-small" name="sort" onchange="this.form.submit()">
 <?php   foreach ($sortOptions as $option => $value) : ?>
             <option value="<?= $value ?>"<?= ($sort == $value ? ' selected' : '') ?>><?= $option ?></option>
 <?php   endforeach; ?>
