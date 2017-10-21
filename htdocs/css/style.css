@@ -375,6 +375,15 @@ a.btn:hover {
     text-shadow: 0 0 2px rgba(255, 255, 255, .4);
 }
 
+input[type=button].input-small,
+input[type=submit].input-small,
+input[type=reset].input-small,
+button.input-small,
+.btn.btn-small {
+    padding: .5em .75em;
+    font-size: .875em;
+}
+
 input[type=text],
 input[type=email],
 input[type=password],
@@ -408,12 +417,7 @@ input[type=password].input-small,
 input[type=number].input-small,
 input[type=url].input-small,
 select.input-small,
-textarea.input-small,
-input[type=button].input-small,
-input[type=submit].input-small,
-input[type=reset].input-small,
-button.input-small,
-.btn.btn-small {
+textarea.input-small {
     padding: .25em .5em;
     font-size: .875em;
 }
@@ -790,7 +794,7 @@ article > .columns:last-child {
 }
 
 .post-tags a {
-    padding: .5em .75em;
+    padding: .333em .667em;
     color: #000;
     background-color: #ddd;
     border: none;
