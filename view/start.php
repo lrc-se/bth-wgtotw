@@ -25,9 +25,10 @@
     </div>
     <div class="column-2">
         <h2>Mest använda taggar</h2>
-        <ul class="post-list">
+        <ul class="post-list tag-list">
 <?php foreach ($activeTags as $tag) : ?>
             <li>
+                <span class="post-type"><span class="icon-tag"></span></span>
                 <span class="post-title"><a href="<?= $this->url('tag/' . urlencode($tag->name)) ?>"><?= esc($tag->name) ?></a></span>
                 <span><span class="icon-question" title="Frågor"></span> <?= $tag->numPosts ?></span>
             </li>

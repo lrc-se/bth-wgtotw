@@ -976,6 +976,14 @@ li:last-child .comment {
     display: block;
 }
 
+.tag-list .post-type {
+    margin-right: .25em;
+}
+
+.tag-desc {
+    margin-top: .5em;
+}
+
 
 @media only screen and (min-width: 768px) {
     
