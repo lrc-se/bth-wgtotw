@@ -5,8 +5,10 @@ $vote = (!empty($user) ? $di->post->getVote($comment, $user) : null);
 
 ?>
 <div id="comment-<?= $comment->id ?>" class="comment">
-    <div class="post-text"><?= markdown($comment->text) ?></div>
+    <div class="post-text">
 <?php $this->renderView('post/meta', ['post' => $comment, 'author' => $comment->user]); ?>
+        <?= markdown($comment->text) ?>
+    </div>
     <div class="post-footer">
         <div class="post-rank"><?= $comment->rank ?></div>
 <?php if (!empty($user) && $comment->userId != $user->id) : ?>

@@ -609,20 +609,21 @@ article > .columns:last-child {
 }
 
 
-.questions ul,
-.answers ul,
-.comments ul {
+.questions > ul,
+.answers > ul,
+.comments > ul {
     margin-bottom: 0;
     padding-left: 0;
     list-style-type: none;
 }
 
-.question li,
-.answers li {
-    margin-bottom: 1em;
+.questions > ul > li:last-child,
+.answers > ul > li:last-child,
+.comments > ul > li:last-child {
+    margin-bottom: 0;    
 }
 
-.questions li {
+.questions > ul > li {
     padding: .5em .75em;
     background-color: #fff;
     border: 1px solid;
@@ -645,6 +646,10 @@ article > .columns:last-child {
 .questions .question-status {
     margin-right: .5em;
     white-space: nowrap;
+}
+
+.answers > ul > li {
+    margin-bottom: 1em;
 }
 
 .post-rank {
@@ -680,6 +685,16 @@ article > .columns:last-child {
     border-top: none;
     border-radius: 0 0 3px 3px;
     overflow: hidden;
+}
+
+.post-body > *:last-child {
+    margin-bottom: 1em;
+}
+
+.post-body::after {
+    content: "";
+    margin-bottom: -1em;
+    display: block;
 }
 
 .post-header {
@@ -733,14 +748,13 @@ article > .columns:last-child {
 }
 
 .post-text {
-    float: left;
-    margin-bottom: 1em;
+    margin-bottom: 1.5em;
 }
 
 .post-meta {
     float: right;
-    margin: 0 0 1em 1em;
-    padding: .5em .75em;
+    margin-left: 1rem;
+    padding: .75em;
     background-color: #fff;
     border: 1px solid;
     border-color: #ccc;
@@ -750,7 +764,7 @@ article > .columns:last-child {
 }
 
 .post-author {
-    padding-bottom: .5em;
+    padding-bottom: .75em;
     border-bottom: 1px solid;
     border-bottom-color: #ccc;
     border-bottom-color: rgba(0, 0, 0, .15);
@@ -772,11 +786,15 @@ article > .columns:last-child {
     font-size: .875em;
 }
 
-.post-updated {
+.post-published {
+    font-weight: 700;
     opacity: .75;
 }
 
-.post-author > span:last-child,
+.post-updated {
+    opacity: .667;
+}
+
 .post-published > span,
 .post-updated > span {
     float: right;
@@ -875,18 +893,22 @@ article > .columns:last-child {
 
 .comments {
     clear: both;
-    margin-top: 1.5em;
+    padding-top: 1.5em;
+    
+}
+
+.comments > ul {
     border: 1px dotted;
     border-color: #ccc;
     border-color: rgba(0, 0, 0, .15);
     border-radius: 3px;
 }
 
-.question .comments {
+.question .comments > ul{
     background-color: #eee;
 }
 
-.answer .comments {
+.answer .comments > ul{
     background-color: #e8e8e8;
 }
 
