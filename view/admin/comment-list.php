@@ -18,11 +18,15 @@ if ($parent->type == 'answer') {
 <?php if ($parent->type == 'question') : ?>
 <h2>Fråga</h2>
 <ul class="post-list">
-    <li><span class="icon-question"></span> <a href="<?= $this->url('question/' . $parent->id) ?>"><?= esc($parent->title) ?></a></li>
+    <li<?= ($question->deleted ? ' class="deleted" title="Frågan är borttagen"' : '') ?>>
+        <span class="icon-question"></span> <a href="<?= $this->url('question/' . $parent->id) ?>"><?= esc($parent->title) ?></a>
+    </li>
 <?php else : ?>
 <h2>Svar till fråga</h2>
 <ul class="post-list">
-    <li><span class="icon-question"></span> <a href="<?= $this->url('question/' . $question->id . '#answer-' . $parent->id) ?>"><?= esc($question->title) ?></a></li>
+    <li<?= ($question->deleted ? ' class="deleted" title="Frågan är borttagen"' : '') ?>>
+        <span class="icon-question"></span> <a href="<?= $this->url('question/' . $question->id . '#answer-' . $parent->id) ?>"><?= esc($question->title) ?></a>
+    </li>
 <?php endif; ?>
 </ul>
 <div class="spacer"></div>

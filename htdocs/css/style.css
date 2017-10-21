@@ -613,6 +613,79 @@ article > .columns:last-child {
 }
 
 
+.xscroll {
+    overflow-x: auto;
+}
+
+.table {
+    width: 100%;
+    max-width: 1024px;
+    margin-bottom: 1em;
+    border: 1px solid;
+    border-color: #ccc;
+    border-color: rgba(0, 0, 0, .15);
+    border-radius: 3px;
+    border-spacing: 0;
+}
+
+.xscroll > .table {
+    margin-bottom: 0;
+}
+
+.table th,
+.table td {
+    padding: .5em .75em;
+    border: 1px solid;
+    border-color: #ccc;
+    border-color: rgba(0, 0, 0, .15);
+    border-top: none;
+    border-left: none;
+    font-size: .9em;
+    vertical-align: top;
+}
+
+.table th {
+    color: #fff;
+    background-color: #000;
+    font-weight: 600;
+    text-align: left;
+}
+
+.table th:first-child {
+    border-radius: 3px 0 0 0;
+}
+
+.table th:last-child {
+    border-radius: 0 3px 0 0;
+}
+
+.table th:last-child,
+.table td:last-child {
+    border-right: none;
+}
+
+.table tr {
+    background-color: #fff;
+}
+
+.table tr.deleted,
+.post-list > li.deleted {
+    background-color: #f6ecec;
+}
+
+.table tr:last-child td {
+    border-bottom: none;
+}
+
+.table tr:last-child td:first-child {
+    border-radius: 0 0 0 3px;
+}
+
+.table tr:last-child td:last-child {
+    border-radius: 0 0 3px 0;
+}
+
+
 .post-list,
 .answers > ul,
 .comments > ul {
