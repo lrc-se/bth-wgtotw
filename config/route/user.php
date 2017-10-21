@@ -19,6 +19,12 @@ return [
             'callable' => ['userController', 'profile']
         ],
         [
+            'info' => 'Profile page (alias).',
+            'requestMethod' => 'get',
+            'path' => 'profile',
+            'callable' => ['userController', 'profile2']
+        ],
+        [
             'info' => 'Registration page.',
             'requestMethod' => 'get',
             'path' => 'create',

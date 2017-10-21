@@ -24,11 +24,11 @@ class UserController extends BaseController
     /**
      * Profile page.
      *
-     * @param int   $id     User ID.
+     * @param int|Models\User   $id     User ID or user model instance.
      */
     public function profile($id)
     {
-        $user = $this->di->user->useSoft()->getById($id);
+        $user = ($id instanceof Models\User ? $id : $this->di->user->useSoft()->getById($id));
         if (!$user) {
             $this->di->common->redirectError('user/all', "Kunde inte hitta användaren med ID $id.");
         }
@@ -42,6 +42,20 @@ class UserController extends BaseController
             'comments' => $this->di->post->useSoft()->getByAuthor($user, 'comment'),
             'curUser' => $this->di->user->getCurrent()
         ], htmlspecialchars($user->username));
+    }
+    
+    
+    /**
+     * Profile page (logged-in user).
+     */
+    public function profile2()
+    {
+        $user = $this->di->user->getCurrent();
+        if (!$user) {
+            $this->di->common->redirect('user/login');
+        }
+        
+        return $this->profile($user);
     }
     
     
