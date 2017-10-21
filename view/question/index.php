@@ -8,22 +8,26 @@
     <ul>
 <?php   foreach ($questions as $question) : ?>
 <?php       $author = ($question instanceof \WGTOTW\Models\PostVM ? $question->username : ($question->user ? $question->user->username : null)); ?>
-        <li>
+        <li <?= ($question->isAnswered() ? ' class="answered"' : '') ?>>
 <?php       if ($question->isAnswered()) : ?>
-            <span class="answered">! <?= $di->post->useSoft()->getAnswerCount($question) ?></span>
+            <span class="question-status">! <?= $di->post->useSoft()->getAnswerCount($question) ?></span>
 <?php       else : ?>
-            <span class="unanswered">? <?= $di->post->useSoft()->getAnswerCount($question) ?></span>
+            <span class="question-status">? <?= $di->post->useSoft()->getAnswerCount($question) ?></span>
 <?php       endif; ?>
-            <span class="question-rank"><?= $question->rank ?></span>
-            <a href="<?= $this->url('question/' . $question->id) ?>"><?= esc($question->title) ?></a>
+            <span class="post-rank"><?= $question->rank ?></span>
+            <span class="question-title"><a href="<?= $this->url('question/' . $question->id) ?>"><?= esc($question->title) ?></a></span>
 <?php       if (empty($hideUser)) : ?>
+            <span class="question-meta">
+                <span class="question-author">
 <?php           if ($author) : ?>
-            <a href="<?= $this->url('user/' . $question->userId) ?>"><?= esc($author) ?></a>
+                    <a href="<?= $this->url('user/' . $question->userId) ?>"><?= esc($author) ?></a>
 <?php           else : ?>
-            <em>(Borttagen användare)</em>
+                    <em>(Borttagen användare)</em>
 <?php           endif; ?>
+                </span>
 <?php       endif; ?>
-            <span class="question-time"><?= $question->published ?></span>
+                <span class="question-time"><?= $question->published ?></span>
+            </span>
         </li>
 <?php   endforeach; ?>
     </ul>
