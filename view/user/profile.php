@@ -37,13 +37,14 @@ $numComments = count($comments);
 <?php $this->renderView('question/index', ['questions' => $questions, 'hideTitle' => true, 'hideUser' => true]); ?>
 <h2>Svar</h2>
 <?php if (!empty($answers)) : ?>
-<ul>
+<ul class="post-list">
 <?php   foreach ($answers as $answer) : ?>
 <?php       $question = $di->post->useSoft()->getById($answer->parentId); ?>
 <?php       if ($question) : ?>
     <li>
-        <a href="<?= $this->url('question/' . $answer->parentId . '#answer-' . $answer->id) ?>"><?= esc($question->title) ?></a>
-        <span class="answer-time"><?= $answer->published ?></span>
+        <span class="post-rank"><?= $answer->rank ?></span>
+        <span class="post-title"><a href="<?= $this->url('question/' . $answer->parentId . '#answer-' . $answer->id) ?>"><?= esc($question->title) ?></a></span>
+        <span class="post-time"><?= $answer->published ?></span>
     </li>
 <?php       endif; ?>
 <?php   endforeach; ?>
@@ -53,15 +54,18 @@ $numComments = count($comments);
 <?php endif; ?>
 <h2>Kommentarer</h2>
 <?php if (!empty($comments)) : ?>
-<ul>
+<ul class="post-list">
 <?php   foreach ($comments as $comment) : ?>
 <?php       $parentPost = $di->post->useSoft()->getById($comment->parentId); ?>
 <?php       if ($parentPost) : ?>
     <li>
-        <a href="<?= $this->url('question/' . ($parentPost->type == 'question' ? $comment->parentId : $parentPost->parentId) . '#comment-' . $comment->id) ?>">
-            <?= esc(($parentPost->type == 'question' ? $parentPost->title : $di->post->getById($parentPost->parentId)->title)) ?>
-        </a>
-        <span class="comment-time"><?= $comment->published ?></span>
+        <span class="post-rank"><?= $comment->rank ?></span>
+        <span class="post-title">
+            <a href="<?= $this->url('question/' . ($parentPost->type == 'question' ? $comment->parentId : $parentPost->parentId) . '#comment-' . $comment->id) ?>">
+                <?= esc(($parentPost->type == 'question' ? $parentPost->title : $di->post->getById($parentPost->parentId)->title)) ?>
+            </a>
+        </span>
+        <span class="post-time"><?= $comment->published ?></span>
     </li>
 <?php       endif; ?>
 <?php   endforeach; ?>

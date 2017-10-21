@@ -5,7 +5,7 @@
 <?php endif; ?>
 <?php if (!empty($questions)) : ?>
 <div class="questions">
-    <ul>
+    <ul class="post-list">
 <?php   foreach ($questions as $question) : ?>
 <?php       if ($question instanceof \WGTOTW\Models\PostVM) : ?>
 <?php           $author = new \WGTOTW\Models\User(); ?>
@@ -21,10 +21,10 @@
             <span class="question-status"><span class="icon-question" title="Saknar accepterat svar"></span> <?= $di->post->useSoft()->getAnswerCount($question) ?></span>
 <?php       endif; ?>
             <span class="post-rank"><?= $question->rank ?></span>
-            <span class="question-title"><a href="<?= $this->url('question/' . $question->id) ?>"><?= esc($question->title) ?></a></span>
+            <span class="post-title"><a href="<?= $this->url('question/' . $question->id) ?>"><?= esc($question->title) ?></a></span>
 <?php       if (empty($hideUser)) : ?>
-            <span class="question-meta">
-                <span class="question-author">
+            <span class="post-meta">
+                <span class="post-author">
 <?php           if ($author) : ?>
                     <a href="<?= $this->url('user/' . $question->userId) ?>"><?= esc($author->username) ?></a>
                     <a href="<?= $this->url('user/' . $question->userId) ?>"><img src="<?= $author->getGravatar(25) ?>" alt=""></a>
@@ -34,7 +34,7 @@
 <?php           endif; ?>
                 </span>
 <?php       endif; ?>
-                <span class="question-time"><?= $question->published ?></span>
+                <span class="post-time"><?= $question->published ?></span>
             </span>
         </li>
 <?php   endforeach; ?>

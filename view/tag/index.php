@@ -2,7 +2,7 @@
 <?php $this->renderView('default/msgs'); ?>
 <?php if (!empty($tags)) : ?>
 <div class="tags">
-    <ul>
+    <ul class="post-list">
 <?php   foreach ($tags as $tag) : ?>
         <li>
             <a href="<?= $this->url('tag/' . urlencode($tag->name)) ?>"><?= esc($tag->name) ?></a>
