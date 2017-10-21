@@ -398,7 +398,8 @@ input[type=url]:focus,
 select:focus,
 textarea:focus {
     background-color: #fff;
-    box-shadow: 0 0 5px rgba(17, 119, 187, .4);
+    outline: none;
+    box-shadow: 0 0 5px rgba(17, 119, 187, .75) inset;
 }
 
 label {
@@ -503,6 +504,88 @@ article > .columns:last-child {
 
 .msg li {
     color: inherit;
+}
+
+.form-control {
+    margin-bottom: 1em;
+    display: flex;
+}
+
+.form-control:last-child {
+    margin-bottom: 0;
+}
+
+.form-label,
+.form-static {
+    padding-top: .5em;
+    padding-right: 1em;
+}
+
+.form-label {
+    font-weight: 700;
+    text-align: right;
+    flex: 0 1 175px;
+}
+
+.form-small .form-label {
+    flex-basis: 125px;
+}
+
+.form-input {
+    overflow: hidden;
+    flex: 0 1 auto;
+}
+
+.form-input input[type=text],
+.form-input input[type=email],
+.form-input input[type=password],
+.form-input input[type=number],
+.form-input input[type=url],
+.form-input select {
+    width: 350px;
+    display: block;
+}
+
+.form-input textarea {
+    width: 450px;
+}
+
+.form-input input[type=checkbox],
+.form-input input[type=radio] {
+    margin-top: .75em;
+    padding: 0;
+    vertical-align: baseline;
+}
+
+.form-input label {
+    margin-right: 1em;
+    padding-top: .5em;
+    font-weight: 400;
+    display: inline-block;
+}
+
+.form-control:last-child .form-input input[type=submit],
+.form-control:last-child .form-input input[type=button],
+.form-control:last-child .form-input input[type=reset],
+.form-control:last-child .form-input button,
+.form-control:last-child .form-input a.btn {
+    margin-top: .5em;
+}
+
+.form-input .has-error {
+    color: #601;
+    border-color: #9c2c30;
+}
+
+.form-input .has-error:focus {
+    box-shadow: 0 0 5px rgba(156, 44, 48, .5) inset;
+}
+
+.form-error {
+    margin-top: .25em;
+    margin-left: .25em;
+    color: #9c2c30;
+    font-style: italic;
 }
 
 
