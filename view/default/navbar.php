@@ -1,7 +1,5 @@
     <nav class="navbar">
-        <!--<a class="logo" href="<?= $this->url('') ?>">
-            <img src="<?= $this->asset('img/kalle.png') ?>" alt="KB" title="Kalles sida">
-        </a>-->
+        <div class="logo"><a href="<?= $this->url('') ?>">Allt om sci-fi</a></div>
         <button id="menu-toggle">///</button>
 <?= $navbar->renderItems() ?>
     </nav>
