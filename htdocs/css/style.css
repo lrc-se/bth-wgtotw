@@ -10,7 +10,7 @@ body {
     margin: 0;
     padding: 0 1em;
     color: #000;
-    background-color: #000;
+    background: #000 url('../img/bg.jpg') center top/cover no-repeat fixed;
     font-family: "Source Sans Pro", sans-serif;
     font-size: 1em;
     line-height: 1.4;
