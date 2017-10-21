@@ -426,6 +426,10 @@ label {
     font-weight: 600;
 }
 
+label + select {
+    margin-left: .5em;
+}
+
 .spacer {
     margin: 0;
     height: 1em;
@@ -715,8 +719,12 @@ article > .columns:last-child {
     border-color: #ccc;
     border-color: rgba(0, 0, 0, .15);
     border-top: none;
-    border-radius: 0 0 3px 3px;
+    border-radius: 3px;
     overflow: hidden;
+}
+
+.post-header + .post-body {
+    border-radius: 0 0 3px 3px;
 }
 
 .post-body > *:last-child {
@@ -882,10 +890,6 @@ article > .columns:last-child {
     margin-bottom: 1em;
 }
 
-.answers > form label {
-    margin-right: .5em;
-}
-
 .answer-header {
     background-color: #999;
 }
@@ -960,7 +964,8 @@ article > .columns:last-child {
     overflow: hidden;
 }
 
-li:last-child .comment {
+li:last-child .comment,
+.post-body > .comment {
     border-bottom: none;
 }
 

@@ -3,21 +3,22 @@
 $num = count($answers);
 
 ?>
+<h1>Administrera svar</h1>
 <?php $this->renderView('default/msgs'); ?>
-<?php if ($num) : ?>
-<h3>Visar <?= $num ?> av <?= $total ?> svar</h3>
-<?php else : ?>
-<h3>Inga svar att visa</h3>
-<?php endif; ?>
-<p><strong>Fråga:</strong> <a href="<?= $this->url('question/' . $question->id) ?>"><?= esc($question->title) ?></a></p>
 <p>
     <a class="btn btn-2" href="<?= $this->url('admin/question') ?>">Tillbaka till frågor</a>
     <a class="btn btn-2" href="<?= $this->url('admin') ?>">Tillbaka till administration</a>
 </p>
+<h2>Fråga</h2>
+<ul class="post-list">
+    <li><span class="icon-question"></span> <a href="<?= $this->url('question/' . $question->id) ?>"><?= esc($question->title) ?></a></li>
+</ul>
+<div class="spacer"></div>
+<div class="spacer"></div>
 <form action="<?= $this->currentUrl() ?>">
     <p>
         <label for="status">Visa:</label>
-        <select id="status" name="status" onchange="this.form.submit()">
+        <select id="status" class="input-small" name="status" onchange="this.form.submit()">
             <option value="">Alla</option>
             <option value="active"<?= ($status == 'active' ? ' selected' : '') ?>>Endast aktiva</option>
             <option value="inactive"<?= ($status == 'inactive' ? ' selected' : '') ?>>Endast inaktiva</option>
@@ -25,6 +26,7 @@ $num = count($answers);
     </p>
 </form>
 <?php if ($num) : ?>
+<h3>Visar <?= $num ?> av <?= $total ?> svar</h3>
 <div class="xscroll">
     <table class="table">
         <thead>
@@ -67,4 +69,6 @@ $num = count($answers);
     </table>
 </div>
 <?php $this->renderView('admin/restore', ['entity' => 'answer']); ?>
+<?php else : ?>
+<h3>Inga svar att visa</h3>
 <?php endif; ?>

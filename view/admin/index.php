@@ -1,6 +1,8 @@
+<h1>Administra&shy;tion</h1>
 <p>
     Härifrån administreras webbplatsens användare och taggar. Frågor, svar och kommentarer kan även redigeras direkt från varje frågas sida, där redigerings&shy;länken alltid visas för administratörer.
 </p>
+<div class="spacer"></div>
 <p>
     <a class="btn" href="<?= $this->url('admin/user') ?>">Användare</a>
     <a class="btn" href="<?= $this->url('admin/tag') ?>">Taggar</a>

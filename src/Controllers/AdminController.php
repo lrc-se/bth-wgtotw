@@ -69,7 +69,8 @@ class AdminController extends BaseController
             'user' => $form->getModel(),
             'admin' => $admin,
             'update' => false,
-            'form' => $form
+            'form' => $form,
+            'title' => 'Skapa användare'
         ], 'Skapa användare');
     }
     
@@ -100,7 +101,8 @@ class AdminController extends BaseController
             'user' => $form->getModel(),
             'admin' => $admin,
             'update' => true,
-            'form' => $form
+            'form' => $form,
+            'title' => 'Redigera användare'
         ], 'Redigera användare');
     }
     
@@ -182,7 +184,7 @@ class AdminController extends BaseController
             }
         }
         
-        return $this->di->common->renderMain('tag/form', [
+        return $this->di->common->renderMain('tag/edit', [
             'tag' => $form->getModel(),
             'update' => false,
             'form' => $form
@@ -212,7 +214,7 @@ class AdminController extends BaseController
             $form = new Form('tag-form', $tag);
         }
         
-        return $this->di->common->renderMain('tag/form', [
+        return $this->di->common->renderMain('tag/edit', [
             'tag' => $form->getModel(),
             'update' => true,
             'form' => $form
@@ -336,7 +338,8 @@ class AdminController extends BaseController
                     'view' => 'question/question',
                     'question' => $post,
                     'canComment' => false,
-                    'return' => $this->getReturnUrl($post)
+                    'return' => $this->getReturnUrl($post),
+                    'title' => 'Visa fråga'
                 ], 'Visa fråga');
             case 'answer':
                 return $this->di->common->renderMain('admin/post-view', [
@@ -344,7 +347,8 @@ class AdminController extends BaseController
                     'view' => 'answer/answer',
                     'answer' => $post,
                     'canComment' => false,
-                    'return' => $this->getReturnUrl($post)
+                    'return' => $this->getReturnUrl($post),
+                    'title' => 'Visa svar'
                 ], 'Visa svar');
             case 'comment':
                 return $this->di->common->renderMain('admin/post-view', [
@@ -352,7 +356,8 @@ class AdminController extends BaseController
                     'view' => 'comment/comment',
                     'comment' => $post,
                     'post' => $this->di->post->getById($post->parentId),
-                    'return' => $this->getReturnUrl($post)
+                    'return' => $this->getReturnUrl($post),
+                    'title' => 'Visa kommentar'
                 ], 'Visa kommentar');
         }
     }
@@ -399,29 +404,32 @@ class AdminController extends BaseController
         
         switch ($type) {
             case 'question':
-                return $this->di->common->renderMain('question/form', [
-                    'question' => $form->getModel(),
+                return $this->di->common->renderMain('admin/post-edit', [
+                    'post' => $form->getModel(),
                     'admin' => true,
                     'update' => true,
                     'form' => $form,
                     'tags' => $this->di->tag->getAll(),
-                    'tagIds' => $this->di->tag->getIdsByPost($post)
+                    'tagIds' => $this->di->tag->getIdsByPost($post),
+                    'title' => 'Redigera fråga'                    
                 ], 'Redigera fråga');
             case 'answer':
-                return $this->di->common->renderMain('answer/form', [
-                    'answer' => $form->getModel(),
+                return $this->di->common->renderMain('admin/post-edit', [
+                    'post' => $form->getModel(),
                     'admin' => true,
                     'update' => true,
                     'form' => $form,
-                    'return' => $this->getReturnUrl($post)
+                    'return' => $this->getReturnUrl($post),
+                    'title' => 'Redigera svar'
                 ], 'Redigera svar');
             case 'comment':
-                return $this->di->common->renderMain('comment/form', [
-                    'comment' => $form->getModel(),
+                return $this->di->common->renderMain('admin/post-edit', [
+                    'post' => $form->getModel(),
                     'admin' => true,
                     'update' => true,
                     'form' => $form,
-                    'return' => $this->getReturnUrl($post)
+                    'return' => $this->getReturnUrl($post),
+                    'title' => 'Redigera kommentar'
                 ], 'Redigera kommentar');
         }
     }
@@ -553,8 +561,7 @@ class AdminController extends BaseController
             $posts = $this->di->repository->posts->getAllSoft(implode(' AND ', $where), $values);
             $total = $this->di->repository->posts->count(implode(' AND ', $where), $values);
         } elseif ($status == 'inactive') {
-            $where[] = 'deleted IS NOT NULL';
-            $posts = $this->di->repository->posts->getAll(implode(' AND ', $where), $values);
+            $posts = $this->di->repository->posts->getAll(implode(' AND ', $where) . ' AND deleted IS NOT NULL', $values);
             $total = $this->di->repository->posts->count(implode(' AND ', $where), $values);
         } else {
             $posts = $this->di->repository->posts->getAll(implode(' AND ', $where), $values);

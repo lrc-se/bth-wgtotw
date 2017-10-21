@@ -18,4 +18,4 @@
     <dt>Uppdaterad:</dt>
     <dd><?= $post->updated ?></dd>
 </dl>
-<div class="post-text"><?= markdown($post->text) ?></div>
+<div class="post-body"><?= markdown($post->text) ?></div>

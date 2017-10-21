@@ -3,26 +3,17 @@
 $num = count($tags);
 
 ?>
+<h1>Administrera taggar</h1>
 <?php $this->renderView('default/msgs'); ?>
+<p>
+    <a class="btn" href="<?= $this->url('admin/tag/create') ?>">Lägg till tagg</a>
+    <a class="btn btn-2" href="<?= $this->url('admin') ?>">Tillbaka till administration</a>
+</p>
 <?php if ($num) : ?>
 <h3>Visar <?= ($num == 1 ? '1 tagg' : "$num taggar") ?></h3>
 <?php else : ?>
 <h3>Inga taggar att visa</h3>
 <?php endif; ?>
-<p>
-    <a class="btn" href="<?= $this->url('admin/tag/create') ?>">Lägg till tagg</a>
-    <a class="btn btn-2" href="<?= $this->url('admin') ?>">Tillbaka till administration</a>
-</p>
-<!--<form action="<?= $this->currentUrl() ?>">
-    <p>
-        <label for="status">Visa:</label>
-        <select id="status" name="status" onchange="this.form.submit()">
-            <option value="">Alla</option>
-            <option value="active"<?= ($status == 'active' ? ' selected' : '') ?>>Endast aktiva</option>
-            <option value="inactive"<?= ($status == 'inactive' ? ' selected' : '') ?>>Endast inaktiva</option>
-        </select>
-    </p>
-</form>-->
 <?php if ($num) : ?>
 <div class="xscroll">
     <table class="table">

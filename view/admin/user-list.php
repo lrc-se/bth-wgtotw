@@ -3,12 +3,8 @@
 $num = count($users);
 
 ?>
+<h1>Administrera användare</h1>
 <?php $this->renderView('default/msgs'); ?>
-<?php if ($num) : ?>
-<h3>Visar <?= $num ?> av <?= $total ?> användare</h3>
-<?php else : ?>
-<h3>Inga användare att visa</h3>
-<?php endif; ?>
 <p>
     <a class="btn" href="<?= $this->url('admin/user/create') ?>">Lägg till användare</a>
     <a class="btn btn-2" href="<?= $this->url('admin') ?>">Tillbaka till administration</a>
@@ -16,7 +12,7 @@ $num = count($users);
 <form action="<?= $this->currentUrl() ?>">
     <p>
         <label for="status">Visa:</label>
-        <select id="status" name="status" onchange="this.form.submit()">
+        <select id="status" class="input-small" name="status" onchange="this.form.submit()">
             <option value="">Alla</option>
             <option value="active"<?= ($status == 'active' ? ' selected' : '') ?>>Endast aktiva</option>
             <option value="inactive"<?= ($status == 'inactive' ? ' selected' : '') ?>>Endast inaktiva</option>
@@ -24,6 +20,7 @@ $num = count($users);
     </p>
 </form>
 <?php if ($num) : ?>
+<h3>Visar <?= $num ?> av <?= $total ?> användare</h3>
 <div class="xscroll">
     <table class="table">
         <thead>
@@ -66,4 +63,6 @@ $num = count($users);
     </table>
 </div>
 <?php $this->renderView('admin/restore', ['entity' => 'user']); ?>
+<?php else : ?>
+<h3>Inga användare att visa</h3>
 <?php endif; ?>

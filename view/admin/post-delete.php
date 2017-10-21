@@ -2,19 +2,25 @@
 
 switch ($type) {
     case 'question':
-        $title = 'denna fråga';
+        $title = 'Ta bort fråga';
+        $what = 'denna fråga';
         break;
     case 'answer':
-        $title = 'detta svar';
+        $title = 'Ta bort svar';
+        $what = 'detta svar';
         break;
     case 'comment':
-        $title = 'denna kommentar';
+        $title = 'Ta bort kommentar';
+        $what = 'denna kommentar';
         break;
 }
 
 ?>
-<h4>Är du säker på att du vill ta bort <?= $title ?>?</h4>
+<h1><?= $title ?></h1>
+<h5>Är du säker på att du vill ta bort <?= $what ?>?</h5>
+<div class="spacer"></div>
 <?php $this->renderView('admin/post-details', ['post' => $post]); ?>
+<div class="spacer"></div>
 <form action="<?= $this->currentUrl() ?>" method="post">
     <input type="hidden" name="action" value="delete">
     <input type="submit" value="Ta bort">
