@@ -26,12 +26,12 @@
 <?php       if (empty($hideUser)) : ?>
             <span class="post-meta">
                 <span class="post-author">
-<?php           if ($author) : ?>
+<?php           if ($author && $author->username) : ?>
                     <a href="<?= $this->url('user/' . $question->userId) ?>"><?= esc($author->username) ?></a>
                     <a href="<?= $this->url('user/' . $question->userId) ?>"><img src="<?= $author->getGravatar(25) ?>" alt=""></a>
 <?php           else : ?>
                     <em>(Borttagen användare)</em>
-                    <img src="<?= $author->getGravatar(25) ?>" alt="">
+                    <img src="<?= (new \WGTOTW\Models\User())->getGravatar(25) ?>" alt="">
 <?php           endif; ?>
                 </span>
 <?php       endif; ?>
