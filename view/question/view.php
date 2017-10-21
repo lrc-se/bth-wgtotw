@@ -24,3 +24,14 @@
 <?php else : ?>
 <p><em>Inga svar att visa</em></p>
 <?php endif; ?>
+<script>
+    (function(doc) {
+        var anchor = doc.location.hash;
+        if (anchor && (anchor.substring(0, 8) == "#answer-" || anchor.substring(0, 9) == "#comment-")) {
+            var el = doc.querySelector(anchor);
+            if (el) {
+                el.classList.add("attention");
+            }
+        }
+    })(document);
+</script>

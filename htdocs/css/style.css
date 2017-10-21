@@ -1097,6 +1097,23 @@ li:last-child .comment,
     text-overflow: ellipsis;
 }
 
+.attention {
+    -webkit-animation: attention .6s ease-in-out;
+    animation: attention .6s ease-in-out;
+}
+
+@-webkit-keyframes attention {
+    0% { opacity: 1; transform: scale(1); }
+    50% { opacity: .7; transform: scale(.8); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes attention {
+    0% { opacity: 1; transform: scale(1); }
+    50% { opacity: .7; transform: scale(.8); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
 
 @media only screen and (min-width: 768px) {
     
