@@ -692,7 +692,14 @@ article > .columns:last-child {
     align-items: center;
 }
 
-.post-header .post-rank {
+.post-footer {
+    clear: left;
+    display: flex;
+    align-items: center;
+}
+
+.post-header .post-rank,
+.post-footer .post-rank {
     margin-right: .5em;
 }
 
@@ -701,7 +708,7 @@ article > .columns:last-child {
     background-color: #fff;
 }
 
-.post-header .post-vote > a {
+.post-vote > a {
     width: 1em;
     color: #fff;
     text-align: center;
@@ -709,7 +716,7 @@ article > .columns:last-child {
     display: inline-block;
 }
 
-.post-header .post-vote-active {
+.post-vote-active {
     width: 1.5em;
     margin-right: .25em;
     color: #ccc;
@@ -828,12 +835,14 @@ article > .columns:last-child {
     background-color: #f8f8f8;
 }
 
-.answer-header .post-vote-active {
+.answer-header .post-vote-active,
+.post-footer .post-vote-active {
     color: inherit;
     border-color: inherit;
 }
 
-.answer-header .post-vote > a {
+.answer-header .post-vote > a,
+.post-footer .post-vote > a {
     color: inherit;
 }
 
@@ -866,6 +875,43 @@ article > .columns:last-child {
 
 .comments {
     clear: both;
+    margin-top: 1.5em;
+    border: 1px dotted;
+    border-color: #ccc;
+    border-color: rgba(0, 0, 0, .15);
+    border-radius: 3px;
+}
+
+.question .comments {
+    background-color: #eee;
+}
+
+.answer .comments {
+    background-color: #e8e8e8;
+}
+
+.comments li {
+    margin-bottom: 0;
+}
+
+.comment {
+    padding: .75em;
+    border-bottom: 1px dotted;
+    border-bottom-color: #ccc;
+    border-bottom-color: rgba(0, 0, 0, .15);
+    overflow: hidden;
+}
+
+li:last-child .comment {
+    border-bottom: none;
+}
+
+.comment .post-meta {
+    font-size: .75em;
+}
+
+.comment .post-actions {
+    margin-left: .5em;
 }
 
 
