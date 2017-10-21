@@ -1,6 +1,7 @@
 <?php
 
 $vote = (!empty($user) ? $di->post->getVote($question, $user) : null);
+$user = (isset($user) ? $user : null);
 
 ?>
 <div class="post-header question-header">
@@ -30,13 +31,6 @@ $vote = (!empty($user) ? $di->post->getVote($question, $user) : null);
         </ul>
     </div>
 <?php endif; ?>
-    <div class="post-actions">
-<?php if (!empty($canComment)) : ?>
-        <a class="btn btn-small" href="<?= $this->url('question/' . $question->id . '/comment') ?>">Kommentera</a>
-<?php endif; ?>
-<?php if (!empty($user) && ($user->isAdmin || $question->userId == $user->id)) : ?>
-        <a class="btn btn-small btn-2" href="<?= $this->url('question/edit/' . $question->id) ?>">Redigera</a>
-<?php endif; ?>
-    </div>
-<?php $this->renderView('comment/comments', ['post' => $question, 'user' => (isset($user) ? $user : null)]); ?>
+<?php $this->renderView('post/actions', ['post' => $question, 'user' => $user, 'canComment' => !empty($canComment)]); ?>
+<?php $this->renderView('comment/comments', ['post' => $question, 'user' => $user]); ?>
 </div>

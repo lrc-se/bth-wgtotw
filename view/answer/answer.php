@@ -1,6 +1,7 @@
 <?php
 
 $vote = (!empty($user) ? $di->post->getVote($answer, $user) : null);
+$user = (isset($user) ? $user : null);
 
 ?>
 <div class="post-header answer-header">
@@ -34,13 +35,6 @@ $vote = (!empty($user) ? $di->post->getVote($answer, $user) : null);
 <div class="post-body answer">
     <div class="post-text"><?= markdown($answer->text) ?></div>
 <?php $this->renderView('post/meta', ['post' => $answer, 'author' => $answer->user]); ?>
-    <div class="post-actions">
-<?php if (!empty($canComment)) : ?>
-        <a class="btn btn-small" href="<?= $this->url('question/' . $answer->parentId . '/answer/' . $answer->id . '/comment') ?>">Kommentera</a>
-<?php endif; ?>
-<?php if (!empty($user) && ($user->isAdmin || $answer->userId == $user->id)) : ?>
-        <a class="btn btn-small btn-2" href="<?= $this->url('question/' . $answer->parentId . '/answer/' . $answer->id) ?>">Redigera</a>
-<?php endif; ?>
-    </div>
-<?php $this->renderView('comment/comments', ['post' => $answer, 'user' => (isset($user) ? $user : null)]); ?>
+<?php $this->renderView('post/actions', ['post' => $answer, 'user' => $user, 'canComment' => !empty($canComment)]); ?>
+<?php $this->renderView('comment/comments', ['post' => $answer, 'user' => $user]); ?>
 </div>
