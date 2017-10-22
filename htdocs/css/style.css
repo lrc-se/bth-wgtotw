@@ -97,6 +97,7 @@ blockquote {
 
 img {
     max-width: 100%;
+    border-radius: 3px;
     vertical-align: bottom;
 }
 
@@ -180,7 +181,9 @@ hr {
     margin-top: 0;
     margin-bottom: 1em;
     border: none;
-    border-top: 1px solid #000;
+    border-top: 1px dotted;
+    border-top-color: #aaa;
+    border-top-color: rgba(0, 0, 0, .25);
 }
 
 input,
@@ -820,12 +823,6 @@ article > .columns:last-child {
 
 .comment .post-rank {
     background-color: #fff;
-}
-
-.post-title img,
-.post-author img,
-.user-summary img {
-    border-radius: 3px;
 }
 
 .post-list .post-title {
