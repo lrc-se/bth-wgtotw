@@ -460,6 +460,7 @@ footer > p:last-child {
 
 .columns > * {
     margin: .75em;
+    overflow: hidden;
     flex: 0 1 auto;
 }
 
@@ -472,42 +473,52 @@ article > .columns:last-child {
 }
 
 .column-1 {
+    max-width: 100%;
     flex-basis: 100%;
 }
 
 .column-2 {
+    max-width: calc(50% - 1.5em);
     flex-basis: calc(50% - 1.5em);
 }
 
 .column-3 {
+    max-width: calc(33.333% - 1.5em);
     flex-basis: calc(33.333% - 1.5em);
 }
 
 .column-4 {
+    max-width: calc(25% - 1.5em);
     flex-basis: calc(25% - 1.5em);
 }
 
 .column-5 {
+    max-width: calc(20% - 1.5em);
     flex-basis: calc(20% - 1.5em);
 }
 
 .column-2-3 {
+    max-width: calc(66.667% - 1.5em);
     flex-basis: calc(66.667% - 1.5em);
 }
 
 .column-3-4 {
+    max-width: calc(75% - 1.5em);
     flex-basis: calc(75% - 1.5em);
 }
 
 .column-2-5 {
+    max-width: calc(40% - 1.5em);
     flex-basis: calc(40% - 1.5em);
 }
 
 .column-3-5 {
+    max-width: calc(60% - 1.5em);
     flex-basis: calc(60% - 1.5em);
 }
 
 .column-4-5 {
+    max-width: calc(80% - 1.5em);
     flex-basis: calc(80% - 1.5em);
 }
 
@@ -761,11 +772,20 @@ article > .columns:last-child {
     font-weight: 600;
 }
 
+.post-list .post-author > a:first-child {
+    max-width: 250px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: inline-block;
+    vertical-align: bottom;
+}
+
 .post-list .post-author img {
     margin-left: .25em;
 }
 
 .post-list .post-time {
+    white-space: nowrap;
     opacity: .75;
 }
 
@@ -773,8 +793,12 @@ article > .columns:last-child {
     margin-bottom: 1em;
 }
 
+.post-type > span::before {
+    margin-left: 0;
+}
+
 .post-rank {
-    padding: .1em .4em;
+    padding: 0 .333em;
     color: #555;
     background-color: #ddd;
     background-color: rgba(0, 0, 0, .05);
@@ -782,22 +806,31 @@ article > .columns:last-child {
     border-color: #ccc;
     border-color: rgba(0, 0, 0, .15);
     border-radius: 3px;
-}
-
-.post-list .post-rank {
-    margin-left: .5em;
+    display: inline-block;
 }
 
 .post-list .post-title {
+    padding-right: 1em;
+    text-overflow: ellipsis;
+    overflow: hidden;
     flex-grow: 1;
+}
+
+.post-list .post-title > a {
+    margin-right: .5em;
 }
 
 .post-list .post-title img {
     margin-right: .25em;
 }
 
+.post-list .nowrap {
+    display: inline-block;
+}
+
 .post-list .post-meta {
     white-space: nowrap;
+    flex-shrink: 0;
 }
 
 .post-list .post-time {
@@ -1069,6 +1102,10 @@ li:last-child .comment,
     margin-left: .5em;
 }
 
+.user-list > li > * {
+    white-space: nowrap;
+}
+
 .tags .post-list > li {
     display: block;
 }
@@ -1207,6 +1244,10 @@ li:last-child .comment,
     
     .navbar-user > span {
         max-width: 100px;
+    }
+    
+    .post-list .post-author > a:first-child {
+        max-width: 175px;
     }
     
 }
@@ -1388,14 +1429,42 @@ li:last-child .comment,
     .column-3-4,
     .column-2-5,
     .column-3-5 {
+        max-width: calc(50% - 1em);
         flex-basis: calc(50% - 1em);
     }
     
     .column-5 {
+        max-width: calc(33.333% - 1em);
         flex-basis: calc(33.333% - 1em);
     }
     
     .column-4-5 {
+        max-width: 100%;
+        flex-basis: 100%;
+    }
+    
+    .post-list.post-wrap > li {
+        flex-wrap: wrap;
+    }
+    
+    .post-list.post-wrap > li > * {
+        margin-right: 0;
+        flex-basis: 100%;
+    }
+    
+    .post-list .post-title {
+        padding-right: 0;
+    }
+    
+    .post-list .post-meta,
+    .post-list > li > .post-time {
+        margin-top: 1em;
+        text-align: right;
+        white-space: normal;
+    }
+    
+    .post-list > li > .post-time {
+        margin-left: 0;
         flex-basis: 100%;
     }
     
@@ -1467,10 +1536,12 @@ li:last-child .comment,
     .column-3-4,
     .column-2-5,
     .column-3-5 {
+        max-width: 100%;
         flex-basis: 100%;
     }
     
     .column-5 {
+        max-width: calc(50% - 1em);
         flex-basis: calc(50% - 1em);
     }
     
@@ -1514,7 +1585,20 @@ li:last-child .comment,
     }
     
     .columns > * {
+        max-width: 100%;
         flex-basis: 100%;
+    }
+    
+    .post-list .post-meta {
+        max-width: 100%;
+    }
+    
+    .post-list .post-author {
+        display: block;
+    }
+    
+    .post-list .post-author > a:first-child {
+        max-width: calc(100% - 2em);
     }
     
 }

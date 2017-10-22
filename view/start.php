@@ -9,7 +9,7 @@
 <div class="columns">
     <div class="column-2">
         <h2>Mest aktiva användare</h2>
-        <ul class="post-list">
+        <ul class="post-list user-list">
 <?php foreach ($activeUsers as $user) : ?>
 <?php   $user2 = new \WGTOTW\Models\User(); ?>
 <?php   $user2->email = $user->email; ?>
@@ -30,7 +30,7 @@
             <li>
                 <span class="post-type"><span class="icon-tag"></span></span>
                 <span class="post-title"><a href="<?= $this->url('tag/' . urlencode($tag->name)) ?>"><?= esc($tag->name) ?></a></span>
-                <span><span class="icon-question" title="Frågor"></span> <?= $tag->numPosts ?></span>
+                <span class="nowrap"><span class="icon-question" title="Frågor"></span> <?= $tag->numPosts ?></span>
             </li>
 <?php endforeach; ?>
         </ul>

@@ -2,7 +2,7 @@
 <?php $this->renderView('default/msgs'); ?>
 <?php if (!empty($users)) : ?>
 <div class="users">
-    <ul class="post-list">
+    <ul class="post-list user-list">
 <?php   foreach ($users as $user) : ?>
         <li>
             <span class="post-title">

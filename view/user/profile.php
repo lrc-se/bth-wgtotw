@@ -42,7 +42,7 @@ $numComments = count($comments);
 <?php $this->renderView('question/index', ['questions' => $questions, 'hideTitle' => true, 'hideUser' => true]); ?>
 <h2>Svar</h2>
 <?php if (!empty($answers)) : ?>
-<ul class="post-list">
+<ul class="post-list post-wrap">
 <?php   foreach ($answers as $answer) : ?>
 <?php       $question = $di->post->useSoft()->getById($answer->parentId); ?>
 <?php       if ($question) : ?>
@@ -62,7 +62,7 @@ $numComments = count($comments);
 <?php endif; ?>
 <h2>Kommentarer</h2>
 <?php if (!empty($comments)) : ?>
-<ul class="post-list">
+<ul class="post-list post-wrap">
 <?php   foreach ($comments as $comment) : ?>
 <?php       $parentPost = $di->post->useSoft()->getById($comment->parentId); ?>
 <?php       if ($parentPost) : ?>

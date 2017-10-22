@@ -5,7 +5,7 @@
 <?php endif; ?>
 <?php if (!empty($questions)) : ?>
 <div class="questions">
-    <ul class="post-list">
+    <ul class="post-list post-wrap">
 <?php   foreach ($questions as $question) : ?>
 <?php       if ($question instanceof \WGTOTW\Models\PostVM) : ?>
 <?php           $author = new \WGTOTW\Models\User(); ?>
@@ -18,10 +18,12 @@
             <span class="post-type"><span class="icon-question"></span> <strong><?= $di->post->useSoft()->getAnswerCount($question) ?></strong></span>
             <span class="post-title">
                 <a href="<?= $this->url('question/' . $question->id) ?>"><?= esc($question->title) ?></a>
-                <span class="post-rank"><?= $question->rank ?></span>
+                <span class="nowrap">
+                    <span class="post-rank"><?= $question->rank ?></span>
 <?php       if ($question->isAnswered()) : ?>
-                <span class="icon-accepted" title="Har ett accepterat svar"></span>
+                    <span class="icon-accepted" title="Har ett accepterat svar"></span>
 <?php       endif; ?>
+                </span>
             </span>
 <?php       if (empty($hideUser)) : ?>
             <span class="post-meta">
