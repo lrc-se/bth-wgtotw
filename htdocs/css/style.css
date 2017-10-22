@@ -548,6 +548,13 @@ article > .columns:last-child {
     box-shadow: 0 0 5px #9c2c30 inset;
 }
 
+.msg.warning > div {
+    color: #998b17;
+    background-color: #fbf9e5;
+    border-color: #998b17;
+    box-shadow: 0 0 5px #998b17 inset;
+}
+
 .msg ul,
 .msg ol {
     margin-bottom: .75em;

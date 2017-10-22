@@ -11,11 +11,14 @@ $num = count($answers);
 </p>
 <h2>Fråga</h2>
 <ul class="post-list">
-    <li<?= ($question->deleted ? ' class="deleted" title="Frågan är borttagen"' : '') ?>>
+    <li>
         <span class="icon-question"></span> <a href="<?= $this->url('question/' . $question->id) ?>"><?= esc($question->title) ?></a>
     </li>
 </ul>
 <div class="spacer"></div>
+<?php if ($question->deleted) : ?>
+<div class="msg warning"><div><strong>OBS!</strong> Frågan är borttagen och svaren visas därför inte för besökare.</div></div>
+<?php endif; ?>
 <div class="spacer"></div>
 <form action="<?= $this->currentUrl() ?>">
     <p>

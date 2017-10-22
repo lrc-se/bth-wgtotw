@@ -2,7 +2,7 @@
 
 $num = count($comments);
 if ($parent->type == 'answer') {
-    $question = $di->post->getById($parent->parentId);
+    $question = $di->post->getById($parent->parentId, 'question');
 }
 
 ?>
@@ -18,18 +18,32 @@ if ($parent->type == 'answer') {
 <?php if ($parent->type == 'question') : ?>
 <h2>Fråga</h2>
 <ul class="post-list">
-    <li<?= ($question->deleted ? ' class="deleted" title="Frågan är borttagen"' : '') ?>>
+    <li>
         <span class="icon-question"></span> <a href="<?= $this->url('question/' . $parent->id) ?>"><?= esc($parent->title) ?></a>
     </li>
+</ul>
+<div class="spacer"></div>
+<?php   if ($parent->deleted) : ?>
+<?php       if ($parent->type == 'question') : ?>
+<div class="msg warning"><div><strong>OBS!</strong> Frågan är borttagen och kommentarerna visas därför inte för besökare.</div></div>
+<?php       elseif ($parent->type == 'answer') : ?>
+<div class="msg warning"><div><strong>OBS!</strong> Svaret är borttaget och kommentarerna visas därför inte för besökare.</div></div>
+<?php       endif; ?>
+<?php   endif; ?>
 <?php else : ?>
 <h2>Svar till fråga</h2>
 <ul class="post-list">
-    <li<?= ($question->deleted ? ' class="deleted" title="Frågan är borttagen"' : '') ?>>
+    <li>
         <span class="icon-question"></span> <a href="<?= $this->url('question/' . $question->id . '#answer-' . $parent->id) ?>"><?= esc($question->title) ?></a>
     </li>
-<?php endif; ?>
 </ul>
 <div class="spacer"></div>
+<?php   if ($question->deleted) : ?>
+<div class="msg warning"><div><strong>OBS!</strong> Frågan är borttagen och kommentarerna visas därför inte för besökare.</div></div>
+<?php   elseif ($parent->type == 'answer' && $parent->deleted) : ?>
+<div class="msg warning"><div><strong>OBS!</strong> Svaret är borttaget och kommentarerna visas därför inte för besökare.</div></div>
+<?php   endif; ?>
+<?php endif; ?>
 <div class="spacer"></div>
 <form action="<?= $this->currentUrl() ?>">
     <p>
