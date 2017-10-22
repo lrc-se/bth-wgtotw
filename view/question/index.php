@@ -19,7 +19,7 @@
             <span class="post-title">
                 <a href="<?= $this->url('question/' . $question->id) ?>"><?= esc($question->title) ?></a>
                 <span class="nowrap">
-                    <span class="post-rank"><?= $question->rank ?></span>
+                    <?php $this->renderView('post/rank', ['post' => $question]); ?>
 <?php       if ($question->isAnswered()) : ?>
                     <span class="icon-accepted" title="Har ett accepterat svar"></span>
 <?php       endif; ?>

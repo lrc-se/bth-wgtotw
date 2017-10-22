@@ -50,7 +50,7 @@ $numComments = count($comments);
         <span class="post-type"><span class="icon-answer"></span></span>
         <span class="post-title">
             <a href="<?= $this->url('question/' . $answer->parentId . '#answer-' . $answer->id) ?>"><?= esc($question->title) ?></a>
-            <span class="post-rank"><?= $answer->rank ?></span>
+            <?php $this->renderView('post/rank', ['post' => $answer]); ?>
         </span>
         <span class="post-time"><?= $answer->published ?></span>
     </li>
@@ -71,7 +71,7 @@ $numComments = count($comments);
         <span class="post-type"><span class="icon-comment"></span></span>
         <span class="post-title">
             <a href="<?= $this->url('question/' . ($question->id) . '#comment-' . $comment->id) ?>"><?= esc($question->title) ?></a>
-            <span class="post-rank"><?= $comment->rank ?></span>
+            <?php $this->renderView('post/rank', ['post' => $comment]); ?>
         </span>
         <span class="post-time"><?= $comment->published ?></span>
     </li>

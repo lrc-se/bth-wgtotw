@@ -807,6 +807,11 @@ article > .columns:last-child {
     border-color: rgba(0, 0, 0, .15);
     border-radius: 3px;
     display: inline-block;
+    cursor: default;
+}
+
+.comment .post-rank {
+    background-color: #fff;
 }
 
 .post-list .post-title {

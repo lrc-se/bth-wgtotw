@@ -8,7 +8,7 @@ $vote = (!empty($user) ? $di->post->getVote($comment, $user) : null);
 <?php $this->renderView('post/meta', ['post' => $comment, 'author' => $comment->user]); ?>
     <div class="post-text"><?= markdown($comment->text) ?></div>
     <div class="post-footer">
-        <div class="post-rank"><?= $comment->rank ?></div>
+        <?php $this->renderView('post/rank', ['post' => $comment]); ?>
 <?php if (!empty($user) && $comment->userId != $user->id) : ?>
         <div class="post-vote">
 <?php   if (!$vote) : ?>

@@ -5,7 +5,7 @@ $user = (isset($user) ? $user : null);
 
 ?>
 <div class="post-header answer-header">
-    <div class="post-rank"><?= $answer->rank ?></div>
+    <?php $this->renderView('post/rank', ['post' => $answer]); ?>
 <?php if (!empty($user) && $answer->userId != $user->id) : ?>
     <div class="post-vote">
 <?php   if (!$vote) : ?>
