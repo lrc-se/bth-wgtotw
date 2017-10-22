@@ -27,8 +27,10 @@
         <div class="form-label"><label>Taggar:</label></div>
         <div class="form-input">
 <?php foreach ($tags as $n => $tag) : ?>
-            <input id="tag-<?= $n ?>" type="checkbox" name="tagIds[]" value="<?= $tag->id ?>"<?= (in_array($tag->id, $tagIds) ? ' checked' : '') ?>>
-            <label for="tag-<?= $n ?>"><?= esc($tag->name) ?></label>
+            <span class="nowrap">
+                <input id="tag-<?= $n ?>" type="checkbox" name="tagIds[]" value="<?= $tag->id ?>"<?= (in_array($tag->id, $tagIds) ? ' checked' : '') ?>>
+                <label for="tag-<?= $n ?>"><?= esc($tag->name) ?></label>
+            </span>
 <?php endforeach; ?>
         </div>
     </div>

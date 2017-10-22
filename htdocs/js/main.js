@@ -40,11 +40,13 @@
         hideMenu();
         if (toggle.classList.contains("open")) {
             toggle.classList.toggle("open");
+            doc.body.classList.toggle("menu-open");
         }
     });
     toggle.addEventListener("click", function(e) {
         e.stopPropagation();
         toggle.classList.toggle("open");
+        doc.body.classList.toggle("menu-open");
         hideMenu();
     });
 })(window, document);
