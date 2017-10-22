@@ -65,12 +65,12 @@ $numComments = count($comments);
 <ul class="post-list post-wrap">
 <?php   foreach ($comments as $comment) : ?>
 <?php       $parentPost = $di->post->useSoft()->getById($comment->parentId); ?>
-<?php       if ($parentPost) : ?>
+<?php       $question = ($parentPost && $parentPost->type == 'answer' ? $di->post->useSoft()->getById($parentPost->parentId) : $parentPost); ?>
+<?php       if ($parentPost && $question) : ?>
     <li>
         <span class="post-type"><span class="icon-comment"></span></span>
         <span class="post-title">
-            <a href="<?= $this->url('question/' . ($parentPost->type == 'question' ? $comment->parentId : $parentPost->parentId) . '#comment-' . $comment->id) ?>">
-                <?= esc(($parentPost->type == 'question' ? $parentPost->title : $di->post->getById($parentPost->parentId)->title)) ?></a>
+            <a href="<?= $this->url('question/' . ($question->id) . '#comment-' . $comment->id) ?>"><?= esc($question->title) ?></a>
             <span class="post-rank"><?= $comment->rank ?></span>
         </span>
         <span class="post-time"><?= $comment->published ?></span>
