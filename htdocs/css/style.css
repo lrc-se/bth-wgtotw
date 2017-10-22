@@ -358,6 +358,7 @@ header {
 .navbar > ul li.active > a {
     color: #fff;
     background-color: #247;
+    text-shadow: 1px 1px 3px #000;
 }
 
 .navbar > ul li.sub > a::after {
@@ -1095,6 +1096,10 @@ li:last-child .comment,
 
 .user-list > li > * {
     white-space: nowrap;
+}
+
+.user-list .post-title > a {
+    margin-right: .25em;
 }
 
 .tags .post-list > li {
