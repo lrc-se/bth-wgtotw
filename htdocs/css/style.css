@@ -34,7 +34,7 @@ a:visited {
 }
 
 a:hover {
-    text-shadow: 0 0 2px rgba(17, 119, 187, .2);
+    text-shadow: 0 0 2px rgba(17, 119, 187, .167);
 }
 
 p {
@@ -1335,7 +1335,7 @@ li:last-child .comment,
         text-shadow: 1px 1px 1px rgba(0, 0, 0, .75);
         border: none;
         cursor: pointer;
-        transition: background-color .3s ease-in-out;
+        transition: background-color .3s ease-in-out, border-radius .3s ease-in-out;
     }
     
     .navbar > button:hover {
@@ -1345,10 +1345,11 @@ li:last-child .comment,
     .navbar > button.open {
         background-color: #fff;
         border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
     }
     
     header {
-        transition: background-color .3s ease-in-out;
+        transition: background-color .3s ease-in-out, border-radius .3s ease-in-out;
     }
     
     .menu-open header {
