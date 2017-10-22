@@ -301,7 +301,7 @@ header {
 }
 
 .logo {
-    padding: 0 1em;
+    padding: 0 .5em 0 1em;
     display: flex;
     align-items: center;
 }
@@ -342,7 +342,7 @@ header {
 }
 
 .navbar > ul > li > a {
-    padding: 1em 1.5em;
+    padding: 1em 1.333em;
     display: block;
     transition: background-color .3s ease-in-out;
 }

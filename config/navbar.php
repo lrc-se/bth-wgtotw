@@ -8,7 +8,7 @@
 $navbar = [
     'items' => [
         'start' => [
-            'title' => 'Hem',
+            'title' => 'Översikt',
             'route' => ''
         ],
         'about' => [
