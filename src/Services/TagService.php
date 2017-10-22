@@ -84,7 +84,7 @@ class TagService extends BaseService
      */
     public function getAll()
     {
-        return $this->di->tags->getAll();
+        return $this->di->tags->getAll(null, [], ['order' => 'name']);
     }
     
     
