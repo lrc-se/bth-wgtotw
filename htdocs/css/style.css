@@ -133,8 +133,8 @@ h2 {
 
 h2::after {
     content: "";
-    margin-top: -.167em;
-    margin-bottom: .167em;
+    margin-top: -.15em;
+    margin-bottom: .15em;
     border-bottom: 1px dashed;
     border-bottom-color: #ccc;
     border-bottom-color: rgba(0, 0, 0, .15);
@@ -859,6 +859,23 @@ article > .columns:last-child {
 
 .post-header + .post-body {
     border-radius: 0 0 3px 3px;
+}
+
+.post-body h1,
+.post-body h2,
+.post-body h3 {
+    font-family: "Source Sans Pro", sans-serif;
+    line-height: 1.2;
+    text-shadow: none;
+}
+
+.post-body h1 {
+    margin-top: 0;
+}
+
+.post-body h1::after,
+.post-body h2::after {
+    display: none;
 }
 
 .post-header {
