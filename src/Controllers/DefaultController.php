@@ -30,6 +30,8 @@ class DefaultController extends BaseController
             ->select('t.*, COUNT(tagId) AS numPosts')
             ->from('wgtotw_post_tag AS pt')
             ->join($this->di->repository->tags->getCollectionName() . ' AS t', 'pt.tagId = t.id')
+            ->join($this->di->repository->posts->getCollectionName() . ' AS p', 'pt.postId = p.id')
+            ->where('p.deleted IS NULL')
             ->groupBy('pt.tagId')
             ->orderBy('numPosts DESC, t.id')
             ->limit(5)
