@@ -39,10 +39,8 @@ $user = (isset($user) ? $user : null);
     </div>
 </div>
 <div class="post-body answer">
-    <div class="post-text">
 <?php $this->renderView('post/meta', ['post' => $answer, 'author' => $answer->user]); ?>
-        <?= markdown($answer->text) ?>
-    </div>
+    <div class="post-text"><?= markdown($answer->text) ?></div>
 <?php $this->renderView('post/actions', ['post' => $answer, 'user' => $user, 'canComment' => !empty($canComment)]); ?>
 <?php $this->renderView('comment/comments', ['post' => $answer, 'user' => $user]); ?>
 </div>

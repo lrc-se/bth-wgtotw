@@ -25,10 +25,8 @@ $user = (isset($user) ? $user : null);
 <?php endif; ?>
 </div>
 <div class="post-body question">
-    <div class="post-text">
 <?php $this->renderView('post/meta', ['post' => $question, 'author' => $question->user]); ?>
-        <?= $this->di->textfilter->markdown(esc($question->text)) ?>
-    </div>
+    <div class="post-text"><?= $this->di->textfilter->markdown(esc($question->text)) ?></div>
 <?php if (!empty($tags)) : ?>
     <div class="post-tags">
         <strong>Taggar:</strong>
