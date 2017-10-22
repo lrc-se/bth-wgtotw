@@ -351,7 +351,7 @@ header {
 }
 
 .navbar > ul > li:hover > a {
-    background-color: #fafcff;
+    background-color: #f8f8f8;
 }
 
 .navbar > ul > li.open > a {
@@ -394,6 +394,10 @@ header {
     display: block;
 }
 
+.navbar > ul ul a {
+    transition: background-color .3s ease-in-out;
+}
+
 .navbar > ul ul > li > a {
     padding: 1em 1.5em;
     background-color: #fff;
@@ -401,7 +405,7 @@ header {
 }
 
 .navbar > ul ul > li:not(.active):hover > a {
-    background-color: #fafcff;
+    background-color: #eee;
 }
 
 .navbar-user {
@@ -973,24 +977,41 @@ article > .columns:last-child {
 }
 
 .post-tags ul {
-    margin: .5em -.1em;
+    margin: .1em -.1em .25em;
     padding-left: 0;
     list-style-type: none;
 }
 
-.post-tags li {
-    margin: .1em;
+.form-input.tags {
+    margin: -.25em -.1em;
+    padding-top: .5em;
+}
+
+.post-tags li,
+.form-input.tags label {
+    margin: .25em .1em;
     display: inline-block;
 }
 
-.post-tags a {
+.post-tags a,
+.form-input.tags label {
     padding: .333em .667em;
     color: #000;
-    background-color: #ddd;
+    background-color: #ccc;
     border: none;
     border-radius: 3px;
     font-size: .75em;
     text-decoration: none;
+    cursor: pointer;
+}
+
+.form-input.tags input:checked + label {
+    color: #fff;
+    background-color: #025;
+}
+
+.form-input.tags input {
+    display: none;
 }
 
 .post-actions {
@@ -1305,7 +1326,8 @@ li:last-child .comment,
     }
     
     .form-label,
-    .form-static {
+    .form-static,
+    .form-input.tags {
         padding-top: .333em;
     }
 
@@ -1324,7 +1346,7 @@ li:last-child .comment,
     }
     
     .navbar > button:hover {
-        background-color: #fafcff;
+        background-color: #f8f8f8;
     }
     
     .navbar > button.open {
@@ -1377,7 +1399,7 @@ li:last-child .comment,
     
     .navbar > ul li:not(.active):hover > a,
     .navbar > ul li:not(.active).open > a {
-        background-color: #fafcff;
+        background-color: #eee;
     }
     
     .navbar > ul ul {

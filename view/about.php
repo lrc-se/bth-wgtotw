@@ -18,5 +18,5 @@
 <div class="spacer"></div>
 <p class="center">
     <img src="<?= $this->asset('img/enterprise.jpg') ?>" alt="NCC-1701-D"><br>
-    <span><em><a href="https://commons.wikimedia.org/wiki/File:Enterprise_(869263349).jpg">Rob Young</a></em></span>
+    <small><em><a href="https://commons.wikimedia.org/wiki/File:Enterprise_(869263349).jpg">Rob Young</a></em></small>
 </p>
