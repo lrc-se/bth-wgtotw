@@ -1,4 +1,4 @@
-<h1>Användare</h1>
+<h1>Användare (<?= count($users) ?>)</h1>
 <?php $this->renderView('default/msgs'); ?>
 <?php if (!empty($users)) : ?>
 <div class="users">

@@ -1,7 +1,7 @@
 <h1><?= esc($question->title) ?></h1>
 <?php $this->renderView('default/msgs'); ?>
 <?php $this->renderView('question/question', $data); ?>
-<h2 id="answers">Svar</h2>
+<h2 id="answers">Svar (<?= count($answers) ?>)</h2>
 <p><a class="btn" href="<?= $this->url('question/' . $question->id . '/answer') ?>">Skriv ett svar</a></p>
 <?php if (!empty($answers)) : ?>
 <div class="answers">

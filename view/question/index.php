@@ -1,5 +1,5 @@
 <?php if (empty($hideTitle)) : ?>
-<h1>Frågor</h1>
+<h1>Frågor (<?= count($questions) ?>)</h1>
 <?php $this->renderView('default/msgs'); ?>
 <p><a class="btn" href="<?= $this->url('question/create') ?>">Skriv fråga</a></p>
 <?php endif; ?>

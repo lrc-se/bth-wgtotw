@@ -1,4 +1,4 @@
-<h1>Taggar</h1>
+<h1>Taggar (<?= count($tags) ?>)</h1>
 <?php $this->renderView('default/msgs'); ?>
 <?php if (!empty($tags)) : ?>
 <div class="tags">
