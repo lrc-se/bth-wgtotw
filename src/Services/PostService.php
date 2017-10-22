@@ -40,18 +40,19 @@ class PostService extends BaseService
     /**
      * Get posts by author.
      *
-     * @param Models\User   $user   User model instance.
-     * @param string        $type   Post type (pass null to return all types).
+     * @param Models\User   $user       User model instance.
+     * @param string        $type       Post type (pass null to return all types).
+     * @param array         $options    Query options.
      *
-     * @return array                Array of post model instances.
+     * @return array                    Array of post model instances.
      */
-    public function getByAuthor($user, $type = null)
+    public function getByAuthor($user, $type = null, $options = [])
     {
         $method = ($this->softQuery ? 'getAllSoft' : 'getAll');
         if (!is_null($type)) {
-            $posts = $this->di->posts->fetchReferences(true, true)->$method('userId = ? AND type = ?', [$user->id, $type]);
+            $posts = $this->di->posts->fetchReferences(true, true)->$method('userId = ? AND type = ?', [$user->id, $type], $options);
         } else {
-            $posts = $this->di->posts->fetchReferences(true, true)->$method('userId = ?', [$user->id]);
+            $posts = $this->di->posts->fetchReferences(true, true)->$method('userId = ?', [$user->id], $options);
         }
         $this->useSoft(false);
         return $posts;
@@ -61,14 +62,15 @@ class PostService extends BaseService
     /**
      * Get posts by type.
      *
-     * @param string    $type   Post type (pass null to return all types).
+     * @param string    $type       Post type (pass null to return all types).
+     * @param array     $options    Query options.
      *
-     * @return array            Array of post model instances.
+     * @return array                Array of post model instances.
      */
-    public function getByType($type)
+    public function getByType($type, $options = [])
     {
         $method = ($this->softQuery ? 'getAllSoft' : 'getAll');
-        $posts = $this->di->posts->fetchReferences(true, true)->$method('type = ?', [$type]);
+        $posts = $this->di->posts->fetchReferences(true, true)->$method('type = ?', [$type], $options);
         $this->useSoft(false);
         return $posts;
     }
@@ -77,19 +79,29 @@ class PostService extends BaseService
     /**
      * Get posts by tag.
      *
-     * @param Models\Tag    $tag    Tag model instance.
+     * @param Models\Tag    $tag        Tag model instance.
+     * @param array         $options    Query options.
      *
-     * @return array                Array of post model instances.
+     * @return array                    Array of post model instances.
      */
-    public function getByTag($tag)
+    public function getByTag($tag, $options = [])
     {
-        $posts = $this->di->db->connect()
+        $query = $this->di->db->connect()
             ->select('p.*, u.username, u.email')
             ->from($this->di->posts->getCollectionName() . ' AS p')
             ->join('wgtotw_post_tag AS pt', 'p.id = pt.postId')
             ->leftJoin($this->di->users->getCollectionName() . ' AS u', 'p.userId = u.id AND u.deleted IS NULL')
-            ->where('pt.tagId = ?' . ($this->softQuery ? ' AND p.deleted IS NULL' : ''))
-            ->execute([$tag->id])
+            ->where('pt.tagId = ?' . ($this->softQuery ? ' AND p.deleted IS NULL' : ''));
+        if (isset($options['order'])) {
+            $query = $query->orderBy($options['order']);
+        }
+        if (isset($options['limit'])) {
+            $query = $query->limit($options['limit']);
+        }
+        if (isset($options['offset'])) {
+            $query = $query->offset($options['offset']);
+        }
+        $posts = $query->execute([$tag->id])
             ->fetchAllClass(Models\PostVM::class);
         $this->useSoft(false);
         return $posts;

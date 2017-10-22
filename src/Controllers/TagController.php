@@ -35,7 +35,7 @@ class TagController extends BaseController
         
         return $this->di->common->renderMain('tag/questions', [
             'tag' => $tag,
-            'questions' => $this->di->post->useSoft()->getByTag($tag)
+            'questions' => $this->di->post->useSoft()->getByTag($tag, ['order' => 'published DESC'])
         ], htmlspecialchars($name));
     }
 }

@@ -37,9 +37,9 @@ class UserController extends BaseController
             'user' => $user,
             'reputation' => $this->di->user->getReputation($user),
             'numVotes' => $this->di->repository->votes->count('userId = ?', [$user->id]),
-            'questions' => $this->di->post->useSoft()->getByAuthor($user, 'question'),
-            'answers' => $this->di->post->useSoft()->getByAuthor($user, 'answer'),
-            'comments' => $this->di->post->useSoft()->getByAuthor($user, 'comment'),
+            'questions' => $this->di->post->useSoft()->getByAuthor($user, 'question', ['order' => 'published DESC']),
+            'answers' => $this->di->post->useSoft()->getByAuthor($user, 'answer', ['order' => 'published DESC']),
+            'comments' => $this->di->post->useSoft()->getByAuthor($user, 'comment', ['order' => 'published DESC']),
             'curUser' => $this->di->user->getCurrent()
         ], htmlspecialchars($user->username));
     }

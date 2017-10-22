@@ -16,7 +16,7 @@ class QuestionController extends BaseController
     public function index()
     {
         return $this->di->common->renderMain('question/index', [
-            'questions' => $this->di->post->useSoft()->getByType('question')
+            'questions' => $this->di->post->useSoft()->getByType('question', ['order' => 'published DESC'])
         ], 'Frågor');
     }
     
