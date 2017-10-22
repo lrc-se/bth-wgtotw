@@ -343,7 +343,7 @@ header {
 
 .navbar > ul > li > a {
     padding: 1em 1.5em;
-    display: inline-block;
+    display: block;
     transition: background-color .3s ease-in-out;
 }
 
@@ -814,6 +814,12 @@ article > .columns:last-child {
     background-color: #fff;
 }
 
+.post-title img,
+.post-author img,
+.user-summary img {
+    border-radius: 3px;
+}
+
 .post-list .post-title {
     padding-right: 1em;
     text-overflow: ellipsis;
@@ -823,10 +829,6 @@ article > .columns:last-child {
 
 .post-list .post-title > a {
     margin-right: .5em;
-}
-
-.post-list .post-title img {
-    margin-right: .25em;
 }
 
 .post-list .nowrap {
@@ -1154,22 +1156,21 @@ li:last-child .comment,
     .navbar > ul ul {
         position: absolute;
         list-style-type: none;
-        width: 300px;
+        width: 175px;
+        min-width: 100%;
         margin: 0;
         padding: 0;
-        border-radius: 0 3px 3px 3px;
+        border-radius: 0 0 3px 3px;
         visibility: hidden;
         overflow: hidden;
         opacity: 0;
         z-index: 10;
-        box-shadow: 2px 2px 2px rgba(0, 0, 0, .25);
+        box-shadow: 0 2px 2px rgba(0, 0, 0, .25);
         transition: opacity .3s ease-in-out, visibility .3s ease-in-out;
     }
     
     .navbar > ul > li:last-child > ul {
         right: 0;
-        border-radius: 3px 0 3px 3px;
-        box-shadow: -2px 2px 2px rgba(0, 0, 0, .25);
     }
     
     .navbar > ul > li > a {
@@ -1322,7 +1323,12 @@ li:last-child .comment,
         border-bottom-left-radius: 0;
     }
     
+    header {
+        transition: background-color .3s ease-in-out;
+    }
+    
     .menu-open header {
+        background-color: #fff;
         border-bottom-right-radius: 0;
     }
     
@@ -1332,10 +1338,10 @@ li:last-child .comment,
         right: .5em;
         width: 40%;
         background-color: #fff;
-        border-radius: 3px;
+        border-radius: 0 0 3px 3px;
         visibility: hidden;
         opacity: 0;
-        box-shadow: -2px 2px 2px rgba(0, 0, 0, .25);
+        box-shadow: 0 2px 2px rgba(0, 0, 0, .25);
         transition: opacity .3s ease-in-out, visibility .3s ease-in-out;
     }
     
@@ -1354,10 +1360,6 @@ li:last-child .comment,
         padding: .75em 1em;
         background-color: #fff;
         display: block;
-    }
-    
-    .navbar > ul > li:first-child > a {
-        border-top-left-radius: 3px;
     }
     
     .navbar > ul > li:last-child > a {
@@ -1614,8 +1616,18 @@ li:last-child .comment,
         font-size: 1.25em;
     }
     
+    .menu-open header {
+        border-bottom-left-radius: 0;
+    }
+    
     .navbar > ul {
-        width: 100%;
+        width: auto;
+        left: .5em;
+        border-top-left-radius: 0;
+    }
+    
+    .navbar > ul > li:first-child > a {
+        border-top-left-radius: 0;
     }
     
     .navbar > ul > li {

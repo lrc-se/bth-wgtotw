@@ -19,13 +19,13 @@ $numComments = count($comments);
         <span><span class="icon-join" title="Medlem sedan"></span> <?= substr($user->created, 0, 10) ?></span>
     </div>
     <div>
-        <span><span class="icon-award" title="Rykte"></span> <?= $reputation ?></span>
+        <span><span class="icon-award" title="Rykte"></span> <?= $reputation ?></span>&nbsp;&nbsp;
         <span><span class="icon-vote" title="Röster"></span> <?= $numVotes ?></span>
     </div>
     <div>
-        <span class="icon-message" title="Inlägg"></span> <?= $numQuestions + $numAnswers + $numComments ?>
-        <span class="icon-question" title="Frågor"></span> <?= $numQuestions ?>
-        <span class="icon-answer" title="Svar"></span> <?= $numAnswers ?>
+        <span class="icon-message" title="Inlägg"></span> <?= $numQuestions + $numAnswers + $numComments ?>&nbsp;&nbsp;
+        <span class="icon-question" title="Frågor"></span> <?= $numQuestions ?>&nbsp;&nbsp;
+        <span class="icon-answer" title="Svar"></span> <?= $numAnswers ?>&nbsp;&nbsp;
         <span class="icon-comment" title="Kommentarer"></span> <?= $numComments ?>
     </div>
 </div>
