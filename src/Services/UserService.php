@@ -79,7 +79,7 @@ class UserService extends BaseService
         $posts = $this->di->post->useSoft()->getByAuthor($user);
         foreach ($posts as $post) {
             if ($post->rank < 0) {
-                $factor = $post->rank - 1;
+                $factor = $post->rank;
             } elseif ($post->rank > 0) {
                 $factor = $post->rank + 1;
             } else {
