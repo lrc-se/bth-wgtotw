@@ -42,7 +42,7 @@ class DefaultController extends BaseController
             'questions' => $questions,
             'activeUsers' => $activeUsers,
             'activeTags' => $activeTags
-        ], 'Start');
+        ], null);
     }
 
 

@@ -3,12 +3,12 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>WGTOTW / <?= $title ?></title>
+    <title><?= (!empty($title) ? "$title / Allt om sci-fi" : 'Allt om sci-fi – din stjärnbas i hyperrymden') ?></title>
 <?php foreach ($stylesheets as $stylesheet) : ?>
     <link rel="stylesheet" href="<?= $this->asset($stylesheet) ?>">
 <?php endforeach; ?>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Iceland%7CSource+Sans+Pro:400,400i,600,600i">
-    <!--<link rel="shortcut icon" href="<?= $this->asset('favicon.ico') ?>">-->
+    <link rel="shortcut icon" href="<?= $this->asset('favicon.ico') ?>">
     <script>
         var WGTOTW = {
             basePath: "<?= $this->url('') ?>/"
