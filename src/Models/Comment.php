@@ -15,7 +15,7 @@ class Comment extends Post
             'text' => [
                 [
                     'rule' => 'required',
-                    'message' => 'Kommentarstexten får inte vara tom.'
+                    'message' => 'Kommentarstexten fÃ¥r inte vara tom.'
                 ]
             ]
         ]);

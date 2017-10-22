@@ -21,18 +21,18 @@ class Question extends Post
             'title' => [
                 [
                     'rule' => 'required',
-                    'message' => 'Rubrik måste anges.'
+                    'message' => 'Rubrik mÃ¥ste anges.'
                 ],
                 [
                     'rule' => 'maxlength',
                     'value' => 100,
-                    'message' => 'Rubriken får vara maximalt 100 tecken lång.'
+                    'message' => 'Rubriken fÃ¥r vara maximalt 100 tecken lÃ¥ng.'
                 ]
             ],
             'text' => [
                 [
                     'rule' => 'required',
-                    'message' => 'Frågetexten får inte vara tom.'
+                    'message' => 'FrÃ¥getexten fÃ¥r inte vara tom.'
                 ]
             ]
         ]);

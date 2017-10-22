@@ -21,7 +21,7 @@ class Answer extends Post
             'text' => [
                 [
                     'rule' => 'required',
-                    'message' => 'Svarstexten får inte vara tom.'
+                    'message' => 'Svarstexten fÃ¥r inte vara tom.'
                 ]
             ]
         ]);

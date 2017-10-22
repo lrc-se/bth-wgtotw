@@ -21,23 +21,23 @@ class Tag extends BaseModel
             'name' => [
                 [
                     'rule' => 'required',
-                    'message' => 'Namn måste anges.'
+                    'message' => 'Namn mÃ¥ste anges.'
                 ],
                 [
                     'rule' => 'maxlength',
                     'value' => 25,
-                    'message' => 'Namnet får vara maximalt 25 tecken långt.'
+                    'message' => 'Namnet fÃ¥r vara maximalt 25 tecken lÃ¥ngt.'
                 ]
             ],
             'description' => [
                 [
                     'rule' => 'required',
-                    'message' => 'Beskrivning måste anges.'
+                    'message' => 'Beskrivning mÃ¥ste anges.'
                 ],
                 [
                     'rule' => 'maxlength',
                     'value' => 200,
-                    'message' => 'Beskrivningen får vara maximalt 200 tecken lång.'
+                    'message' => 'Beskrivningen fÃ¥r vara maximalt 200 tecken lÃ¥ng.'
                 ]
             ]
         ]);

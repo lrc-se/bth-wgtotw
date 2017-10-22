@@ -1,6 +1,6 @@
 {
-    "name" : "WGTOTW",
-    "description": "We're Gonna Take Over The World",
+    "name" : "lrc-se/wgtotw",
+    "description": "We're Gonna Take Over The World – Allt om sci-fi",
     "license": "MIT",
     "require": {
         "anax/request": "^1.0",
@@ -17,7 +17,6 @@
     },
     "autoload": {
         "psr-4": {
-            "LRC\\": "src/",
             "WGTOTW\\": "src/"
         }
     }
