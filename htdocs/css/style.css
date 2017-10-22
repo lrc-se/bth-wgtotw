@@ -756,6 +756,7 @@ article > .columns:last-child {
 .post-list .post-type {
     margin-right: .5em;
     white-space: nowrap;
+    cursor: default;
 }
 
 .questions .post-list .post-type {

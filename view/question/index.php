@@ -7,6 +7,7 @@
 <div class="questions">
     <ul class="post-list post-wrap">
 <?php   foreach ($questions as $question) : ?>
+<?php       $answerCount = $di->post->useSoft()->getAnswerCount($question); ?>
 <?php       if ($question instanceof \WGTOTW\Models\PostVM) : ?>
 <?php           $author = new \WGTOTW\Models\User(); ?>
 <?php           $author->username = $question->username; ?>
@@ -15,7 +16,7 @@
 <?php           $author = $question->user; ?>
 <?php       endif; ?>
         <li <?= ($question->isAnswered() ? ' class="answered"' : '') ?>>
-            <span class="post-type"><span class="icon-question"></span> <strong><?= $di->post->useSoft()->getAnswerCount($question) ?></strong></span>
+            <span class="post-type"><span class="icon-question"></span> <strong title="<?= $answerCount ?> svar"><?= $answerCount ?></strong></span>
             <span class="post-title">
                 <a href="<?= $this->url('question/' . $question->id) ?>"><?= esc($question->title) ?></a>
                 <span class="nowrap">
