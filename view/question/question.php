@@ -19,7 +19,7 @@ $user = (isset($user) ? $user : null);
             <span class="icon-thumbs-up" title="Du har röstat upp denna fråga"></span>
 <?php       endif; ?>
         </span>
-        <a href="<?= $this->url('question/' . $question->id . '/vote/' . $question->id . '/cancel') ?>" title="Ångra röst">Ångra</a>
+        <a href="<?= $this->url('question/' . $question->id . '/vote/' . $question->id . '/cancel') ?>" title="Ångra röst"><span class="icon-cancel"></span></a>
 <?php   endif; ?>
     </div>
 <?php endif; ?>

@@ -16,7 +16,7 @@ $numComments = count($comments);
     <div class="url"><span class="icon-link" title="Webbplats"></span> <a href="<?= esc($user->website) ?>"><?= $user->website ?></a></div>
 <?php endif; ?>
     <div>
-        <span>* <?= substr($user->created, 0, 10) ?></span>
+        <span><span class="icon-join" title="Medlem sedan"></span> <?= substr($user->created, 0, 10) ?></span>
     </div>
     <div>
         <span><span class="icon-award" title="Rykte"></span> <?= $reputation ?></span>

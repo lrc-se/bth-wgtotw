@@ -26,9 +26,9 @@ if ($post->type == 'answer') {
 <?php endif; ?>
         </div>
         <div class="post-time">
-            <div class="post-published"><?= $published ?> <span><?= $post->published ?></span></div>
+            <div class="post-published"><span class="icon-time" title="<?= $published ?>"></span> <span><?= $post->published ?></span></div>
 <?php if ($post->updated) : ?>
-            <div class="post-updated"><?= $updated ?> <span><?= $post->updated ?></span></div>
+            <div class="post-updated"><span class="icon-update" title="<?= $updated ?>"></span> <span><?= $post->updated ?></span></div>
 <?php endif; ?>
         </div>
     </div>

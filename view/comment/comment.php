@@ -22,7 +22,7 @@ $vote = (!empty($user) ? $di->post->getVote($comment, $user) : null);
             <span class="icon-thumbs-up" title="Du har röstat upp denna kommentar"></span>
 <?php       endif; ?>
         </span>
-            <a href="<?= $this->url("question/$questionId/vote/" . $comment->id . '/cancel') ?>?return=comment-<?= $comment->id ?>" title="Ångra röst">Ångra</a>
+            <a href="<?= $this->url("question/$questionId/vote/" . $comment->id . '/cancel') ?>?return=comment-<?= $comment->id ?>" title="Ångra röst"><span class="icon-cancel"></span></a>
 <?php   endif; ?>
         </div>
 <?php endif; ?>

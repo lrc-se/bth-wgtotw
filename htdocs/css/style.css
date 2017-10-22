@@ -887,13 +887,8 @@ article > .columns:last-child {
 }
 
 .post-vote-active {
-    margin-right: .25em;
-    padding: .05em;
     color: #888;
     color: rgba(0, 0, 0, .5);
-    border: 2px solid;
-    border-color: #888;
-    border-color: rgba(0, 0, 0, .5);
     border-radius: 50%;
     text-align: center;
     display: inline-block;
@@ -959,12 +954,6 @@ article > .columns:last-child {
     opacity: .667;
 }
 
-.post-published > span,
-.post-updated > span {
-    float: right;
-    margin-left: .75em;
-}
-
 .post-tags {
     clear: left;
     margin-bottom: 1em;
@@ -1004,8 +993,6 @@ article > .columns:last-child {
 .accepted .post-vote-active {
     color: #ccc;
     color: rgba(255, 255, 255, .75);
-    border-color: #ccc;
-    border-color: rgba(255, 255, 255, .75);
 }
 
 .answers > form {
