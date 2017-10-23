@@ -656,7 +656,6 @@ article > .columns:last-child {
 
 .table {
     width: 100%;
-    max-width: 1024px;
     margin-bottom: 1em;
     border: 1px solid;
     border-color: #ccc;

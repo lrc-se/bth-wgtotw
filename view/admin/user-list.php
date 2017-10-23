@@ -30,6 +30,8 @@ $num = count($users);
                 <th>E&#8209;post</th>
                 <th>Webbplats</th>
                 <th>Admin</th>
+                <th>Registrerad</th>
+                <th>Uppdaterad</th>
                 <th>Raderad</th>
                 <th>Åtgärd</th>
             </tr>
@@ -39,13 +41,15 @@ $num = count($users);
             <tr<?= ($user->deleted ? ' class="deleted"' : (is_null($user->username) ? ' class="anonymous"' : '')) ?>>
                 <td><?= $user->id ?></td>
                 <td><a href="<?= $this->url('user/' . $user->id) ?>"><?= esc($user->username) ?></a></td>
-                <td><a href="mailto:<?= esc($user->email) ?>"><?= esc($user->email) ?></a></td>
+                <td><a href="mailto:<?= esc($user->email) ?>"><?= str_replace('@', '@<wbr>', esc($user->email)) ?></a></td>
 <?php       if ($user->website) : ?>
-                <td><a href="<?= esc($user->website) ?>"><?= esc($user->website) ?></a></td>
+                <td><a href="<?= esc($user->website) ?>"><?= str_replace('/', '/<wbr>', esc($user->website)) ?></a></td>
 <?php       else : ?>
                 <td>–</td>
 <?php       endif; ?>
                 <td><?= ($user->isAdmin ? 'Ja' : 'Nej') ?></td>
+                <td><?= $user->created ?></td>
+                <td><?= $user->updated ?></td>
                 <td><?= $user->deleted ?></td>
                 <td>
 <?php       if ($user->deleted) : ?>
