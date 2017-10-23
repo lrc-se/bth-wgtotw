@@ -13,7 +13,7 @@
         "anax/configure": "^1.0",
         "anax/di": "^1.0",
         "anax/database": "^1.1",
-        "lrc-se/anax-repository": "^1.0"
+        "lrc-se/anax-repository": "^1.1"
     },
     "autoload": {
         "psr-4": {
