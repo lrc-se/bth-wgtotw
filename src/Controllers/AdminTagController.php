@@ -33,7 +33,7 @@ class AdminTagController extends BaseController
         $form = new Form('tag-form', Models\Tag::class);
         if ($this->di->request->getMethod() == 'POST') {
             if ($this->di->tag->createFromForm($form)) {
-                $this->di->common->redirectMessage('admin/tag', 'Taggen "' . htmlspecialchars($form->getModel()->name) . '" har skapats.');
+                $this->di->common->redirectMessage('admin/tag', 'Taggen <strong>' . htmlspecialchars($form->getModel()->name) . '</strong> har skapats.');
             }
         }
         
@@ -61,7 +61,7 @@ class AdminTagController extends BaseController
         if ($this->di->request->getMethod() == 'POST') {
             $form = new Form('tag-form', Models\Tag::class);
             if ($this->di->tag->updateFromForm($form, $tag)) {
-                $this->di->common->redirectMessage('admin/tag', 'Taggen "' . htmlspecialchars($form->getModel()->name) . '" har uppdaterats.');
+                $this->di->common->redirectMessage('admin/tag', 'Taggen <strong>' . htmlspecialchars($form->getModel()->name) . '</strong> har uppdaterats.');
             }
         } else {
             $form = new Form('tag-form', $tag);
@@ -91,7 +91,7 @@ class AdminTagController extends BaseController
         if ($this->di->request->getMethod() == 'POST') {
             if ($this->di->request->getPost('action') == 'delete') {
                 $this->di->tag->delete($tag);
-                $this->di->common->redirectMessage('admin/tag', 'Taggen "' . htmlspecialchars($tag->name) . '" har tagits bort.');
+                $this->di->common->redirectMessage('admin/tag', 'Taggen <strong>' . htmlspecialchars($tag->name) . '</strong> har tagits bort.');
             }
         }
         

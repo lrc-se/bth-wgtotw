@@ -257,7 +257,7 @@ class AdminPostController extends BaseController
         
         switch ($type) {
             case 'question':
-                $msg = 'Frågan har tagits återställts.';
+                $msg = 'Frågan har återställts.';
                 break;
             case 'answer':
                 $msg = 'Svaret har återställts.';

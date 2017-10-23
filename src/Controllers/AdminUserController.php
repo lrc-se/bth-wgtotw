@@ -47,7 +47,7 @@ class AdminUserController extends BaseController
         $form = new Form('user-form', Models\User::class);
         if ($this->di->request->getMethod() == 'POST') {
             if ($this->di->user->createFromForm($form, true)) {
-                $this->di->common->redirectMessage('admin/user', 'Användaren "' . htmlspecialchars($form->getModel()->username) . '" har skapats.');
+                $this->di->common->redirectMessage('admin/user', 'Användaren <strong>' . htmlspecialchars($form->getModel()->username) . '</strong> har skapats.');
             }
         }
         
@@ -77,7 +77,7 @@ class AdminUserController extends BaseController
         if ($this->di->request->getMethod() == 'POST') {
             $form = new Form('user-form', Models\User::class);
             if ($this->di->user->updateFromForm($form, $user, true)) {
-                $this->di->common->redirectMessage('admin/user', 'Användaren "' . htmlspecialchars($form->getModel()->username) . '" har uppdaterats.');
+                $this->di->common->redirectMessage('admin/user', 'Användaren <strong>' . htmlspecialchars($form->getModel()->username) . '</strong> har uppdaterats.');
             }
         } else {
             $form = new Form('user-form', $user);
@@ -112,7 +112,7 @@ class AdminUserController extends BaseController
         if ($this->di->request->getMethod() == 'POST') {
             if ($this->di->request->getPost('action') == 'delete') {
                 $this->di->user->delete($user);
-                $this->di->common->redirectMessage('admin/user', 'Användaren "' . htmlspecialchars($user->username) . '" har tagits bort.');
+                $this->di->common->redirectMessage('admin/user', 'Användaren <strong>' . htmlspecialchars($user->username) . '</strong> har tagits bort.');
             }
         }
         
@@ -135,7 +135,7 @@ class AdminUserController extends BaseController
         
         if ($this->di->request->getPost('action') == 'restore') {
             $this->di->user->restore($user);
-            $this->di->common->redirectMessage('admin/user', 'Användaren "' . htmlspecialchars($user->username) . '" har återställts.');
+            $this->di->common->redirectMessage('admin/user', 'Användaren <strong>' . htmlspecialchars($user->username) . '</strong> har återställts.');
         }
         
         $this->di->common->redirect('admin/user');
