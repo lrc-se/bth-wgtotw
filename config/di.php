@@ -58,8 +58,11 @@ $config = [
         'session' => [
             'shared' => true,
             'callback' => function () {
-                return (new \Anax\Session\SessionConfigurable())
+                $session = (new \Anax\Session\SessionConfigurable())
                     ->configure('session.php');
+                $session->name();
+                $session->start();
+                return $session;
             }
         ],
         'textfilter' => [
