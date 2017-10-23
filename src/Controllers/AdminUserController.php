@@ -46,7 +46,7 @@ class AdminUserController extends BaseController
         $admin = $this->di->common->verifyAdmin();
         $form = new Form('user-form', Models\User::class);
         if ($this->di->request->getMethod() == 'POST') {
-            if ($this->di->user->createFromForm($form)) {
+            if ($this->di->user->createFromForm($form, true)) {
                 $this->di->common->redirectMessage('admin/user', 'Användaren "' . htmlspecialchars($form->getModel()->username) . '" har skapats.');
             }
         }
@@ -76,7 +76,7 @@ class AdminUserController extends BaseController
         
         if ($this->di->request->getMethod() == 'POST') {
             $form = new Form('user-form', Models\User::class);
-            if ($this->di->user->updateFromForm($form, $user)) {
+            if ($this->di->user->updateFromForm($form, $user, true)) {
                 $this->di->common->redirectMessage('admin/user', 'Användaren "' . htmlspecialchars($form->getModel()->username) . '" har uppdaterats.');
             }
         } else {
