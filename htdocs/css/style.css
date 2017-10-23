@@ -1017,7 +1017,7 @@ article > .columns:last-child {
 
 .form-input.tags input:checked + label {
     color: #fff;
-    background-color: #025;
+    background-color: #247;
 }
 
 .form-input.tags input {
@@ -1043,7 +1043,7 @@ article > .columns:last-child {
 }
 
 .answer-header {
-    background-color: #999;
+    background-color: #888;
 }
 
 .answer-header .post-rank {
@@ -1116,7 +1116,7 @@ article > .columns:last-child {
     overflow: hidden;
 }
 
-li:last-child .comment,
+li:last-child > .comment,
 .post-body > .comment {
     border-bottom: none;
 }
