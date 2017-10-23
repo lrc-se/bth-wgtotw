@@ -17,6 +17,7 @@ require ANAX_INSTALL_PATH . '/vendor/autoload.php';
 $di = new \Anax\DI\DIFactoryConfigMagic('di.php');
 
 // Start session
+$di->session->name();
 $di->session->start();
 
 // Leave to router to match incoming request to routes
