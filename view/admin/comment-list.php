@@ -77,7 +77,7 @@ if ($parent->type == 'answer') {
 <?php       if ($comment->user) : ?>
                     <a href="<?= $this->url('user/' . $comment->userId) ?>"><?= esc($comment->user->username) ?></a>
 <?php       else : ?>
-                    <em>(Borttagen användare)</em>
+                    <span>(Borttagen användare)</span>
 <?php       endif; ?>
                 </td>
                 <td><?= $comment->published ?></td>

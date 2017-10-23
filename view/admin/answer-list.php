@@ -52,7 +52,7 @@ $num = count($answers);
 <?php       if ($answer->user) : ?>
                     <a href="<?= $this->url('user/' . $answer->userId) ?>"><?= esc($answer->user->username) ?></a>
 <?php       else : ?>
-                    <em>(Borttagen användare)</em>
+                    <span>(Borttagen användare)</span>
 <?php       endif; ?>
                 </td>
                 <td><?= $answer->published ?></td>

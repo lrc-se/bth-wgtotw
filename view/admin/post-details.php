@@ -7,11 +7,7 @@
 <?php endif; ?>
     <dt>Författare:</dt>
     <dd>
-<?php if ($post->user) : ?>
-        <span><?= esc($post->user->username) ?></span>
-<?php else : ?>
-        <em>(Borttagen användare)</em>
-<?php endif; ?>
+        <span><?= ($post->user ? esc($post->user->username) : '(Borttagen användare)') ?></span>
     </dd>
     <dt>Publicerad:</dt>
     <dd><?= $post->published ?></dd>

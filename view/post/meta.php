@@ -22,7 +22,7 @@ if ($post->type == 'answer') {
             <a href="<?= $this->url('user/' . $author->id) ?>"><?= esc($author->username) ?></a>
 <?php else : ?>
             <img src="<?= (new \WGTOTW\Models\User())->getGravatar($size) ?>" alt="">
-            <em>(Borttagen användare)</em>
+            <span>(Borttagen användare)</span>
 <?php endif; ?>
         </div>
         <div class="post-time">

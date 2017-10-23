@@ -42,7 +42,7 @@ $num = count($questions);
 <?php       if ($question->user) : ?>
                     <a href="<?= $this->url('user/' . $question->userId) ?>"><?= esc($question->user->username) ?></a>
 <?php       else : ?>
-                    <em>(Borttagen användare)</em>
+                    <span>(Borttagen användare)</span>
 <?php       endif; ?>
                 </td>
                 <td><?= $question->published ?></td>
