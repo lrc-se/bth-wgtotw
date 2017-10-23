@@ -19,31 +19,31 @@ return [
             'info' => 'Admin user list.',
             'requestMethod' => 'get',
             'path' => 'user',
-            'callable' => ['adminController', 'users']
+            'callable' => ['adminUserController', 'users']
         ],
         [
             'info' => 'Admin user create page/handler.',
             'requestMethod' => 'get|post',
             'path' => 'user/create',
-            'callable' => ['adminController', 'createUser']
+            'callable' => ['adminUserController', 'createUser']
         ],
         [
             'info' => 'Admin user edit page/handler.',
             'requestMethod' => 'get|post',
             'path' => 'user/edit/{id:digit}',
-            'callable' => ['adminController', 'updateUser']
+            'callable' => ['adminUserController', 'updateUser']
         ],
         [
             'info' => 'Admin user delete page/handler.',
             'requestMethod' => 'get|post',
             'path' => 'user/delete/{id:digit}',
-            'callable' => ['adminController', 'deleteUser']
+            'callable' => ['adminUserController', 'deleteUser']
         ],
         [
             'info' => 'Admin user restore handler.',
             'requestMethod' => 'post',
             'path' => 'user/restore/{id:digit}',
-            'callable' => ['adminController', 'restoreUser']
+            'callable' => ['adminUserController', 'restoreUser']
         ],
         
         // tags
@@ -51,25 +51,25 @@ return [
             'info' => 'Admin tag list.',
             'requestMethod' => 'get',
             'path' => 'tag',
-            'callable' => ['adminController', 'tags']
+            'callable' => ['adminTagController', 'tags']
         ],
         [
             'info' => 'Admin tag create page/handler.',
             'requestMethod' => 'get|post',
             'path' => 'tag/create',
-            'callable' => ['adminController', 'createTag']
+            'callable' => ['adminTagController', 'createTag']
         ],
         [
             'info' => 'Admin tag edit page/handler.',
             'requestMethod' => 'get|post',
             'path' => 'tag/edit/{id:digit}',
-            'callable' => ['adminController', 'updateTag']
+            'callable' => ['adminTagController', 'updateTag']
         ],
         [
             'info' => 'Admin tag delete page/handler.',
             'requestMethod' => 'get|post',
             'path' => 'tag/delete/{id:digit}',
-            'callable' => ['adminController', 'deleteTag']
+            'callable' => ['adminTagController', 'deleteTag']
         ],
         
         // questions
@@ -77,14 +77,14 @@ return [
             'info' => 'Admin question list.',
             'requestMethod' => 'get',
             'path' => 'question',
-            'callable' => ['adminController', 'questions']
+            'callable' => ['adminPostController', 'questions']
         ],
         [
             'info' => 'Admin question view.',
             'requestMethod' => 'get',
             'path' => 'question/{id:digit}',
             'callable' => function ($id) {
-                return $this->di->adminController->viewPost('question', $id);
+                return $this->di->adminPostController->viewPost('question', $id);
             }
         ],
         [
@@ -92,7 +92,7 @@ return [
             'requestMethod' => 'get|post',
             'path' => 'question/edit/{id:digit}',
             'callable' => function ($id) {
-                return $this->di->adminController->updatePost('question', $id);
+                return $this->di->adminPostController->updatePost('question', $id);
             }
         ],
         [
@@ -100,7 +100,7 @@ return [
             'requestMethod' => 'get|post',
             'path' => 'question/delete/{id:digit}',
             'callable' => function ($id) {
-                return $this->di->adminController->deletePost('question', $id);
+                return $this->di->adminPostController->deletePost('question', $id);
             }
         ],
         [
@@ -108,7 +108,7 @@ return [
             'requestMethod' => 'post',
             'path' => 'question/restore/{id:digit}',
             'callable' => function ($id) {
-                return $this->di->adminController->restorePost('question', $id);
+                return $this->di->adminPostController->restorePost('question', $id);
             }
         ],
         
@@ -117,14 +117,14 @@ return [
             'info' => 'Admin answer list.',
             'requestMethod' => 'get',
             'path' => 'question/{questionId:digit}/answer',
-            'callable' => ['adminController', 'answers']
+            'callable' => ['adminPostController', 'answers']
         ],
         [
             'info' => 'Admin answer view.',
             'requestMethod' => 'get',
             'path' => 'answer/{id:digit}',
             'callable' => function ($id) {
-                return $this->di->adminController->viewPost('answer', $id);
+                return $this->di->adminPostController->viewPost('answer', $id);
             }
         ],
         [
@@ -132,7 +132,7 @@ return [
             'requestMethod' => 'get|post',
             'path' => 'answer/edit/{id:digit}',
             'callable' => function ($id) {
-                return $this->di->adminController->updatePost('answer', $id);
+                return $this->di->adminPostController->updatePost('answer', $id);
             }
         ],
         [
@@ -140,7 +140,7 @@ return [
             'requestMethod' => 'get|post',
             'path' => 'answer/delete/{id:digit}',
             'callable' => function ($id) {
-                return $this->di->adminController->deletePost('answer', $id);
+                return $this->di->adminPostController->deletePost('answer', $id);
             }
         ],
         [
@@ -148,7 +148,7 @@ return [
             'requestMethod' => 'post',
             'path' => 'answer/restore/{id:digit}',
             'callable' => function ($id) {
-                return $this->di->adminController->restorePost('answer', $id);
+                return $this->di->adminPostController->restorePost('answer', $id);
             }
         ],
         
@@ -157,20 +157,20 @@ return [
             'info' => 'Admin question comment list.',
             'requestMethod' => 'get',
             'path' => 'question/{parentId:digit}/comment',
-            'callable' => ['adminController', 'comments']
+            'callable' => ['adminPostController', 'comments']
         ],
         [
             'info' => 'Admin answer comment list.',
             'requestMethod' => 'get',
             'path' => 'answer/{parentId:digit}/comment',
-            'callable' => ['adminController', 'comments']
+            'callable' => ['adminPostController', 'comments']
         ],
         [
             'info' => 'Admin comment view.',
             'requestMethod' => 'get',
             'path' => 'comment/{id:digit}',
             'callable' => function ($id) {
-                return $this->di->adminController->viewPost('comment', $id);
+                return $this->di->adminPostController->viewPost('comment', $id);
             }
         ],
         [
@@ -178,7 +178,7 @@ return [
             'requestMethod' => 'get|post',
             'path' => 'comment/edit/{id:digit}',
             'callable' => function ($id) {
-                return $this->di->adminController->updatePost('comment', $id);
+                return $this->di->adminPostController->updatePost('comment', $id);
             }
         ],
         [
@@ -186,7 +186,7 @@ return [
             'requestMethod' => 'get|post',
             'path' => 'comment/delete/{id:digit}',
             'callable' => function ($id) {
-                return $this->di->adminController->deletePost('comment', $id);
+                return $this->di->adminPostController->deletePost('comment', $id);
             }
         ],
         [
@@ -194,7 +194,7 @@ return [
             'requestMethod' => 'post',
             'path' => 'comment/restore/{id:digit}',
             'callable' => function ($id) {
-                return $this->di->adminController->restorePost('comment', $id);
+                return $this->di->adminPostController->restorePost('comment', $id);
             }
         ]
     ]

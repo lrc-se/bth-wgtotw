@@ -138,7 +138,10 @@ $controllers = [
     'comment' => 'Comment',
     'vote' => 'Vote',
     'tag' => 'Tag',
-    'admin' => 'Admin'
+    'admin' => 'Admin',
+    'adminUser' => 'AdminUser',
+    'adminTag' => 'AdminTag',
+    'adminPost' => 'AdminPost'
 ];
 
 foreach ($controllers as $key => $controller) {
