@@ -27,7 +27,7 @@ $user = (isset($user) ? $user : null);
 <?php if (!empty($user) && $question->userId == $user->id) : ?>
 <?php   if ($answer->isAccepted()) : ?>
         <span class="answer-accepted" title="Accepterat svar"><span class="icon-accepted"></span></span>
-        <a href="<?= $this->url('question/' . $answer->parentId . '/answer/' . $answer->id . '/unaccept') ?>?return=answer-<?= $answer->id ?>">Ångra</a>
+        <a href="<?= $this->url('question/' . $answer->parentId . '/answer/' . $answer->id . '/unaccept') ?>?return=answer-<?= $answer->id ?>" title="Ångra acceptering"><span class="icon-cancel"></span></a>
 <?php   else : ?>
         <a href="<?= $this->url('question/' . $answer->parentId . '/answer/' . $answer->id . '/accept') ?>?return=answer-<?= $answer->id ?>" title="Acceptera detta svar"><span class="icon-accepted"></span></a>
 <?php   endif; ?>
