@@ -49,6 +49,7 @@ class TagService extends BaseService
             ->from($this->di->tags->getCollectionName() . ' AS t')
             ->join('wgtotw_post_tag AS pt', 't.id = pt.tagId')
             ->where('pt.postId = ?')
+            ->orderBy('name')
             ->execute([$post->id])
             ->fetchAllClass(Models\Tag::class);
     }

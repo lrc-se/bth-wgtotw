@@ -16,7 +16,7 @@ class UserController extends BaseController
     public function index()
     {
         return $this->di->common->renderMain('user/index', [
-            'users' => $this->di->repository->users->getAllSoft()
+            'users' => $this->di->repository->users->getAllSoft(null, [], ['order' => 'username'])
         ], 'Användare');
     }
     
