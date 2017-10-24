@@ -10,11 +10,12 @@ $vote = (!empty($user) ? $di->post->getVote($comment, $user) : null);
     <div class="post-footer">
         <?php $this->renderView('post/rank', ['post' => $comment]); ?>
 <?php if (!empty($user) && $comment->userId != $user->id) : ?>
-        <div class="post-vote">
 <?php   if (!$vote) : ?>
+        <div class="post-vote post-vote-space">
             <a href="<?= $this->url("question/$questionId/vote/" . $comment->id . '/up') ?>?return=comment-<?= $comment->id ?>" title="Rösta upp"><span class="icon-thumbs-up"></span></a>
             <a href="<?= $this->url("question/$questionId/vote/" . $comment->id . '/down') ?>?return=comment-<?= $comment->id ?>" title="Rösta ned"><span class="icon-thumbs-down"></span></a>
 <?php   else : ?>
+        <div class="post-vote">
             <span class="post-vote-active">
 <?php       if ($vote->value < 0) : ?>
             <span class="icon-thumbs-down" title="Du har röstat ned denna kommentar"></span>

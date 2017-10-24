@@ -74,21 +74,20 @@ dl {
 dt {
     margin: 0;
     font-weight: 600;
-    text-align: right;
-    flex: 0 0 175px;
+    flex: 0 0 150px;
 }
 
 dl.dl-small dt {
-    flex-basis: 125px;
+    flex-basis: 100px;
 }
 
 dd {
     margin: 0 0 0 1em;
-    flex: 0 0 calc(100% - 175px - 1em);
+    flex: 0 0 calc(100% - 150px - 1em);
 }
 
 dl.dl-small dd {
-    flex-basis: calc(100% - 125px - 1em);
+    flex-basis: calc(100% - 100px - 1em);
 }
 
 blockquote {
@@ -232,6 +231,10 @@ input[type=reset]:hover,
 button:hover,
 a.btn:hover {
     text-shadow: 1px 1px 2px rgba(255, 255, 255, .4);
+}
+
+.btn.btn-2:hover {
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, .333);
 }
 
 input[type=button].input-small,
@@ -788,8 +791,10 @@ article > .columns:last-child {
     font-weight: 600;
 }
 
-.post-list .post-author > a:first-child {
+.post-list .post-author > a:first-child,
+.post-list .post-author > span:first-child {
     max-width: 250px;
+    white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
     display: inline-block;
@@ -857,16 +862,18 @@ article > .columns:last-child {
 .post-body {
     padding: 1em;
     background-color: #fff;
-    border: 1px solid;
-    border-color: #ccc;
-    border-color: rgba(0, 0, 0, .15);
-    border-top: none;
+    border: 1px solid #999;
     border-radius: 3px;
     overflow: hidden;
 }
 
 .post-header + .post-body {
+    border-top: none;
     border-radius: 0 0 3px 3px;
+}
+
+.question-header + .post-body {
+    border-color: #000;
 }
 
 .post-body h1,
@@ -889,7 +896,7 @@ article > .columns:last-child {
 .post-header {
     padding: .5em;
     background-color: #000;
-    border: 1px solid #ccc;
+    border: 1px solid #000;
     border-bottom: none;
     border-radius: 3px 3px 0 0;
     display: flex;
@@ -968,8 +975,10 @@ article > .columns:last-child {
     margin-right: .25em;
 }
 
-.post-body .post-author > a:last-child {
+.post-body .post-author > a:last-child,
+.post-body .post-author > span:last-child {
     max-width: 250px;
+    white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
 }
@@ -1051,7 +1060,8 @@ article > .columns:last-child {
 }
 
 .answer-header {
-    background-color: #888;
+    background-color: #999;
+    border-color: #999;
 }
 
 .answer-header .post-rank {
@@ -1066,6 +1076,7 @@ article > .columns:last-child {
 
 .answer {
     background-color: #f8f8f8;
+    border-color: #999;
 }
 
 .accepted .answer-header {
@@ -1133,6 +1144,10 @@ li:last-child > .comment,
     font-size: .75em;
 }
 
+.comment .post-vote-space {
+    padding-right: .5em;
+}
+
 .comment .post-actions {
     margin-left: .5em;
 }
@@ -1178,19 +1193,19 @@ li:last-child > .comment,
 }
 
 .attention {
-    -webkit-animation: attention .6s ease-in-out;
-    animation: attention .6s ease-in-out;
+    -webkit-animation: attention .4s ease-in-out;
+    animation: attention .4s ease-in-out;
 }
 
 @-webkit-keyframes attention {
     0% { opacity: 1; transform: scale(1); }
-    50% { opacity: .7; transform: scale(.8); }
+    50% { opacity: .75; transform: scale(.9); }
     100% { opacity: 1; transform: scale(1); }
 }
 
 @keyframes attention {
     0% { opacity: 1; transform: scale(1); }
-    50% { opacity: .7; transform: scale(.8); }
+    50% { opacity: .75; transform: scale(.9); }
     100% { opacity: 1; transform: scale(1); }
 }
 
@@ -1285,7 +1300,9 @@ li:last-child > .comment,
     }
     
     .post-list .post-author > a:first-child,
-    .post-body .post-author > a:last-child {
+    .post-list .post-author > span:first-child,
+    .post-body .post-author > a:last-child,
+    .post-body .post-author > span:last-child {
        max-width: 175px;
     }
     
@@ -1414,6 +1431,15 @@ li:last-child > .comment,
     
     .navbar > ul > li:last-child > a {
         border-radius: 0 0 3px 3px;
+    }
+    
+    .navbar > ul > li.open:last-child {
+        border-radius: 0 0 3px 3px;
+        overflow: hidden;
+    }
+    
+    .navbar > ul > li.open:last-child > a {
+        border-radius: 0;
     }
     
     .navbar > ul li:not(.active):hover > a,
@@ -1707,11 +1733,13 @@ li:last-child > .comment,
         display: block;
     }
     
-    .post-list .post-author > a:first-child {
+    .post-list .post-author > a:first-child,
+    .post-list .post-author > span:first-child {
         max-width: calc(100% - 2em);
     }
     
-    .post-body .post-author > a:last-child {
+    .post-body .post-author > a:last-child,
+    .post-body .post-author > span:last-child {
        max-width: calc(100% - 50px);
     }
     
