@@ -336,6 +336,13 @@ class PostService extends BaseService
     public function delete($post)
     {
         $this->di->posts->deleteSoft($post);
+        
+        // handle accepted status
+        if ($post->isAccepted()) {
+            $question = $this->di->posts->find(null, $post->parentId);
+            $question->status = null;
+            $this->di->posts->save($question);
+        }
     }
     
     
@@ -347,6 +354,20 @@ class PostService extends BaseService
     public function restore($post)
     {
         $this->di->posts->restoreSoft($post);
+        
+        // handle accepted status
+        if ($post->isAccepted()) {
+            $question = $this->di->posts->find(null, $post->parentId);
+            if ($question->isAnswered()) {
+                // another answer has been accepted in the meantime
+                $post->status = null;
+                $this->di->posts->save($post);
+            } else {
+                // this is still the only accepted answer, so restore answered status
+                $question->status = Models\Question::ANSWERED;
+                $this->di->posts->save($question);
+            }
+        }
     }
     
     
