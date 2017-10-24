@@ -164,7 +164,7 @@ class UserService extends BaseService
         
         if ($form->isValid()) {
             if (!$admin) {
-                $user->isAdmin = false;
+                $user->isAdmin = $oldUser->isAdmin;
             }
             $user->hideEmail = (bool)$user->hideEmail;
             $user->created = $oldUser->created;
