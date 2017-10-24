@@ -106,9 +106,9 @@ class CommonService extends BaseService
     /**
      * Verify that there is a logged-in user with admin status.
      *
-     * @param string    $url    Url to redirect to if verification fails.
+     * @param string            $url    Url to redirect to if verification fails.
      *
-     * @return \LRC\User\User   Model instance of the logged-in user.
+     * @return \WGTOTW\Models\User      Model instance of the logged-in user.
      */
     public function verifyAdmin($url = 'user/login')
     {

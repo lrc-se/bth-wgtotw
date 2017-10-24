@@ -104,10 +104,10 @@ class UserService extends BaseService
     /**
      * Create user from model-bound form.
      *
-     * @param \LRC\Form\ModelForm   $form       Model-bound form.
-     * @param boolean               $admin      Whether the creation is performed by an admin.
+     * @param \WGTOTW\Form\ModelForm    $form       Model-bound form.
+     * @param boolean                   $admin      Whether the creation is performed by an admin.
      *
-     * @return bool                             True if the insert was performed, false if validation failed.
+     * @return bool                                 True if the insert was performed, false if validation failed.
      */
     public function createFromForm($form, $admin = false)
     {
@@ -138,11 +138,11 @@ class UserService extends BaseService
     /**
      * Update user from model-bound form.
      *
-     * @param \LRC\Form\ModelForm   $form       Model-bound form.
-     * @param User                  $oldUser    Model instance of existing user.
-     * @param boolean               $admin      Whether the update is performed by an admin.
+     * @param \WGTOTW\Form\ModelForm    $form       Model-bound form.
+     * @param User                      $oldUser    Model instance of existing user.
+     * @param boolean                   $admin      Whether the update is performed by an admin.
      *
-     * @return bool                             True if the update was performed, false if validation failed.
+     * @return bool                                 True if the update was performed, false if validation failed.
      */
     public function updateFromForm($form, $oldUser, $admin = false)
     {
