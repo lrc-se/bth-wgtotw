@@ -38,6 +38,7 @@ $num = count($answers);
             <tr>
                 <th>ID</th>
                 <th>Författare</th>
+                <th>Accepterat</th>
                 <th>Publicerad</th>
                 <th>Uppdaterad</th>
                 <th>Raderad</th>
@@ -55,12 +56,13 @@ $num = count($answers);
                     <span>(Borttagen användare)</span>
 <?php       endif; ?>
                 </td>
+                <td><?= ($answer->isAccepted() ? 'Ja' : 'Nej') ?></td>
                 <td><?= $answer->published ?></td>
                 <td><?= $answer->updated ?></td>
                 <td><?= $answer->deleted ?></td>
                 <td>
-                    <a href="<?= $this->url('admin/answer/' . $answer->id) ?>">Visa svar</a><br>
                     <a href="<?= $this->url('admin/answer/' . $answer->id . '/comment') ?>">Kommentarer</a><br>
+                    <a href="<?= $this->url('admin/answer/' . $answer->id) ?>">Visa svar</a><br>
 <?php       if ($answer->deleted) : ?>
                     <a class="restore-link" href="#!" data-id="<?= $answer->id ?>">Återställ</a>
 <?php       else : ?>

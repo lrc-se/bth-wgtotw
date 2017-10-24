@@ -27,6 +27,7 @@ $num = count($questions);
                 <th>ID</th>
                 <th>Rubrik</th>
                 <th>Författare</th>
+                <th>Besvarad</th>
                 <th>Publicerad</th>
                 <th>Uppdaterad</th>
                 <th>Raderad</th>
@@ -45,13 +46,14 @@ $num = count($questions);
                     <span>(Borttagen användare)</span>
 <?php       endif; ?>
                 </td>
+                <td><?= ($question->isAnswered() ? 'Ja' : 'Nej') ?></td> 
                 <td><?= $question->published ?></td>
                 <td><?= $question->updated ?></td>
                 <td><?= $question->deleted ?></td>
                 <td>
-                    <a href="<?= $this->url('admin/question/' . $question->id) ?>">Visa fråga</a><br>
                     <a href="<?= $this->url('admin/question/' . $question->id . '/answer') ?>">Svar</a><br>
                     <a href="<?= $this->url('admin/question/' . $question->id . '/comment') ?>">Kommentarer</a><br>
+                    <a href="<?= $this->url('admin/question/' . $question->id) ?>">Visa fråga</a><br>
 <?php       if ($question->deleted) : ?>
                     <a class="restore-link" href="#!" data-id="<?= $question->id ?>">Återställ</a>
 <?php       else : ?>
