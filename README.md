@@ -15,7 +15,7 @@ Perform the following steps to run the website on your own system:
 
 1. Clone the repo
 2. Run `composer install` to install all dependencies
-3. Edit `config/db-example.php` with your connection details and rename the file to `config/db.php`
+3. Edit `config/db-example.php` with your connection details and rename the file to `config/db.php` (make sure to keep the table prefix empty)
 4. Run `sql/setup.sql` on the database server you configured in step #3 to create the database (remove the insert operations first if you don't want any sample data)
 5. Edit the paths in `htdocs/.htaccess` to match your setup
 6. Start a PHP-enabled webserver (5.6+) and browse to `htdocs/`
